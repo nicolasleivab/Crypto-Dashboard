@@ -3,12 +3,21 @@
 request('GET', 'https://api.coincap.io/v2/assets/')
 .then((response) => {
     const data = JSON.parse(response.target.responseText)
-    console.log(data);
+    console.log(data.data);
     const cryptoData = data.data;
-        
+
+// Format decimals
+cryptoData.forEach(function(d) {
+    d.priceUsd = Math.round(d.priceUsd * 100) / 100;
+    d.changePercent24Hr = Math.round(d.changePercent24Hr * 100) / 100;
+    d.marketCapUsd = Math.round(d.marketCapUsd * 100) / 100;
+    d.supply = Math.round(d.supply * 100) / 100;
+    });
+
 function displayCryptoBoard(arr) {
     let theExport = ""; //initialize the export
-    arr.forEach((crypto) => theExport += '<tr><td>' + crypto.rank + '</td><td>' + crypto.name + '</td><td>' + crypto.priceUsd+ '</td></tr>'); //prints the row tables
+    arr.forEach((crypto) => theExport += '<tr><td>' + crypto.rank + '</td><td>' + crypto.name + '</td><td>' + 
+    crypto.marketCapUsd + '</td><td>' + crypto.priceUsd + '</td><td>' + crypto.changePercent24Hr + '</td></tr>'); //prints the row tables
     document.getElementById("crypto-table").innerHTML = theExport;
 }
 

@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
+@import url('https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou');
+
+body {
+    font-family:  Titillium Web ,sans-serif!important
+}
+
+#coins {
+    padding-top: 100px;
+    padding-left: 100px;
+    margin: auto;  
+}
+
+.nav {
+  height: 40px;
+  width: 100%;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  background-color: #2B2B2B;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-align: left;
+  border-bottom: solid #4E4E4E 1px;
+}
+
+.nav a {
+  padding-top: 10px;
+  padding-left: 10px;
+  margin-left: 30px;
+  height: 21px;
+  text-decoration: none;
+  font-family: 'ZCOOL QingKe HuangYou', sans-serif;
+  color: #fff;
+  display: inline-block;
+  font-size: 17px;
+}
+
+.nav a:hover {
+    border-bottom: solid #FFF 1px; 
+}
+
+.coins-table{
+    text-align: left;
+}
+
+td, th{
+    padding: 0 15px 0 15px;
+}
