@@ -34,6 +34,7 @@ displayCryptoBoard(first20Coins); //call table function with the array and appen
 /*
 Add on click functions for displaying coins 21-40, 41-60, 61-80 and 81-100
 */
+
 document.getElementById("first").onclick = function(){displayCryptoBoard(first20Coins)};
 document.getElementById("second").onclick = function(){displayCryptoBoard(secondBatch)};
 document.getElementById("third").onclick = function(){displayCryptoBoard(thirdBatch)};
