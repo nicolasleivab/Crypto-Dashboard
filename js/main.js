@@ -23,17 +23,23 @@ function displayCryptoBoard(arr) {
     crypto.supply + '</td></tr>'); //prints the row tables with each value
     document.getElementById("crypto-table").innerHTML = theExport;
 }
-let first20Coins = cryptoData.slice(1, 20);
-let secondBatch = cryptoData.slice(21, 40);
-let thirdBatch = cryptoData.slice(41, 60);
-let fourthBatch = cryptoData.slice(61, 80);
-let fifthBatch = cryptoData.slice(81, 100);
+let first20Coins = cryptoData.slice(0, 20);
+let secondBatch = cryptoData.slice(20, 40);
+let thirdBatch = cryptoData.slice(40, 60);
+let fourthBatch = cryptoData.slice(60, 80);
+let fifthBatch = cryptoData.slice(80, 100);
 
 displayCryptoBoard(first20Coins); //call table function with the array and append to #crypto-table
 
 /*
 Add on click functions for displaying coins 21-40, 41-60, 61-80 and 81-100
 */
+document.getElementById("first").onclick = function(){displayCryptoBoard(first20Coins)};
+document.getElementById("second").onclick = function(){displayCryptoBoard(secondBatch)};
+document.getElementById("third").onclick = function(){displayCryptoBoard(thirdBatch)};
+document.getElementById("fourth").onclick = function(){displayCryptoBoard(fourthBatch)};
+document.getElementById("fifth").onclick = function(){displayCryptoBoard(fifthBatch)};
+
 }).catch()
 
 function request(method, url) {
