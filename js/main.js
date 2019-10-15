@@ -23,7 +23,12 @@ function displayCryptoBoard(arr) {
     crypto.supply + '</td></tr>'); //prints the row tables with each value
     document.getElementById("crypto-table").innerHTML = theExport;
 }
-let first20Coins = cryptoData.slice(1,20);
+let first20Coins = cryptoData.slice(1, 20);
+let secondBatch = cryptoData.slice(21, 40);
+let thirdBatch = cryptoData.slice(41, 60);
+let fourthBatch = cryptoData.slice(61, 80);
+let fifthBatch = cryptoData.slice(81, 100);
+
 displayCryptoBoard(first20Coins); //call table function with the array and append to #crypto-table
 
 /*
