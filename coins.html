@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Crypto Dashboard">
+    <meta name="author" content="Nicolás Leiva Büchi">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <div class="nav">
+        <a href="index.html">Dashboard</a>
+        <a href="#">Coins</a>
+        <a href="">About</a>
+    </div>
+
+    <div id="coins">
+    <div class="container">
+    <p id="marketCap">Market Cap:</p><p id="totalVol">Total Volume (24hr):</p><p id="btcDom">Bitcoin Dominance:</p><p id="allCoins">Active Cryptocurrencies:</p>
+    </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Market Cap (USD)</th>
+                    <th>Price (USD)</th>
+                    <th>24Hr Change (%)</th>
+                    <th>Volume (24hr)</th>
+                    <th>Supply</th>
+                </tr>
+            </thead>
+            <tbody id="crypto-table">
+                <thead>
+                </thead>
+            </tbody>
+        </table>
+        <div class="pages">
+        <a href="#" id="first" style="padding-left: 15px";>1</a>
+        <a href="#" id="second" style="padding-left: 15px";>2</a>
+        <a href="#" id="third" style="padding-left: 15px";>3</a>
+        <a href="#" id="fourth" style="padding-left: 15px";>4</a>
+        <a href="#" id="fifth" style="padding-left: 15px";>5</a>
+        </div>
+    </div>
+
+    <!-- Libraries -->
+    <script src="js/d3.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/coins.js"></script>
+
+</body>
