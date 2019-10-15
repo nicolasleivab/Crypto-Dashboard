@@ -6,7 +6,7 @@ body {
 }
 
 #coins {
-    padding: 100px 50px 0 30px;
+    padding: 50px 50px 0 30px;
     margin: auto;  
 }
 
@@ -67,10 +67,28 @@ table {
     box-shadow: 0 0 0 1px #555; 
     
 	}
+
 .pages{
     margin: auto;
     padding: 30px 0 30px 0;
     text-align: center;
 }
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.container p{
+    font-weight: 600;
+}
+.container p:not(:first-child) {
+    padding-left: 50px;
+}
+
+
 
 

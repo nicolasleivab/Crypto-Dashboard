@@ -1,5 +1,38 @@
 /* Main js */
 
+//CoinMarketCap API for global metrics
+const apiKey = {
+    key: 'xxxxxx' //add your private key
+};
+
+request('GET', 'https://pro-api.coinmarketcap.com/v1/global-metrics/quotes/latest?CMC_PRO_API_KEY=' + apiKey.key)
+.then((response) => {
+    const data = JSON.parse(response.target.responseText)
+    const generalData = data.data.quote.USD;
+    console.log(generalData);
+    console.log(data.data);
+
+//append global metrics
+document.getElementById("marketCap").innerHTML = "Market Cap (USD): " + data.data.quote.USD.total_market_cap;
+document.getElementById("totalVol").innerHTML = "Total Volume (24hr): " + data.data.quote.USD.total_volume_24h;
+document.getElementById("btcDom").innerHTML = "Bitcoin Dominance (%): " + data.data.btc_dominance;
+document.getElementById("allCoins").innerHTML = "Active Cryptocurrencies: " + data.data.active_cryptocurrencies;
+
+}).catch()
+
+function request(method, url) {
+    return new Promise(function (resolve, reject){
+        const xhr = new XMLHttpRequest();
+        xhr.open(method, url);
+        xhr.onload = resolve;
+        xhr.onerror = reject;
+        xhr.send();
+
+    });
+    
+}
+
+//CoinCap API for top 100 coins
 request('GET', 'https://api.coincap.io/v2/assets/')
 .then((response) => {
     const data = JSON.parse(response.target.responseText)
@@ -23,6 +56,7 @@ function displayCryptoBoard(arr) {
     crypto.supply + '</td></tr>'); //prints the row tables with each value
     document.getElementById("crypto-table").innerHTML = theExport;
 }
+
 let first20Coins = cryptoData.slice(0, 20);
 let secondBatch = cryptoData.slice(20, 40);
 let thirdBatch = cryptoData.slice(40, 60);
