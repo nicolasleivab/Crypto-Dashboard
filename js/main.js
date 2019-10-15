@@ -20,12 +20,15 @@ function displayCryptoBoard(arr) {
     arr.forEach((crypto) => theExport += '<tr><td>' + crypto.rank + '</td><td>' + crypto.symbol + '</td><td>' + 
     crypto.name + '</td><td>' + crypto.marketCapUsd + '</td><td>' + crypto.priceUsd + '</td><td>' + 
     crypto.changePercent24Hr + '</td><td>' + crypto.volumeUsd24Hr + '</td><td>' + 
-    crypto.supply + '</td><td>' + '</td></tr>'); //prints the row tables with each value
+    crypto.supply + '</td></tr>'); //prints the row tables with each value
     document.getElementById("crypto-table").innerHTML = theExport;
 }
+let first20Coins = cryptoData.slice(1,20);
+displayCryptoBoard(first20Coins); //call table function with the array and append to #crypto-table
 
-displayCryptoBoard(cryptoData); //call table function with the array and append to #crypto-table
-
+/*
+Add on click functions for displaying coins 21-40, 41-60, 61-80 and 81-100
+*/
 }).catch()
 
 function request(method, url) {

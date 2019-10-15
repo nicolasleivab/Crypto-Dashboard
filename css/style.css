@@ -6,8 +6,7 @@ body {
 }
 
 #coins {
-    padding-top: 100px;
-    padding-left: 100px;
+    padding: 100px 50px 0 30px;
     margin: auto;  
 }
 
@@ -41,10 +40,31 @@ body {
     border-bottom: solid #FFF 1px; 
 }
 
-.coins-table{
-    text-align: left;
-}
-
 td, th{
     padding: 0 15px 0 15px;
+    border: 1px solid #ccc;
+	text-align: left; 
+	font-size: 14px;
+    border-spacing: 0;
+    border-spacing: 15px;
 }
+th{
+    background-color: #f0f0f5;
+    padding: 15px;
+}
+td{
+    padding: 15px;
+}
+
+table { 
+	width: 100%; 
+	border-collapse: collapse; 
+	margin: auto;
+    padding-right: 100px;
+    text-align: left;
+    border-radius: 3px;
+    border-style: hidden; 
+    box-shadow: 0 0 0 1px #555; 
+	}
+
+
