@@ -53,5 +53,12 @@ svg.append("path")
     .y(function(d) { return y(d.price) })
     )
 
+//append this.coin text
+svg.append("text")
+  .attr("x", width/2)
+  .attr("y", 0)
+  .attr("text-anchor", "middle")
+  .text(this.coin)
+
     }
 };
