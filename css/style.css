@@ -89,6 +89,16 @@ table {
     padding-left: 50px;
 }
 
+.grid-container {
+margin: auto;
+width: 100%;
+min-height: 250px;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+grid-template-rows: repeat(2, 1fr);
+
+}
+
 
 
 
