@@ -15,7 +15,14 @@ request('GET', 'https://api.coincap.io/v2/candles?exchange=binance&interval=m15&
 
 
 /* D3 viz */
+let lineChart1 = new LineChart("#btcChart", btcDailyCloses, "bitcoin");
+let lineChart2 = new LineChart("#ethChart", btcDailyCloses, "bitcoin");
+let lineChart3 = new LineChart("#xrpChart", btcDailyCloses, "bitcoin");
 
+//calling the  drawChart method for each chart
+lineChart1.drawChart();
+lineChart2.drawChart();
+lineChart3.drawChart();
 
 }).catch()
 

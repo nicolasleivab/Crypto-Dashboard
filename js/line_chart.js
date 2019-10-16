@@ -42,5 +42,16 @@ const y = d3.scaleLinear()
 svg.append("g")
   .call(d3.axisLeft(y).ticks(5));
 
+// Add the line
+svg.append("path")
+  .datum(this.formattedData)
+  .attr("fill", "none")
+  .attr("stroke", "blue")
+  .attr("stroke-width", 1)
+  .attr("d", d3.line()
+    .x(function(d) { return x(d.date) })
+    .y(function(d) { return y(d.price) })
+    )
+
     }
 };
