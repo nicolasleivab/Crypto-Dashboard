@@ -27,5 +27,20 @@ const svg = d3.select(this.parentDiv)
 .attr("transform",
       "translate(" + margin.left + "," + margin.top + ")");
 
+// Add x axis, I'm not formatting the date for this viz class
+const x = d3.scaleLinear()
+  .domain(d3.extent(this.formattedData, function(d) { return d.date; }))
+  .range([ 0, width ]);
+svg.append("g")
+  .attr("transform", "translate(0," + height + ")")
+  .call(d3.axisBottom(x).ticks(3)).selectAll("text").style("text-anchor", "end").attr("transform", "rotate(-10)");
+
+// Add y axis
+const y = d3.scaleLinear()
+  .domain([d3.min(this.formattedData, function(d) { return d.price; }), d3.max(this.formattedData, function(d) { return d.price; })])
+  .range([ height, 0 ]);
+svg.append("g")
+  .call(d3.axisLeft(y).ticks(5));
+
     }
 };
