@@ -13,7 +13,9 @@ request('GET', 'https://api.coincap.io/v2/candles?exchange=binance&interval=m15&
     //transform existing array to a new one with the data we need (price and date)
     console.log(btcDailyCloses);
 
+/* D3 viz */
 
+/* end of D3 code */
 }).catch()
 
 function request(method, url) {
