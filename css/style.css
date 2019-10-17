@@ -101,9 +101,9 @@ grid-template-rows: repeat(2, 1fr);
 
 /* D3 */
 .hover-line {
-  stroke: #2B2B2B;
-  stroke-width: 1px;
-  stroke-dasharray: 7,7;
+  stroke: #4E4E4E;
+  stroke-width: 1.5px;
+    
 }
 
 

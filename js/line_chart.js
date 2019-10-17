@@ -68,13 +68,20 @@ const focus = svg.append("g")
   .attr("class", "focus")
   .style("display", "none");
 
+  //bottom line
 focus.append("line")
   .attr("class", "x-hover-line hover-line")
   .attr("y1", 0)
   .attr("y2", height);
 
+  //upper line
+focus.append("line")
+  .attr("class", "x2-hover-line hover-line")
+  .attr("y1", 0)
+  .attr("y2", height);
+
 focus.append("circle")
-.attr("r", 3);
+.attr("r", 2);
 
 focus.append("text")
 .attr("x", 15)
@@ -99,7 +106,8 @@ var x0 = x.invert(d3.mouse(this)[0]),
   d = x0 - d0.date > d1.date - x0 ? d1 : d0;
 focus.attr("transform", "translate(" + x(d.date) + "," + y(d.price) + ")");
 focus.select("text").text(function() { return d.price; });
-focus.select(".x-hover-line").attr("y2", height - y(d.price));
+focus.select(".x-hover-line").attr("y2", (height - y(d.price)));
+focus.select(".x2-hover-line").attr("y2", (height - y(d.price)) + (- height));
 }
 
     }
