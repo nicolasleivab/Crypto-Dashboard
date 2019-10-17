@@ -6,6 +6,7 @@ const index = ["&baseId=bitcoin&quoteId=tether", "&baseId=ethereum&quoteId=tethe
     bindsArray = ["lineChart1", "lineChart2", "lineChart3", "lineChart4", "lineChart5", "lineChart6"],
     parentsArray = ["#chart1", "#chart2", "#chart3", "#chart4", "#chart5", "#chart6"],
     namesArray = ["Bitcoin", "Ethereum", "XRP", "Bitcoin Cash", "Litecoin", "Binance Coin"],
+    titlesArray = ["title1", "title2", "title3", "title4", "title5", "title6"],
     request = new XMLHttpRequest();
 
 (function loop(i, length) {
@@ -27,7 +28,7 @@ const index = ["&baseId=bitcoin&quoteId=tether", "&baseId=ethereum&quoteId=tethe
             
             /* D3 viz */
             //create a new binding with each loop for each coin
-            bindsArray[i] = new LineChart(parentsArray[i], formattedData, namesArray[i]);
+            bindsArray[i] = new LineChart(parentsArray[i], formattedData, namesArray[i], titlesArray[i]);
 
             //calling the  drawChart method for each coin
             bindsArray[i].drawChart();

@@ -90,12 +90,21 @@ table {
 }
 
 .grid-container {
+padding-top: 50px;
 margin: auto;
-width: 100%;
+width: 100v%;
 min-height: 250px;
 display: grid;
 grid-template-columns: repeat(3, 1fr);
 grid-template-rows: repeat(2, 1fr);
+gap: 30px 30px;
+
+}
+
+.grid-container div {
+    border: solid #DCDCDC 1.5px;
+    border-radius: 5px;
+    align-self: center;
 
 }
 

@@ -2,10 +2,11 @@
 
 //Create a class to use with different coins
 class LineChart {
-    constructor(_parentDiv, _formattedData, _coin) {
+    constructor(_parentDiv, _formattedData, _coin, _titleDiv) {
         this.parentDiv = _parentDiv; //this div target or parent element
         this.formattedData = _formattedData;
         this.coin = _coin;
+        this.titleDiv = _titleDiv;
     
     }
 // Add methods to the class 
@@ -14,7 +15,7 @@ class LineChart {
 /* Actual D3 code */
 
 // set the dimensions of the graph
-const margin = {top: 100, right: 50, bottom: 30, left: 50},
+const margin = {top: 75, right: 0, bottom: 75, left: 50},
 width = 400 - margin.left - margin.right,
 height = 250 - margin.top - margin.bottom,
 vis = this;
@@ -57,12 +58,8 @@ svg.append("path")
     .on("mouseout", function() { focus.style("display", "none"); })
     .on("mousemove", mousemove);
 
-//append this.coin text
-svg.append("text")
-  .attr("x", width/2)
-  .attr("y", 0)
-  .attr("text-anchor", "middle")
-  .text(vis.coin);
+//append this.coin text to innetHTML
+document.getElementById(vis.titleDiv).innerHTML = vis.coin;
 
 const focus = svg.append("g")
   .attr("class", "focus")
