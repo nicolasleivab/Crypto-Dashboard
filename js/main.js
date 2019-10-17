@@ -2,9 +2,11 @@
 
 //CoinCap API 
 const index = ["&baseId=bitcoin&quoteId=tether", "&baseId=ethereum&quoteId=tether", "&baseId=ripple&quoteId=tether", 
-"&baseId=bitcoin-cash&quoteId=tether", "&baseId=litecoin&quoteId=tether", "&baseId=binance-coin&quoteId=tether"];
-const myArray = [];
-const request = new XMLHttpRequest();
+"&baseId=bitcoin-cash&quoteId=tether", "&baseId=litecoin&quoteId=tether", "&baseId=binance-coin&quoteId=tether"],
+    bindsArray = ["lineChart1", "lineChart2", "lineChart3", "lineChart4", "lineChart5", "lineChart6"],
+    parentsArray = ["#chart1", "#chart2", "#chart3", "#chart4", "#chart5", "#chart6"],
+    namesArray = ["Bitcoin", "Ethereum", "XRP", "Bitcoin Cash", "Litecoin", "Binance Coin"],
+    request = new XMLHttpRequest();
 
 (function loop(i, length) {
     if (i>= length) {
@@ -22,7 +24,14 @@ const request = new XMLHttpRequest();
             const formattedData= oneDayData.map((function(d){return {"price": +d.close, "date": new Date(d.period)} ;}));
             //transform existing array to a new one with the data we need (price and date)
             console.log(formattedData);
-            myArray.push(formattedData); //storing each GET response to a global array
+            
+            /* D3 viz */
+            //create a new binding with each loop for each coin
+            bindsArray[i] = new LineChart(parentsArray[i], formattedData, namesArray[i]);
+
+            //calling the  drawChart method for each coin
+            bindsArray[i].drawChart();
+
 
             loop(i + 1, length);
         }
