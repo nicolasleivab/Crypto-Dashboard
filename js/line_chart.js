@@ -2,7 +2,7 @@
 
 //Create a class to use with different coins
 class LineChart {
-    constructor(_parentDiv, _formattedData, _coin, _titleDiv, _priceDiv, _changeDiv, _coinHeader) {
+    constructor(_parentDiv, _formattedData, _coin, _titleDiv, _priceDiv, _changeDiv, _coinHeader, _dateDiv) {
         this.parentDiv = _parentDiv; //this div target or parent element
         this.formattedData = _formattedData;
         this.coin = _coin;
@@ -10,6 +10,7 @@ class LineChart {
         this.priceDiv = _priceDiv;
         this.changeDiv = _changeDiv;
         this.coinHeader = _coinHeader;
+        this.dateDiv = _dateDiv;
     
     }
 // Add methods to the class 
@@ -107,6 +108,8 @@ svg.append("rect")
 .on("mouseout", reset)
 .on("mousemove", mousemove);
 
+const formatDate = d3.timeFormat("%m/%d %H:%M");
+
 //mousemove function adapted from Adam Janes https://github.com/adamjanes/udemy-d3/blob/master/06/6.10.0/js/main.js
 function mousemove() {
 var x0 = x.invert(d3.mouse(this)[0]),
@@ -120,12 +123,14 @@ focus.select(".x2-hover-line").attr("y2", (height - y(d.price)) + (- height));
 svg.selectAll("text").style('fill', 'transparent'); //remove text from svg
 //append price text to priceDiv
 document.getElementById(vis.priceDiv).innerHTML = "Price: $" + (focus.select("text").text(function() { return d.price; })._groups[0][0].innerHTML);
+document.getElementById(vis.dateDiv).innerHTML = "Date time: " + (focus.select("text").text(function() { return formatDate(d.date); })._groups[0][0].innerHTML);
 
 }
 
 //reset pricediv function on mouseout
 function reset(){
   document.getElementById(vis.priceDiv).innerHTML = "Price: $" + vis.formattedData[95].price;
+  document.getElementById(vis.dateDiv).innerHTML = "Date time: " + formatDate(vis.formattedData[95].date);
   focus.style("display", "none");
   };
 
