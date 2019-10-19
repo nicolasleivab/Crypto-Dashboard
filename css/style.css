@@ -74,6 +74,14 @@ table {
     text-align: center;
 }
 
+.pages a{
+    text-decoration: none;
+}
+.pages a:focus { 
+  color: lightskyblue;
+  text-decoration: underline;
+}
+
 .container{
     display: flex;
     flex-wrap: wrap;

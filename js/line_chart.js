@@ -19,7 +19,7 @@ class LineChart {
 /* Actual D3 code */
 
 // set the dimensions of the graph
-const margin = {top: 5, right: 0, bottom: 5, left: 50},
+const margin = {top: 25, right: 0, bottom: 5, left: 50},
 width = 400 - margin.left - margin.right,
 height = 100 - margin.top - margin.bottom,
 vis = this;
