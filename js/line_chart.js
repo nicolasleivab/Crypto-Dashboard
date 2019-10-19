@@ -91,12 +91,11 @@ svg.append("rect")
 .attr("width", width)
 .attr("height", height)
 .on("mouseover", function() { focus.style("display", null); })
-.on("mouseout", function() { focus.style("display", "none"); })
+.on("mouseout", reset)
 .on("mousemove", mousemove);
 
 //mousemove function adapted from Adam Janes https://github.com/adamjanes/udemy-d3/blob/master/06/6.10.0/js/main.js
 function mousemove() {
-    console.log(vis.formattedData);
 var x0 = x.invert(d3.mouse(this)[0]),
   i = d3.bisector(function(d) { return d.date; }).left(vis.formattedData, x0, 1),
   d0 = vis.formattedData[i - 1],
@@ -110,6 +109,14 @@ svg.selectAll("text").style('fill', 'transparent'); //remove text from svg
 document.getElementById(vis.priceDiv).innerHTML = "Price: $" + (focus.select("text").text(function() { return d.price; })._groups[0][0].innerHTML);
 
 }
+
+//reset pricediv function on mouseout
+function reset(){
+  document.getElementById(vis.priceDiv).innerHTML = "Price: $" + vis.formattedData[95].price;
+  focus.style("display", "none");
+  };
+
+reset();
 
     }
 };
