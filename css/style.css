@@ -92,8 +92,8 @@ table {
 .grid-container {
 padding-top: 50px;
 margin: auto;
-width: 100v%;
-min-height: 100px;
+width: 100%;
+min-height: 300px;
 display: grid;
 grid-template-columns: repeat(3, 1fr);
 grid-template-rows: repeat(2, 1fr);
@@ -101,11 +101,39 @@ gap: 30px 30px;
 
 }
 
-.grid-container div {
+.inner-grid {
+    width: 100%;
+    min-height: 100px;
     border: solid #DCDCDC 1.5px;
     border-radius: 5px;
     align-self: center;
 
+}
+
+.inner-flex{
+    border: thick solid lightcoral;
+    border-radius: 5px;
+    background-color: lightcoral;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows:  1fr;
+    
+}
+.inner-flex div:first-child {
+ text-align: left;
+}
+.inner-flex div:nth-child(2) {
+ text-align: right;
+}
+
+.coin-header{
+    margin: 5px; 
+    align-content: right;
+}
+
+.grid-footer{
+    margin: 10px;
+    text-align: right;
 }
 
 /* D3 */

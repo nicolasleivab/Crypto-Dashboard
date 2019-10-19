@@ -2,12 +2,14 @@
 
 //Create a class to use with different coins
 class LineChart {
-    constructor(_parentDiv, _formattedData, _coin, _titleDiv, _priceDiv) {
+    constructor(_parentDiv, _formattedData, _coin, _titleDiv, _priceDiv, _changeDiv, _coinHeader) {
         this.parentDiv = _parentDiv; //this div target or parent element
         this.formattedData = _formattedData;
         this.coin = _coin;
         this.titleDiv = _titleDiv;
         this.priceDiv = _priceDiv;
+        this.changeDiv = _changeDiv;
+        this.coinHeader = _coinHeader;
     
     }
 // Add methods to the class 
@@ -61,6 +63,17 @@ svg.append("path")
 
 //append this.coin text to innetHTML
 document.getElementById(vis.titleDiv).innerHTML = vis.coin;
+
+//calculate and append 24 hr change
+const dailyChange = (((vis.formattedData[95].price - vis.formattedData[0].price)/vis.formattedData[0].price)*100).toFixed(2);
+document.getElementById(vis.changeDiv).innerHTML = "24hr Change: "+dailyChange+"(%)";
+if(dailyChange<0){
+document.getElementById(vis.coinHeader).style.backgroundColor = "lightcoral";
+}
+else{
+  document.getElementById(vis.coinHeader).style.backgroundColor = "lightgreen";
+  document.getElementById(vis.coinHeader).style.border = "thick solid lightgreen";
+}
 
 const focus = svg.append("g")
   .attr("class", "focus")
