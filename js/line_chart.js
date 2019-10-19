@@ -2,11 +2,12 @@
 
 //Create a class to use with different coins
 class LineChart {
-    constructor(_parentDiv, _formattedData, _coin, _titleDiv) {
+    constructor(_parentDiv, _formattedData, _coin, _titleDiv, _priceDiv) {
         this.parentDiv = _parentDiv; //this div target or parent element
         this.formattedData = _formattedData;
         this.coin = _coin;
         this.titleDiv = _titleDiv;
+        this.priceDiv = _priceDiv;
     
     }
 // Add methods to the class 
@@ -15,9 +16,9 @@ class LineChart {
 /* Actual D3 code */
 
 // set the dimensions of the graph
-const margin = {top: 75, right: 0, bottom: 75, left: 50},
+const margin = {top: 5, right: 0, bottom: 5, left: 50},
 width = 400 - margin.left - margin.right,
-height = 250 - margin.top - margin.bottom,
+height = 100 - margin.top - margin.bottom,
 vis = this;
 
 // append svg to current parentDiv
@@ -33,16 +34,16 @@ const svg = d3.select(vis.parentDiv)
 const x = d3.scaleTime()
   .domain(d3.extent(vis.formattedData, function(d) { return d.date; }))
   .range([ 0, width ]);
-svg.append("g")
+/*svg.append("g")
   .attr("transform", "translate(0," + height + ")")
-  .call(d3.axisBottom(x).ticks(3)).selectAll("text").style("text-anchor", "end").attr("transform", "rotate(-10)");
+  .call(d3.axisBottom(x).ticks(3)).selectAll("text").style("text-anchor", "end").attr("transform", "rotate(-10)");*/
 
 // Add y axis
 const y = d3.scaleLinear()
   .domain([d3.min(vis.formattedData, function(d) { return d.price; }), d3.max(vis.formattedData, function(d) { return d.price; })])
   .range([ height, 0 ]);
-svg.append("g")
-  .call(d3.axisLeft(y).ticks(5));
+/*svg.append("g")
+  .call(d3.axisLeft(y).ticks(5));*/
 
 // Add the line
 svg.append("path")
@@ -102,9 +103,12 @@ var x0 = x.invert(d3.mouse(this)[0]),
   d1 = vis.formattedData[i],
   d = x0 - d0.date > d1.date - x0 ? d1 : d0;
 focus.attr("transform", "translate(" + x(d.date) + "," + y(d.price) + ")");
-focus.select("text").text(function() { return d.price; });
 focus.select(".x-hover-line").attr("y2", (height - y(d.price)));
 focus.select(".x2-hover-line").attr("y2", (height - y(d.price)) + (- height));
+svg.selectAll("text").style('fill', 'transparent'); //remove text from svg
+//append price text to priceDiv
+document.getElementById(vis.priceDiv).innerHTML = "Price: $" + (focus.select("text").text(function() { return d.price; })._groups[0][0].innerHTML);
+
 }
 
     }

@@ -93,7 +93,7 @@ table {
 padding-top: 50px;
 margin: auto;
 width: 100v%;
-min-height: 250px;
+min-height: 100px;
 display: grid;
 grid-template-columns: repeat(3, 1fr);
 grid-template-rows: repeat(2, 1fr);
