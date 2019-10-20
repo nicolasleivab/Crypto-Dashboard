@@ -9,6 +9,10 @@
 
     <!-- Style -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- Icons -->
+    <link href="css/brands.css" rel="stylesheet">
+    <link href="css/solid.css" rel="stylesheet">
+    <link href="css/fontawesome.css" rel="stylesheet">
 
 </head>
 
@@ -16,12 +20,15 @@
     <div class="nav">
         <a href="index.html">Dashboard</a>
         <a href="coins.html">Coins</a>
-        <a href="chart.html">Search</a>
+        <input type="text" id ="search" class="search-input" placeholder="Search any top 100 coin" />
+        <button id="searchSubmit"><i class="fas fa-search"></i></button>
     </div>
 
     <!-- Libraries -->
     <script src="js/d3.min.js"></script>
     <!-- Custom JS -->
     <script src="js/candlestick_chart.js"></script>
+    <script src="js/search.js"></script>
+    
 
 </body>

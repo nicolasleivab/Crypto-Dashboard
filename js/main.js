@@ -1,8 +1,8 @@
 /* Main js */
 
 //CoinCap API 
-//list of ten coins to be replaced
-let coin = ["bitcoin", "template", "template", "template", "template", "template", "template", "template", "template", "template", "template"];
+//list of coins to be replaced
+let coin = ["template", "template", "template", "template", "template", "template", "template", "template", "template", "template", "template"];
 
 const bindsArray = [], parentsArray = [], titlesArray = [], pricesArray = [], changeArray = [], headerArray = [], datesArray = [];
 for(let n = 0; n < 11; n ++){
@@ -26,7 +26,7 @@ const request = new XMLHttpRequest();
     if(i>0){
      url = "https://api.coincap.io/v2/assets/"+coin[i]+"/history?interval=m15";
     }
-    console.log(i);
+    
     request.open("GET", url);
     request.onreadystatechange = function() {
         if(request.readyState === XMLHttpRequest.DONE && request.status === 200) { //so we can get the elements in order
