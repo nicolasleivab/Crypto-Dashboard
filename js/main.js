@@ -1,14 +1,15 @@
 /* Main js */
 
 //CoinCap API 
-const coin = ["bitcoin", "ethereum", "ripple", "tether", "bitcoin-cash", "litecoin"],
-    bindsArray = ["lineChart1", "lineChart2", "lineChart3", "lineChart4", "lineChart5", "lineChart6"],
-    parentsArray = ["#chart1", "#chart2", "#chart3", "#chart4", "#chart5", "#chart6"],
-    titlesArray = ["title1", "title2", "title3", "title4", "title5", "title6"],
-    pricesArray = ["price1", "price2", "price3", "price4", "price5", "price6"],
-    changeArray = ["change1", "change2", "change3", "change4", "change5", "change6"],
-    headerArray = ["header1", "header2", "header3", "header4", "header5", "header6"],
-    datesArray = ["date1", "date2", "date3", "date4", "date5", "date6"],
+const coin = ["bitcoin", "ethereum", "ripple", "tether", "bitcoin-cash", "litecoin", "binance-coin", "eos", "bitcoin-sv", "stellar"],
+    bindsArray = ["lineChart1", "lineChart2", "lineChart3", "lineChart4", "lineChart5", "lineChart6",
+"lineChart7", "lineChart8", "lineChart9", "lineChart10"],
+    parentsArray = ["#chart1", "#chart2", "#chart3", "#chart4", "#chart5", "#chart6", "#chart7", "#chart8", "#chart9", "#chart10"],
+    titlesArray = ["title1", "title2", "title3", "title4", "title5", "title6", "title7", "title8", "title9", "title10"],
+    pricesArray = ["price1", "price2", "price3", "price4", "price5", "price6", "price7", "price8", "price9", "price10"],
+    changeArray = ["change1", "change2", "change3", "change4", "change5", "change6", "change7", "change8", "change9", "change10"],
+    headerArray = ["header1", "header2", "header3", "header4", "header5", "header6", "header7", "header8", "header9", "header10"],
+    datesArray = ["date1", "date2", "date3", "date4", "date5", "date6", "date7", "date8", "date9", "date10"],
     request = new XMLHttpRequest();
 
 (function loop(i, length) {

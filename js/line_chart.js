@@ -20,8 +20,8 @@ class LineChart {
 
 // set the dimensions of the graph
 const margin = {top: 25, right: 0, bottom: 5, left: 50},
-width = 400 - margin.left - margin.right,
-height = 100 - margin.top - margin.bottom,
+width = 300 - margin.left - margin.right,
+height = 70 - margin.top - margin.bottom,
 vis = this;
 
 // append svg to current parentDiv
@@ -69,11 +69,11 @@ document.getElementById(vis.titleDiv).innerHTML = vis.coin;
 const dailyChange = (((vis.formattedData[95].price - vis.formattedData[0].price)/vis.formattedData[0].price)*100).toFixed(2);
 document.getElementById(vis.changeDiv).innerHTML = "24hr Change: "+dailyChange+"(%)";
 if(dailyChange<0){
-document.getElementById(vis.coinHeader).style.backgroundColor = "lightcoral";
+document.getElementById(vis.coinHeader).style.backgroundColor = "#ff9999";
 }
 else{
-  document.getElementById(vis.coinHeader).style.backgroundColor = "lightgreen";
-  document.getElementById(vis.coinHeader).style.border = "thick solid lightgreen";
+  document.getElementById(vis.coinHeader).style.backgroundColor = "#ccffcc";
+  document.getElementById(vis.coinHeader).style.border = "thick solid #ccffcc";
 }
 
 const focus = svg.append("g")
