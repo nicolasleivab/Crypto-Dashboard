@@ -73,7 +73,6 @@ document.getElementById(vis.coinHeader).style.backgroundColor = "#ff9999";
 }
 else{
   document.getElementById(vis.coinHeader).style.backgroundColor = "#ccffcc";
-  document.getElementById(vis.coinHeader).style.border = "thick solid #ccffcc";
 }
 
 const focus = svg.append("g")

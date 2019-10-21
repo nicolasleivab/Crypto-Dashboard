@@ -13,10 +13,10 @@ request('GET', 'https://pro-api.coinmarketcap.com/v1/global-metrics/quotes/lates
     console.log(data.data);
 
 //append global metrics
-document.getElementById("marketCap").innerHTML = "Market Cap (USD): " + data.data.quote.USD.total_market_cap;
-document.getElementById("totalVol").innerHTML = "Total Volume (24hr): " + data.data.quote.USD.total_volume_24h;
-document.getElementById("btcDom").innerHTML = "Bitcoin Dominance (%): " + data.data.btc_dominance;
-document.getElementById("allCoins").innerHTML = "Active Cryptocurrencies: " + data.data.active_cryptocurrencies;
+document.getElementById("marketCap").innerHTML = "Market Cap (USD): " + Number(data.data.quote.USD.total_market_cap).toLocaleString('en');
+document.getElementById("totalVol").innerHTML = "Total Volume (24hr): " + Number(data.data.quote.USD.total_volume_24h).toLocaleString('en');
+document.getElementById("btcDom").innerHTML = "Bitcoin Dominance (%): " + Number(data.data.btc_dominance).toLocaleString('en');
+document.getElementById("allCoins").innerHTML = "Active Cryptocurrencies: " + Number(data.data.active_cryptocurrencies).toLocaleString('en');
 
 }).catch()
 
@@ -41,11 +41,11 @@ request('GET', 'https://api.coincap.io/v2/assets/')
 
 // Format decimals
 cryptoData.forEach(function(d) {
-    d.priceUsd = Math.round(d.priceUsd * 100) / 100;
-    d.changePercent24Hr = Math.round(d.changePercent24Hr * 100) / 100;
-    d.marketCapUsd = Math.round(d.marketCapUsd * 100) / 100;
-    d.supply = Math.round(d.supply * 100) / 100;
-    d.volumeUsd24Hr = Math.round(d.volumeUsd24Hr * 100) / 100;
+    d.priceUsd = Number(Math.round(d.priceUsd * 100) / 100).toLocaleString('en');
+    d.changePercent24Hr = Number(Math.round(d.changePercent24Hr * 100) / 100).toLocaleString('en');
+    d.marketCapUsd = Number(Math.round(d.marketCapUsd * 100) / 100).toLocaleString('en');
+    d.supply = Number(Math.round(d.supply * 100) / 100).toLocaleString('en');
+    d.volumeUsd24Hr = Number(Math.round(d.volumeUsd24Hr * 100) / 100).toLocaleString('en');
     });
 
 function displayCryptoBoard(arr) {

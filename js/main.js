@@ -39,7 +39,9 @@ const request = new XMLHttpRequest();
               });
             //replace original coins array with the updated top ten coins (when i = 0)
             if(finalArray[0]!=undefined){coin = [finalArray[0]].concat(finalArray)}
-
+            
+            //after updating topTen coins
+            if(i>0){
             const oneDayData = cryptoData.slice(-96); // 24hr/15min = 96 
             const formattedData= oneDayData.map((function(d){return {"price": (Math.round(d.priceUsd*10000))/10000, "date": new Date(d.time)} ;}));
             
@@ -49,7 +51,7 @@ const request = new XMLHttpRequest();
 
             //calling the  drawChart method for each coin
             bindsArray[i].drawChart();
-
+            }
 
             loop(i + 1, length);
         }

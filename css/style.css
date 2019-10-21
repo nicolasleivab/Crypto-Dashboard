@@ -1,8 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
 @import url('https://fonts.googleapis.com/css?family=ZCOOL+QingKe+HuangYou');
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family:  Titillium Web ,sans-serif!important
+    font-family:  Titillium Web ,sans-serif;
+    margin: 10px;
 }
 
 #coins {
@@ -25,10 +32,8 @@ body {
 }
 
 .nav a {
-  padding-top: 10px;
-  padding-left: 0px;
   margin-left: 30px;
-  height: 21px;
+  height: 20px;
   text-decoration: none;
   font-family: 'ZCOOL QingKe HuangYou', sans-serif;
   color: #fff;
@@ -40,7 +45,7 @@ body {
   margin-top: 10px;
   padding-left: 10px;
   margin-left: 30px;
-  height: 15px;
+  height: 20px;
 }
 
 .nav a:hover {
@@ -126,10 +131,9 @@ gap: 30px 30px;
 }
 
 .inner-flex{
-    border: thick solid #ff9999;
     border-radius: 5px;
-    background-color: lightcoral;
-    display: grid;
+    background-color: #ff9999;
+    display: grid; 
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows:  1fr;
     text-transform: capitalize;
@@ -160,14 +164,15 @@ gap: 30px 30px;
     grid-template-columns:  1fr;
 }
 
-.hide{
-    visibility: hidden;
+.icons i,.icons svg {
+    color: #fff;   
 }
 
-.icons i,.icons svg {
-    color: #fff;
-    
+.footer{
+    position: relative;
+    padding-top: 40px;
 }
+
 /* D3 */
 .hover-line {
   stroke: #4E4E4E;
