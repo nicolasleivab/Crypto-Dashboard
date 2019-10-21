@@ -181,5 +181,12 @@ gap: 30px 30px;
     
 }
 
+.hover-line2 {
+  stroke: rgb(161, 161, 161);
+  stroke-width: 1px;
+  stroke-dasharray: 3,3;
+
+}
+
 
 
