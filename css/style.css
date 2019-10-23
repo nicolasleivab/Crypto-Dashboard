@@ -173,6 +173,46 @@ gap: 30px 30px;
     position: relative;
     padding-top: 40px;
 }
+/* chart html */
+
+.chart-outter-grid{
+    padding-top: 100px;
+    width: 100%;
+    min-height: 500px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows:  1fr;
+    gap: 30px 30px;
+}
+
+.chart-grid{
+    width: 100%;
+    min-height: 100px;
+    border: solid #DCDCDC 1.5px;
+    border-radius: 5px;
+    align-self: center;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns:  1fr;   
+}
+
+.chart-header-container{
+    border-radius: 5px;
+    border: solid #DCDCDC 1.5px;
+    display: grid; 
+    grid-template-rows: 1fr;
+    grid-template-columns:  repeat(2, 1fr);
+    text-transform: capitalize;
+}
+
+.chart-container{
+    width: 100%;
+    min-height: 400px;
+    border: solid #DCDCDC 1.5px;
+}
+
+.data-container{
+ text-align: left;
+}
 
 /* D3 */
 .hover-line {
