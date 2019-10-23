@@ -78,6 +78,8 @@ g.append("rect")
 .on("mouseout", function() { focus.style("display", "none"); })
 .on("mousemove", mousemove);
 
+const formatDate = d3.timeFormat("%m/%d %H:%M");
+
 //mousemove function adapted from Adam Janes https://github.com/adamjanes/udemy-d3/blob/master/06/6.10.0/js/main.js
 function mousemove() {
 var x0 = x.invert(d3.mouse(this)[0]),
@@ -86,7 +88,7 @@ var x0 = x.invert(d3.mouse(this)[0]),
   d1 = formattedData[i],
   d = x0 - d0.date > d1.date - x0 ? d1 : d0;
 focus.attr("transform", "translate(" + x(d.date) + "," + y(d.price) + ")");
-focus.select("text").text(d.price);
+focus.select("text").text("$"+d.price);
 focus.select(".x-hover-line").attr("y2", (height - y(d.price)));
 focus.select(".x2-hover-line").attr("y2", (height - y(d.price)) + (- height));
 

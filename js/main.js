@@ -38,7 +38,12 @@ const request = new XMLHttpRequest();
                 return obj.id;
               });
             //replace original coins array with the updated top ten coins (when i = 0)
-            if(finalArray[0]!=undefined){coin = [finalArray[0]].concat(finalArray)}
+            if(finalArray[0]!=undefined){
+                coin = [finalArray[0]].concat(finalArray)
+                topOneHundred = cryptoData;
+                localStorage.setItem('arrayToPass', JSON.stringify(topOneHundred));
+                
+            }
             
             //after updating topTen coins
             if(i>0){

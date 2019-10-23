@@ -1,4 +1,5 @@
 /* Search js */
+let topCoins = JSON.parse(localStorage.getItem('arrayToPass'));
 
 function clicked() {
     let inputCoin = document.getElementById('search').value;
