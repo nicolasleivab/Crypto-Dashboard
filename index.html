@@ -150,6 +150,14 @@
             <div></div>
     </div>
 
+    <script>
+        
+        document.getElementsByTagName("a").onclick = function(){
+        let selectedCoin = getElementById("title1").innerHTML;
+        
+        sessionStorage.setItem('selectedCoin', JSON.stringify(selectedCoin));
+        }
+    </script>
     <!-- Libraries -->
     <script src="js/d3.min.js"></script>
     <!-- Custom JS -->

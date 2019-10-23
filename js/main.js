@@ -49,7 +49,7 @@ const request = new XMLHttpRequest();
             if(i>0){
             const oneDayData = cryptoData.slice(-96); // 24hr/15min = 96 
             const formattedData= oneDayData.map((function(d){return {"price": (Math.round(d.priceUsd*10000))/10000, "date": new Date(d.time)} ;}));
-            
+
             /* D3 viz */
             //create a new binding with each loop for each coin
             bindsArray[i] = new LineChart(parentsArray[i], formattedData, coin[i], titlesArray[i], pricesArray[i], changeArray[i], headerArray[i], datesArray[i]);

@@ -62,8 +62,8 @@ svg.append("path")
     .on("mouseout", function() { focus.style("display", "none"); })
     .on("mousemove", mousemove);
 
-//append this.coin text to innetHTML
-document.getElementById(vis.titleDiv).innerHTML = vis.coin;
+//append this.coin text to innetHTML and as a query parameter
+document.getElementById(vis.titleDiv).innerHTML = "<a href=chart.html?selectedCoin=" + vis.coin+">"+vis.coin+"</a>";
 
 //calculate and append 24 hr change
 const dailyChange = (((vis.formattedData[95].price - vis.formattedData[0].price)/vis.formattedData[0].price)*100).toFixed(2);

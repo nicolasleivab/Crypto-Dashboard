@@ -1,7 +1,8 @@
 /* Search js */
-let topCoins = JSON.parse(localStorage.getItem('arrayToPass'));
-let selectedCoin;
-let request = new XMLHttpRequest();
+const topCoins = JSON.parse(localStorage.getItem('arrayToPass'));
+const urlParams = new URLSearchParams(window.location.search);//get query parameter
+const selectedCoin = urlParams.get('selectedCoin');
+const request = new XMLHttpRequest();
 
 if(selectedCoin != undefined){
 //if selected from dashboard
