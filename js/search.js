@@ -1,7 +1,5 @@
 /* Search js */
 
-let i = 0;
-
 function clicked() {
     let inputCoin = document.getElementById('search').value;
     inputCoin = inputCoin.replace(/\s+/g, '-').toLowerCase();
@@ -19,12 +17,8 @@ request.onreadystatechange = function() {
         const oneDayData = cryptoData.slice(-96); // 24hr/15min = 96 (start with 1 day chart by default) 
         const formattedData= oneDayData.map((function(d){return {"price": (Math.round(d.priceUsd*10000))/10000, "date": new Date(d.time)} ;}));
         console.log(formattedData);
-
-        let histLineChart = new HistLineChart(formattedData, inputCoin);
-        if(i<1){histLineChart.drawChart();
-        }else{histLineChart.updateChart();
-        };
-        i++;
+        //call update func to render the chart with new data
+        updateChart(formattedData);
         
     }
    
