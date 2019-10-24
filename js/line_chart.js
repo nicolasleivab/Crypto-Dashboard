@@ -124,14 +124,14 @@ focus.select(".x-hover-line").attr("y2", (height - y(d.price)));
 focus.select(".x2-hover-line").attr("y2", (height - y(d.price)) + (- height));
 svg.selectAll("text").style('fill', 'transparent'); //remove text from svg
 //append price text to priceDiv
-document.getElementById(vis.priceDiv).innerHTML = "Price: $" + (focus.select("text").text(function() { return d.price; })._groups[0][0].innerHTML);
+document.getElementById(vis.priceDiv).innerHTML = "Price: $" + (focus.select("text").text(function() { return (d.price).toLocaleString('en'); })._groups[0][0].innerHTML);
 document.getElementById(vis.dateDiv).innerHTML = "Date time: " + (focus.select("text").text(function() { return formatDate(d.date); })._groups[0][0].innerHTML);
 
 }
 
 //reset pricediv function on mouseout
 function reset(){
-  document.getElementById(vis.priceDiv).innerHTML = "Price: $" + vis.formattedData[95].price;
+  document.getElementById(vis.priceDiv).innerHTML = "Price: $" + (vis.formattedData[95].price).toLocaleString('en');
   document.getElementById(vis.dateDiv).innerHTML = "Date time: " + formatDate(vis.formattedData[95].date);
   focus.style("display", "none");
   };

@@ -4,11 +4,23 @@ const urlParams = new URLSearchParams(window.location.search);//get query parame
 const selectedCoin = urlParams.get('selectedCoin');
 let inputCoin;
 const request = new XMLHttpRequest();
-
+//append coin data functions
 function appData(id, text){
     document.getElementById(id).innerHTML = text;
 }
-
+function appAll(filtered){
+appData("rank", "Rank #" + filtered[0].rank);
+appData("title", filtered[0].name+" - "+filtered[0].symbol+" "+"("+filtered[0].changePercent24Hr+"%)");
+appData("marketCap", "Market Cap: "+filtered[0].marketCapUsd);
+appData("supply", "Supply: " +filtered[0].supply);
+appData("max-supply", "Max Supply: " +filtered[0].maxSupply);
+appData("24hrvolume", "Volume (24hr): "+filtered[0].volumeUsd24Hr);
+appData("24hrwap", "Volume Weighted Average Price (24hr): "+filtered[0].vwap24Hr)
+appData("price-change", "24hr Price Change: "+filtered[0].changePercent24Hr+"%");
+if(filtered[0].changePercent24Hr<0){document.getElementById("chart-header").style.backgroundColor = "#ff9999";
+}else{document.getElementById("chart-header").style.backgroundColor = "#ccffcc";}
+}
+//request function
 function getData(url){
     request.open("GET", url);
     request.onreadystatechange = function() {
@@ -21,41 +33,20 @@ function getData(url){
             //call update func to render the chart with new data
             updateChart(formattedData);
     
-            //append coin title and rank to innetHTML
+            //append coin title and data
            if(selectedCoin != undefined && inputCoin == undefined){
             //filter this coin
             function filterCoin(coin) {return coin.id == selectedCoin;}
             let filtered = topCoins.filter(filterCoin);
-            appData("rank", "Rank #" + filtered[0].rank);
-            appData("title", filtered[0].name+" - "+filtered[0].symbol+" "+"("+filtered[0].changePercent24Hr+"%)");
-            appData("marketCap", "Market Cap: "+filtered[0].marketCapUsd);
-            appData("supply", "Supply: " +filtered[0].supply);
-            appData("24hrvolume", "Volume (24hr): "+filtered[0].volumeUsd24Hr);
-            appData("price-change", "24hr Price Change: "+filtered[0].changePercent24Hr+"%");
-            if(filtered[0].changePercent24Hr<0){document.getElementById("chart-header").style.backgroundColor = "#ff9999";
-            }else{document.getElementById("chart-header").style.backgroundColor = "#ccffcc";}
+            appAll(filtered);
             }else if(inputCoin == undefined){
             function filterCoin(coin) {return coin.id == "bitcoin";}
-            let bitcoin = topCoins.filter(filterCoin);
-            appData("rank", "Rank #" + bitcoin[0].rank);
-            appData("title", bitcoin[0].name+" - "+bitcoin[0].symbol+" "+"("+bitcoin[0].changePercent24Hr+"%)");
-            appData("marketCap", "Market Cap: "+bitcoin[0].marketCapUsd);
-            appData("supply", "Supply: " +bitcoin[0].supply);
-            appData("24hrvolume", "Volume (24hr): "+bitcoin[0].volumeUsd24Hr);
-            appData("price-change", "24hr Price Change: "+bitcoin[0].changePercent24Hr+"%");
-            if(bitcoin[0].changePercent24Hr<0){document.getElementById("chart-header").style.backgroundColor = "#ff9999";
-            }else{document.getElementById("chart-header").style.backgroundColor = "#ccffcc";}
+            let filtered = topCoins.filter(filterCoin);
+            appAll(filtered);
             }else{
             function filterCoin(coin) {return coin.id == inputCoin;}
             let filtered = topCoins.filter(filterCoin);
-            appData("rank", "Rank #" + filtered[0].rank);
-            appData("title", filtered[0].name+" - "+filtered[0].symbol+" "+"("+filtered[0].changePercent24Hr+"%)");
-            appData("marketCap", "Market Cap: "+filtered[0].marketCapUsd);
-            appData("supply", "Supply: " +filtered[0].supply);
-            appData("24hrvolume", "Volume (24hr): "+filtered[0].volumeUsd24Hr);
-            appData("price-change", "24hr Price Change: "+filtered[0].changePercent24Hr+"%");
-            if(filtered[0].changePercent24Hr<0){document.getElementById("chart-header").style.backgroundColor = "#ff9999";
-            }else{document.getElementById("chart-header").style.backgroundColor = "#ccffcc";}
+            appAll(filtered);
             }
         }   
     } 

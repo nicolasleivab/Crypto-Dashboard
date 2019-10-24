@@ -128,7 +128,7 @@ min-height: 300px;
 display: grid;
 grid-template-columns: repeat(4, 1fr);
 grid-template-rows: repeat(3, 1fr);
-gap: 30px 30px;
+gap: 15px 15px;
 
 }
 
