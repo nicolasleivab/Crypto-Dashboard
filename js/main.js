@@ -3,6 +3,7 @@
 //CoinCap API 
 //list of coins to be replaced
 let coin = ["template", "template", "template", "template", "template", "template", "template", "template", "template", "template", "template"];
+let topOneHundred = [];
 
 const bindsArray = [], parentsArray = [], titlesArray = [], pricesArray = [], changeArray = [], headerArray = [], datesArray = [];
 for(let n = 0; n < 11; n ++){

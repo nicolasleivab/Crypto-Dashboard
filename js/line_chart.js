@@ -62,8 +62,13 @@ svg.append("path")
     .on("mouseout", function() { focus.style("display", "none"); })
     .on("mousemove", mousemove);
 
+//filter this coin
+function filterCoin(coin) {
+  return coin.id == vis.coin;
+}       
+let filtered = topOneHundred.filter(filterCoin);
 //append this.coin text to innetHTML and as a query parameter
-document.getElementById(vis.titleDiv).innerHTML = "<a href=chart.html?selectedCoin=" + vis.coin+">"+vis.coin+"</a>";
+document.getElementById(vis.titleDiv).innerHTML = "<a href=chart.html?selectedCoin=" + vis.coin+">"+filtered[0].name+"</a>";
 
 //calculate and append 24 hr change
 const dailyChange = (((vis.formattedData[95].price - vis.formattedData[0].price)/vis.formattedData[0].price)*100).toFixed(2);

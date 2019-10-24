@@ -31,6 +31,16 @@ body {
   border-bottom: solid #4E4E4E 1px;
 }
 
+a:link, a:visited {
+    color: blue;
+}
+a{
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+    color: cornflowerblue;
+}
 .nav a {
   margin-left: 30px;
   margin-top: 10px;
@@ -137,7 +147,6 @@ gap: 30px 30px;
     display: grid; 
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows:  1fr;
-    text-transform: capitalize;
     
 }
 .inner-flex div:first-child {
@@ -201,7 +210,6 @@ gap: 30px 30px;
     display: grid; 
     grid-template-rows: 1fr;
     grid-template-columns:  repeat(2, 1fr);
-    text-transform: capitalize;
 }
 
 .chart-container{

@@ -18,8 +18,6 @@ request.onreadystatechange = function() {
         //call update func to render the chart with new data
         updateChart(formattedData);
 
-        //append coin text to innetHTML
-        document.getElementById("title").innerHTML = selectedCoin;
         //filter this coin
         function filterCoin(coin) {
             return coin.id == selectedCoin;
@@ -28,6 +26,8 @@ request.onreadystatechange = function() {
         let filtered = topCoins.filter(filterCoin);
         //append coin rank to innetHTML
          document.getElementById("rank").innerHTML = "Rank #" + filtered[0].rank;
+         //append coin text to innetHTML
+        document.getElementById("title").innerHTML = filtered[0].name+" - "+filtered[0].symbol;
         
     } 
 }
