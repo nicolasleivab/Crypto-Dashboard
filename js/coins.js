@@ -36,7 +36,6 @@ function request(method, url) {
 request('GET', 'https://api.coincap.io/v2/assets/')
 .then((response) => {
     const data = JSON.parse(response.target.responseText)
-    console.log(data.data);
     const cryptoData = data.data;
 
 // Format decimals
@@ -47,6 +46,7 @@ cryptoData.forEach(function(d) {
     d.supply = Number(Math.round(d.supply * 100) / 100).toLocaleString('en');
     d.volumeUsd24Hr = Number(Math.round(d.volumeUsd24Hr * 100) / 100).toLocaleString('en');
     });
+console.log(cryptoData);
 
 function displayCryptoBoard(arr) {
     let theExport = ""; //initialize the export

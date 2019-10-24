@@ -5,6 +5,10 @@ const selectedCoin = urlParams.get('selectedCoin');
 let inputCoin;
 const request = new XMLHttpRequest();
 
+function appData(id, text){
+    document.getElementById(id).innerHTML = text;
+}
+
 function getData(url){
     request.open("GET", url);
     request.onreadystatechange = function() {
@@ -22,41 +26,56 @@ function getData(url){
             //filter this coin
             function filterCoin(coin) {return coin.id == selectedCoin;}
             let filtered = topCoins.filter(filterCoin);
-            document.getElementById("rank").innerHTML = "Rank #" + filtered[0].rank;
-            document.getElementById("title").innerHTML = filtered[0].name+" - "+filtered[0].symbol;
+            appData("rank", "Rank #" + filtered[0].rank);
+            appData("title", filtered[0].name+" - "+filtered[0].symbol+" "+"("+filtered[0].changePercent24Hr+"%)");
+            appData("marketCap", "Market Cap: "+filtered[0].marketCapUsd);
+            appData("supply", "Supply: " +filtered[0].supply);
+            appData("24hrvolume", "Volume (24hr): "+filtered[0].volumeUsd24Hr);
+            appData("price-change", "24hr Price Change: "+filtered[0].changePercent24Hr+"%");
+            if(filtered[0].changePercent24Hr<0){document.getElementById("chart-header").style.backgroundColor = "#ff9999";
+            }else{document.getElementById("chart-header").style.backgroundColor = "#ccffcc";}
             }else if(inputCoin == undefined){
             function filterCoin(coin) {return coin.id == "bitcoin";}
             let bitcoin = topCoins.filter(filterCoin);
-            document.getElementById("rank").innerHTML = "Rank #" + bitcoin[0].rank;
-            document.getElementById("title").innerHTML = bitcoin[0].name+" - "+bitcoin[0].symbol;
+            appData("rank", "Rank #" + bitcoin[0].rank);
+            appData("title", bitcoin[0].name+" - "+bitcoin[0].symbol+" "+"("+bitcoin[0].changePercent24Hr+"%)");
+            appData("marketCap", "Market Cap: "+bitcoin[0].marketCapUsd);
+            appData("supply", "Supply: " +bitcoin[0].supply);
+            appData("24hrvolume", "Volume (24hr): "+bitcoin[0].volumeUsd24Hr);
+            appData("price-change", "24hr Price Change: "+bitcoin[0].changePercent24Hr+"%");
+            if(bitcoin[0].changePercent24Hr<0){document.getElementById("chart-header").style.backgroundColor = "#ff9999";
+            }else{document.getElementById("chart-header").style.backgroundColor = "#ccffcc";}
+            }else{
+            function filterCoin(coin) {return coin.id == inputCoin;}
+            let filtered = topCoins.filter(filterCoin);
+            appData("rank", "Rank #" + filtered[0].rank);
+            appData("title", filtered[0].name+" - "+filtered[0].symbol+" "+"("+filtered[0].changePercent24Hr+"%)");
+            appData("marketCap", "Market Cap: "+filtered[0].marketCapUsd);
+            appData("supply", "Supply: " +filtered[0].supply);
+            appData("24hrvolume", "Volume (24hr): "+filtered[0].volumeUsd24Hr);
+            appData("price-change", "24hr Price Change: "+filtered[0].changePercent24Hr+"%");
+            if(filtered[0].changePercent24Hr<0){document.getElementById("chart-header").style.backgroundColor = "#ff9999";
+            }else{document.getElementById("chart-header").style.backgroundColor = "#ccffcc";}
             }
-        }
-       
+        }   
     } 
-    
     request.send();
 }
-
-if(selectedCoin != undefined){
 //if selected from dashboard
+if(selectedCoin != undefined){
 getData("https://api.coincap.io/v2/assets/"+selectedCoin+"/history?interval=m15");
 }
-else{
 //default chart
+else{
 getData("https://api.coincap.io/v2/assets/bitcoin/history?interval=m15");
 };
 //selected from search input
 function clicked() {
     inputCoin = document.getElementById('search').value;
     inputCoin = inputCoin.replace(/\s+/g, '-').toLowerCase();
-    console.log(inputCoin);
    
 //Request input coin candles data
 getData("https://api.coincap.io/v2/assets/"+inputCoin+"/history?interval=m15");
-function filterCoin(coin) {return coin.id == inputCoin;}
-let filtered = topCoins.filter(filterCoin);
-document.getElementById("rank").innerHTML = "Rank #" + filtered[0].rank;
-document.getElementById("title").innerHTML = filtered[0].name+" - "+filtered[0].symbol;
 };
 
 document.getElementById('searchSubmit').addEventListener('click', clicked);
