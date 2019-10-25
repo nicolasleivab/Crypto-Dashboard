@@ -20,11 +20,11 @@ appData("price-change", "24hr Price Change: "+filtered[0].changePercent24Hr+"%")
 if(filtered[0].changePercent24Hr<0){document.getElementById("chart-header").style.backgroundColor = "#ff9999";
 }else{document.getElementById("chart-header").style.backgroundColor = "#ccffcc";}
 }
-let cryptoData = []; //array to be replaced
-//daily, weekly and monthly data
+
+//daily, weekly and monthly data to be used also in time_filter.js
 const oneDayData = -96, // 24hr/15min = 96
       oneWeekData = -168 // 168hr/1hr = 168
-      oneMonthData = -180 // 720hr/4hr = 180
+      oneMonthData = -120 // 720hr/6hr = 120
 //request function
 function getData(url, sliceNum){
     request.open("GET", url);

@@ -190,10 +190,15 @@ gap: 15px 15px;
     min-height: 500px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows:  1fr;
+    grid-template-rows: 1fr;
     gap: 30px 30px;
 }
 
+.buttons-container{
+    position: relative;
+    top: 100px;
+    left: 10px;
+}
 .chart-grid{
     width: 100%;
     min-height: 100px;
