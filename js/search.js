@@ -20,15 +20,20 @@ appData("price-change", "24hr Price Change: "+filtered[0].changePercent24Hr+"%")
 if(filtered[0].changePercent24Hr<0){document.getElementById("chart-header").style.backgroundColor = "#ff9999";
 }else{document.getElementById("chart-header").style.backgroundColor = "#ccffcc";}
 }
+let cryptoData = []; //array to be replaced
+//daily, weekly and monthly data
+const oneDayData = -96, // 24hr/15min = 96
+      oneWeekData = -168 // 168hr/1hr = 168
+      oneMonthData = -180 // 720hr/4hr = 180
 //request function
-function getData(url){
+function getData(url, sliceNum){
     request.open("GET", url);
     request.onreadystatechange = function() {
         if(request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-            let data = JSON.parse(request.responseText);
+            const data = JSON.parse(request.responseText);
             const cryptoData = data.data;
-            const oneDayData = cryptoData.slice(-96); // 24hr/15min = 96 (start with 1 day chart by default) 
-            const formattedData= oneDayData.map((function(d){return {"price": (Math.round(d.priceUsd*10000))/10000, "date": new Date(d.time)} ;}));
+            const slicedData = cryptoData.slice(sliceNum);
+            const formattedData= slicedData.map((function(d){return {"price": (Math.round(d.priceUsd*10000))/10000, "date": new Date(d.time)} ;}));
             console.log(formattedData);
             //call update func to render the chart with new data
             updateChart(formattedData);
@@ -54,11 +59,11 @@ function getData(url){
 }
 //if selected from dashboard
 if(selectedCoin != undefined){
-getData("https://api.coincap.io/v2/assets/"+selectedCoin+"/history?interval=m15");
+getData("https://api.coincap.io/v2/assets/"+selectedCoin+"/history?interval=m15", oneDayData);
 }
 //default chart
 else{
-getData("https://api.coincap.io/v2/assets/bitcoin/history?interval=m15");
+getData("https://api.coincap.io/v2/assets/bitcoin/history?interval=m15", oneDayData);
 };
 //selected from search input
 function clicked() {
@@ -66,7 +71,7 @@ function clicked() {
     inputCoin = inputCoin.replace(/\s+/g, '-').toLowerCase();
    
 //Request input coin candles data
-getData("https://api.coincap.io/v2/assets/"+inputCoin+"/history?interval=m15");
+getData("https://api.coincap.io/v2/assets/"+inputCoin+"/history?interval=m15", oneDayData);
 };
 
 document.getElementById('searchSubmit').addEventListener('click', clicked);
