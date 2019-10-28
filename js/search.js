@@ -2,7 +2,7 @@
 const topCoins = JSON.parse(localStorage.getItem('arrayToPass'));
 const urlParams = new URLSearchParams(window.location.search);//get query parameter
 const selectedCoin = urlParams.get('selectedCoin');
-let inputCoin;
+let inputCoin, priceChange;
 const request = new XMLHttpRequest();
 //append coin data functions
 function appData(id, text){
@@ -35,9 +35,11 @@ function getData(url, sliceNum){
             const slicedData = cryptoData.slice(sliceNum);
             const formattedData= slicedData.map((function(d){return {"price": (Math.round(d.priceUsd*10000))/10000, "date": new Date(d.time)} ;}));
             console.log(formattedData);
+            priceChange = ((formattedData[formattedData.length - 1].price)-(formattedData[0].price))/(formattedData[0].price)*100;
+            priceChange = priceChange.toFixed(2);
             //call update func to render the chart with new data
             updateChart(formattedData);
-    
+            
             //append coin title and data
            if(selectedCoin != undefined && inputCoin == undefined){
             //filter this coin
@@ -53,6 +55,17 @@ function getData(url, sliceNum){
             let filtered = topCoins.filter(filterCoin);
             appAll(filtered);
             }
+
+        //append price change for 7 and 30 days
+        if(sliceNum == -168){
+            appData("price-change", "7 days Price Change: "+priceChange+"%");
+            if(priceChange<0){document.getElementById("chart-header").style.backgroundColor = "#ff9999";
+            }else{document.getElementById("chart-header").style.backgroundColor = "#ccffcc";}
+        }else if(sliceNum == -120){ 
+            appData("price-change", "30 days Price Change: "+priceChange+"%");
+            if(priceChange<0){document.getElementById("chart-header").style.backgroundColor = "#ff9999";
+            }else{document.getElementById("chart-header").style.backgroundColor = "#ccffcc";}
+        }
         }   
     } 
     request.send();
