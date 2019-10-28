@@ -10,7 +10,7 @@ function appData(id, text){
 }
 function appAll(filtered){
 appData("rank", "Rank #" + filtered[0].rank);
-appData("title", filtered[0].name+" - "+filtered[0].symbol+" "+"("+filtered[0].changePercent24Hr+"%)");
+appData("title", filtered[0].name+" - "+filtered[0].symbol+"-"+"$"+filtered[0].priceUsd);
 appData("marketCap", "$"+filtered[0].marketCapUsd);
 appData("supply", filtered[0].supply);
 appData("max-supply", filtered[0].maxSupply);

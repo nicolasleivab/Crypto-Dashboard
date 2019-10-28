@@ -1,9 +1,19 @@
 /* Coins js */
-
+let topCoins;
 //CoinMarketCap API for global metrics
 const apiKey = {
     key: "xxxxxxx" //insert private key
 };
+
+//table draw func
+function displayCryptoBoard(arr) {
+    let theExport = ""; //initialize the export
+    arr.forEach((crypto) => theExport += '<tr><td>' + crypto.rank + '</td><td>' + "<a href=chart.html?selectedCoin=" + crypto.id+">"+crypto.symbol+"</a>" + '</td><td>' + 
+    "<a href=chart.html?selectedCoin=" + crypto.id+">"+crypto.name+"</a>" + '</td><td>' + "$"+(crypto.marketCapUsd).toLocaleString('en') + '</td><td>' + "$"+(crypto.priceUsd).toLocaleString('en')+ '</td><td>' + 
+    crypto.changePercent24Hr + '</td><td>' + "$"+(crypto.volumeUsd24Hr).toLocaleString('en') + '</td><td>' + 
+    (crypto.supply).toLocaleString('en') + '</td></tr>'); //prints the row tables with each value
+    document.getElementById("crypto-table").innerHTML = theExport;
+}
 
 request('GET', 'https://pro-api.coinmarketcap.com/v1/global-metrics/quotes/latest?CMC_PRO_API_KEY=' + apiKey.key)
 .then((response) => {
@@ -40,22 +50,15 @@ request('GET', 'https://api.coincap.io/v2/assets/')
 
 // Format decimals
 cryptoData.forEach(function(d) {
-    d.priceUsd = Number(Math.round(d.priceUsd * 100) / 100).toLocaleString('en');
-    d.changePercent24Hr = Number(Math.round(d.changePercent24Hr * 100) / 100).toLocaleString('en');
-    d.marketCapUsd = Number(Math.round(d.marketCapUsd * 100) / 100).toLocaleString('en');
-    d.supply = Number(Math.round(d.supply * 100) / 100).toLocaleString('en');
-    d.volumeUsd24Hr = Number(Math.round(d.volumeUsd24Hr * 100) / 100).toLocaleString('en');
+    d.priceUsd = Number(Math.round(d.priceUsd * 10000) / 10000);
+    d.changePercent24Hr = Number(Math.round(d.changePercent24Hr * 100) / 100);
+    d.marketCapUsd = Number(Math.round(d.marketCapUsd * 100) / 100);
+    d.supply = Number(Math.round(d.supply * 100) / 100);
+    d.volumeUsd24Hr = Number(Math.round(d.volumeUsd24Hr * 100) / 100);
     });
 console.log(cryptoData);
 
-function displayCryptoBoard(arr) {
-    let theExport = ""; //initialize the export
-    arr.forEach((crypto) => theExport += '<tr><td>' + crypto.rank + '</td><td>' + "<a href=chart.html?selectedCoin=" + crypto.id+">"+crypto.symbol+"</a>" + '</td><td>' + 
-    "<a href=chart.html?selectedCoin=" + crypto.id+">"+crypto.name+"</a>" + '</td><td>' + "$"+crypto.marketCapUsd + '</td><td>' + "$"+crypto.priceUsd + '</td><td>' + 
-    crypto.changePercent24Hr + '</td><td>' + "$"+crypto.volumeUsd24Hr + '</td><td>' + 
-    crypto.supply + '</td></tr>'); //prints the row tables with each value
-    document.getElementById("crypto-table").innerHTML = theExport;
-}
+topCoins = cryptoData;
 
 let first20Coins = cryptoData.slice(0, 20);
 let secondBatch = cryptoData.slice(20, 40);
