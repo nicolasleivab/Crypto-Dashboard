@@ -11,11 +11,11 @@ function appData(id, text){
 function appAll(filtered){
 appData("rank", "Rank #" + filtered[0].rank);
 appData("title", filtered[0].name+" - "+filtered[0].symbol+" "+"("+filtered[0].changePercent24Hr+"%)");
-appData("marketCap", "Market Cap: "+filtered[0].marketCapUsd);
-appData("supply", "Supply: " +filtered[0].supply);
-appData("max-supply", "Max Supply: " +filtered[0].maxSupply);
-appData("24hrvolume", "Volume (24hr): "+filtered[0].volumeUsd24Hr);
-appData("24hrwap", "Volume Weighted Average Price (24hr): "+filtered[0].vwap24Hr)
+appData("marketCap", filtered[0].marketCapUsd);
+appData("supply", filtered[0].supply);
+appData("max-supply", filtered[0].maxSupply);
+appData("24hrvolume", filtered[0].volumeUsd24Hr);
+appData("24hrwap", filtered[0].vwap24Hr);
 appData("price-change", "24hr Price Change: "+filtered[0].changePercent24Hr+"%");
 if(filtered[0].changePercent24Hr<0){document.getElementById("chart-header").style.backgroundColor = "#ff9999";
 }else{document.getElementById("chart-header").style.backgroundColor = "#ccffcc";}

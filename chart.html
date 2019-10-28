@@ -40,12 +40,35 @@
     <div id="chart"></div>
     </div>
     </div>
-    <div class="data-container">Market Data
-    <div id="marketCap"></div>
-    <div id="supply"></div>
-    <div id="max-supply"></div>
-    <div id="24hrvolume"></div>
-    <div id="24hrwap"></div>
+    <div>
+      <table class="data-container">
+        <thead>
+            <tr>
+                <th>Market Cap:</th>
+                <td id="marketCap"></td>
+            </tr>
+            <tr>
+                <th>Supply:</th>
+                <td id="supply"></td>
+            </tr>
+            <tr>
+              <th>Max Supply:</th>
+              <td id="max-supply"></td>
+          </tr>
+          <tr>
+            <th>Volume (24hr):</th>
+            <td id="24hrvolume"></td>
+        </tr>
+        <tr>
+          <th>Volume Weighted Average Price (24hr):</th>
+          <td id="24hrwap"></td>
+      </tr>
+        </thead>
+        <tbody id="crypto-table">
+            <thead>
+            </thead>
+        </tbody>
+    </table>
     </div>
     </div>
     
@@ -53,7 +76,7 @@
     <script src="js/d3.min.js"></script>
     <!-- D3js plugin -->
     <script src="https://unpkg.com/d3-interpolate-path/build/d3-interpolate-path.min.js"></script>
-    
+
     <!-- Custom JS -->
     <script src="js/history_chart.js"></script>
     <script src="js/search.js"></script>
