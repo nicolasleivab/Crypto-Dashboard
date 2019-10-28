@@ -197,7 +197,28 @@ gap: 15px 15px;
 .buttons-container{
     position: relative;
     top: 100px;
-    left: 10px;
+    left: 0;
+}
+
+.btn{
+    height: 33px;
+    width: 10%;
+    font-family:  Titillium Web ,sans-serif;
+    font-size: 15px;
+    color: white;
+    background-color: #555;
+    border: solid #555 1.5px;
+    border-radius: 5px;
+    margin: 3px;
+}
+.btn:hover{
+    transform: translate(-1.5px, -1.5px);
+    box-shadow: 3px 3px 10px #555;
+}
+.focus{
+    background-color: #DCDCDC;
+    color: #555;
+    font-weight: 700;
 }
 .chart-grid{
     width: 100%;

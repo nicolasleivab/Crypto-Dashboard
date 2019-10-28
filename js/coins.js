@@ -51,8 +51,8 @@ console.log(cryptoData);
 function displayCryptoBoard(arr) {
     let theExport = ""; //initialize the export
     arr.forEach((crypto) => theExport += '<tr><td>' + crypto.rank + '</td><td>' + "<a href=chart.html?selectedCoin=" + crypto.id+">"+crypto.symbol+"</a>" + '</td><td>' + 
-    "<a href=chart.html?selectedCoin=" + crypto.id+">"+crypto.name+"</a>" + '</td><td>' + crypto.marketCapUsd + '</td><td>' + crypto.priceUsd + '</td><td>' + 
-    crypto.changePercent24Hr + '</td><td>' + crypto.volumeUsd24Hr + '</td><td>' + 
+    "<a href=chart.html?selectedCoin=" + crypto.id+">"+crypto.name+"</a>" + '</td><td>' + "$"+crypto.marketCapUsd + '</td><td>' + "$"+crypto.priceUsd + '</td><td>' + 
+    crypto.changePercent24Hr + '</td><td>' + "$"+crypto.volumeUsd24Hr + '</td><td>' + 
     crypto.supply + '</td></tr>'); //prints the row tables with each value
     document.getElementById("crypto-table").innerHTML = theExport;
 }
