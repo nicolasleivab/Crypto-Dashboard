@@ -97,7 +97,12 @@ const line = d3.line()
 .y(function(d) { return y(d.price); });
 
 g.select(".line")
-.transition(1000)
-.attr("d", line(formattedData));
+.transition(2000)
+.attr("d", line(formattedData))
+.attrTween('d', function (d) { //interpolation func for a smooth path transition
+  var previous = d3.select(this).attr('d');
+  var current = line(formattedData);
+  return d3.interpolatePath(previous, current);
+});
 
 };
