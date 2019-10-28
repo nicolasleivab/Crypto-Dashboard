@@ -82,6 +82,9 @@ getData("https://api.coincap.io/v2/assets/bitcoin/history?interval=m15", oneDayD
 function clicked() {
     inputCoin = document.getElementById('search').value;
     inputCoin = inputCoin.replace(/\s+/g, '-').toLowerCase();
+    if(inputCoin == "xrp"){
+        inputCoin = "ripple";
+    }
    
 //Request input coin candles data
 getData("https://api.coincap.io/v2/assets/"+inputCoin+"/history?interval=m15", oneDayData);

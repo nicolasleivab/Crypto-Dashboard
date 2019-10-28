@@ -21,8 +21,12 @@
     <div class="nav">
         <a href="index.html">Dashboard</a>
         <a href="coins.html">Coins</a>
-        <input type="text" id ="search" class="search-input" placeholder="Search any of the top 100 coin" />
-        <button id="searchSubmit"><i class="fas fa-search"></i></button>
+        <input type="text" id ="search" class="search-input" placeholder="Search coin" 
+        list="datalist" onkeyup="autoComplete(this.value)"/>
+        <datalist id="datalist"> 
+          <option value="Bitcoin"></option> 
+        </datalist>
+        <button id="searchSubmit" class="btn-gray"> Search</i></button>
     </div>
     <div class="buttons-container">
         <button class="btn focus" id="day">24Hr</button>
@@ -81,6 +85,7 @@
     <script src="js/history_chart.js"></script>
     <script src="js/search.js"></script>
     <script src="js/time_filter.js"></script>
+    <script src="js/autocomplete.js"></script>
     
 
 </body>

@@ -57,6 +57,23 @@ a:hover {
   padding-left: 10px;
   margin-left: 30px;
   height: 20px;
+  width: 10%;
+}
+
+.btn-gray{
+    padding-top: -5px;
+    height: 25px;
+    width: 5%;
+    font-size: 15px;
+    color: black;
+    background-color: #ccc;
+    border: solid #555 1.5px;
+    border-radius: 5px;
+    font-family: 'ZCOOL QingKe HuangYou', sans-serif;
+    font-size: 17px;
+}
+.btn-gray:hover{
+    transform: translate(1.5px, 1.5px);
 }
 
 .nav a:hover {
