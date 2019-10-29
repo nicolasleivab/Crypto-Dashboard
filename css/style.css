@@ -121,10 +121,13 @@ table {
 
 .pages a{
     text-decoration: none;
+    color: rgb(62, 170, 238);
+    padding: 0 15px 0 15px;
 }
-.pages a:focus { 
-  color: lightskyblue;
-  text-decoration: underline;
+
+.focus2{ 
+  background-color:  rgb(7, 86, 134);
+  color:rgb(173, 218, 247);
 }
 
 .container{

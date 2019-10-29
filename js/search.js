@@ -88,6 +88,11 @@ function clicked() {
    
 //Request input coin candles data
 getData("https://api.coincap.io/v2/assets/"+inputCoin+"/history?interval=m15", oneDayData);
+
+//add/remove focus class
+document.getElementById('day').classList.add('focus');
+document.getElementById('week').classList.remove('focus');
+document.getElementById('month').classList.remove('focus');
 };
 
 document.getElementById('searchSubmit').addEventListener('click', clicked);

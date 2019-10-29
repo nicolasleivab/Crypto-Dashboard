@@ -92,6 +92,13 @@ function request(method, url) {
 Add on click functions for displaying coins 21-40, 41-60, 61-80 and 81-100
 */
 function appCoins1(){
+    //focus class to links
+    document.getElementById('first').classList.add('focus2');
+    document.getElementById('second').classList.remove('focus2');
+    document.getElementById('third').classList.remove('focus2');
+    document.getElementById('fourth').classList.remove('focus2');
+    document.getElementById('fifth').classList.remove('focus2');
+    
     if(firstSort < 1){
         displayCryptoBoard(first20Coins);
         coinCounter = 1; //counter for table page
@@ -101,6 +108,13 @@ function appCoins1(){
     }
 };
 function appCoins2(){
+    //focus class to links
+    document.getElementById('first').classList.remove('focus2');
+    document.getElementById('second').classList.add('focus2');
+    document.getElementById('third').classList.remove('focus2');
+    document.getElementById('fourth').classList.remove('focus2');
+    document.getElementById('fifth').classList.remove('focus2');
+
     if(firstSort < 1){
         displayCryptoBoard(secondBatch);
         coinCounter = 2;
@@ -110,6 +124,13 @@ function appCoins2(){
     }
 };
 function appCoins3(){
+    //focus class to links
+    document.getElementById('first').classList.remove('focus2');
+    document.getElementById('second').classList.remove('focus2');
+    document.getElementById('third').classList.add('focus2');
+    document.getElementById('fourth').classList.remove('focus2');
+    document.getElementById('fifth').classList.remove('focus2');
+
     if(firstSort < 1){
         displayCryptoBoard(thirdBatch);
         coinCounter = 3;
@@ -119,6 +140,12 @@ function appCoins3(){
     }
 };
 function appCoins4(){
+    //focus class to links
+    document.getElementById('first').classList.remove('focus2');
+    document.getElementById('second').classList.remove('focus2');
+    document.getElementById('third').classList.remove('focus2');
+    document.getElementById('fourth').classList.add('focus2');
+    document.getElementById('fifth').classList.remove('focus2');
     if(firstSort < 1){
         displayCryptoBoard(fourthBatch);
         coinCounter = 4;
@@ -128,6 +155,13 @@ function appCoins4(){
     }
 };
 function appCoins5(){
+    //focus class to links
+    document.getElementById('first').classList.remove('focus2');
+    document.getElementById('second').classList.remove('focus2');
+    document.getElementById('third').classList.remove('focus2');
+    document.getElementById('fourth').classList.remove('focus2');
+    document.getElementById('fifth').classList.add('focus2');
+
     if(firstSort < 1){
         displayCryptoBoard(fifthBatch);
         coinCounter = 5;
