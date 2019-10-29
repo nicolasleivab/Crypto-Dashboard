@@ -5,11 +5,8 @@ let sorted = [];
 let counter1 = 0, counter2 = 0, counter3 = 0, counter4 = 0, counter5= 0, firstSort = 0;//counters as indicators
 //counter used in this file
 let coinCounter = 1;
-
-/*CoinMarketCap API for global metrics*/
-const apiKey = {
-    key: "xxxxxxx" //insert private key
-};
+//test
+let globalData;
 
 //table draw func
 function displayCryptoBoard(arr) {
@@ -21,18 +18,18 @@ function displayCryptoBoard(arr) {
     document.getElementById("crypto-table").innerHTML = theExport;
 }
 
-request('GET', 'https://pro-api.coinmarketcap.com/v1/global-metrics/quotes/latest?CMC_PRO_API_KEY=' + apiKey.key)
+/*CoinGecko API for global metrics*/
+request('GET', 'https://api.coingecko.com/api/v3/global')
 .then((response) => {
     const data = JSON.parse(response.target.responseText)
-    const generalData = data.data.quote.USD;
-    console.log(generalData);
-    console.log(data.data);
+    globalData = data.data;
+    console.log(globalData);
 
 //append global metrics
-document.getElementById("marketCap").innerHTML = "Market Cap (USD): " + Number(data.data.quote.USD.total_market_cap).toLocaleString('en');
-document.getElementById("totalVol").innerHTML = "Total Volume (24hr): " + Number(data.data.quote.USD.total_volume_24h).toLocaleString('en');
-document.getElementById("btcDom").innerHTML = "Bitcoin Dominance (%): " + Number(data.data.btc_dominance).toLocaleString('en');
-document.getElementById("allCoins").innerHTML = "Active Cryptocurrencies: " + Number(data.data.active_cryptocurrencies).toLocaleString('en');
+document.getElementById("marketCap").innerHTML = "Market Cap (USD): $"+ Number(globalData.total_market_cap.usd).toLocaleString('en');
+document.getElementById("totalVol").innerHTML = "Total Volume (24hr): $"+ Number(globalData.total_volume.usd).toLocaleString('en');
+document.getElementById("btcDom").innerHTML = "Bitcoin Dominance: " + Number(globalData.market_cap_percentage.btc).toLocaleString('en')+"%";
+document.getElementById("allCoins").innerHTML = "Active Cryptocurrencies: " + Number(globalData.active_cryptocurrencies).toLocaleString('en');
 
 }).catch()
 
