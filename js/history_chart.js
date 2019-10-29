@@ -1,7 +1,7 @@
 /* D3 History Line Chart */
 
 // set the dimensions of the graph
-const margin = {top: 30, right: 50, bottom: 50, left: 50},
+const margin = {top: 30, right: 75, bottom: 50, left: 50},
 width = 700 - margin.left - margin.right,
 height = 400 - margin.top - margin.bottom;
 

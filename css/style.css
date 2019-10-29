@@ -96,6 +96,11 @@ td{
     padding: 15px;
 }
 
+th i:hover{
+    transform: translate(1px, -1px);
+    text-decoration: underline;
+}
+
 table { 
 	width: 100%; 
 	border-collapse: collapse; 

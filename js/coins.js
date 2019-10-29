@@ -1,6 +1,12 @@
 /* Coins js */
-let topCoins;
-//CoinMarketCap API for global metrics
+let topCoins, first20Coins, secondBatch, thirdBatch, fourthBatch, fifthBatch;
+//to be replaced in sort_table.js
+let sorted = [];
+let counter1 = 0, counter2 = 0, counter3 = 0, counter4 = 0, counter5= 0, firstSort = 0;//counters as indicators
+//counter used in this file
+let coinCounter = 1;
+
+/*CoinMarketCap API for global metrics*/
 const apiKey = {
     key: "xxxxxxx" //insert private key
 };
@@ -60,23 +66,13 @@ console.log(cryptoData);
 
 topCoins = cryptoData;
 
-let first20Coins = cryptoData.slice(0, 20);
-let secondBatch = cryptoData.slice(20, 40);
-let thirdBatch = cryptoData.slice(40, 60);
-let fourthBatch = cryptoData.slice(60, 80);
-let fifthBatch = cryptoData.slice(80, 100);
+first20Coins = cryptoData.slice(0, 20);
+secondBatch = cryptoData.slice(20, 40);
+thirdBatch = cryptoData.slice(40, 60);
+fourthBatch = cryptoData.slice(60, 80);
+fifthBatch = cryptoData.slice(80, 100);
 
 displayCryptoBoard(first20Coins); //call table function with the array and append to #crypto-table
-
-/*
-Add on click functions for displaying coins 21-40, 41-60, 61-80 and 81-100
-*/
-
-document.getElementById("first").onclick = function(){displayCryptoBoard(first20Coins)};
-document.getElementById("second").onclick = function(){displayCryptoBoard(secondBatch)};
-document.getElementById("third").onclick = function(){displayCryptoBoard(thirdBatch)};
-document.getElementById("fourth").onclick = function(){displayCryptoBoard(fourthBatch)};
-document.getElementById("fifth").onclick = function(){displayCryptoBoard(fifthBatch)};
 
 }).catch()
 
@@ -91,3 +87,58 @@ function request(method, url) {
     });
     
 }
+
+/*
+Add on click functions for displaying coins 21-40, 41-60, 61-80 and 81-100
+*/
+function appCoins1(){
+    if(firstSort < 1){
+        displayCryptoBoard(first20Coins);
+        coinCounter = 1; //counter for table page
+    }else{
+        displayCryptoBoard(sorted.slice(0, 20));
+        coinCounter = 1;
+    }
+};
+function appCoins2(){
+    if(firstSort < 1){
+        displayCryptoBoard(secondBatch);
+        coinCounter = 2;
+    }else{
+        displayCryptoBoard(sorted.slice(20, 40));
+        coinCounter = 2;
+    }
+};
+function appCoins3(){
+    if(firstSort < 1){
+        displayCryptoBoard(thirdBatch);
+        coinCounter = 3;
+    }else{
+        displayCryptoBoard(sorted.slice(40, 60));
+        coinCounter = 3;
+    }
+};
+function appCoins4(){
+    if(firstSort < 1){
+        displayCryptoBoard(fourthBatch);
+        coinCounter = 4;
+    }else{
+        displayCryptoBoard(sorted.slice(60, 80));
+        coinCounter = 4;
+    }
+};
+function appCoins5(){
+    if(firstSort < 1){
+        displayCryptoBoard(fifthBatch);
+        coinCounter = 5;
+    }else{
+        displayCryptoBoard(sorted.slice(80, 100));
+        coinCounter = 5;
+    }
+};
+
+document.getElementById("first").addEventListener('click', appCoins1);
+document.getElementById("second").addEventListener('click', appCoins2);
+document.getElementById("third").addEventListener('click', appCoins3); 
+document.getElementById("fourth").addEventListener('click', appCoins4); 
+document.getElementById("fifth").addEventListener('click', appCoins5); 

@@ -44,13 +44,13 @@ const request = new XMLHttpRequest();
                 topOneHundred = cryptoData;
                 //format array to pass
                 topOneHundred.forEach(function(d) {
-                    d.priceUsd = Number(Math.round(d.priceUsd * 100) / 100).toLocaleString('en');
-                    d.changePercent24Hr = Number(Math.round(d.changePercent24Hr * 100) / 100).toLocaleString('en');
-                    d.marketCapUsd = Number(Math.round(d.marketCapUsd * 100) / 100).toLocaleString('en');
-                    d.supply = Number(Math.round(d.supply * 100) / 100).toLocaleString('en');
-                    d.maxSupply = Number(Math.round(d.maxSupply * 100) / 100).toLocaleString('en');
-                    d.volumeUsd24Hr = Number(Math.round(d.volumeUsd24Hr * 100) / 100).toLocaleString('en');
-                    d.vwap24Hr = Number(Math.round(d.vwap24Hr * 100) / 100).toLocaleString('en');
+                    d.priceUsd = Number(Math.round(d.priceUsd * 10000) / 10000);
+                    d.changePercent24Hr = Number(Math.round(d.changePercent24Hr * 100) / 100);
+                    d.marketCapUsd = Number(Math.round(d.marketCapUsd * 100) / 100);
+                    d.supply = Number(Math.round(d.supply * 100) / 100);
+                    d.maxSupply = Number(Math.round(d.maxSupply * 100) / 100);
+                    d.volumeUsd24Hr = Number(Math.round(d.volumeUsd24Hr * 100) / 100);
+                    d.vwap24Hr = Number(Math.round(d.vwap24Hr * 100) / 100);
                     });
                 localStorage.setItem('arrayToPass', JSON.stringify(topOneHundred));  
             }
