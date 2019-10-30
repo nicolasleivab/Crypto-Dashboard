@@ -4,17 +4,16 @@ Cryptocurrencies dashboard created with D3js that fetches updated data using [Co
 * Follow the recent performance of the top 10 coins 
 * Search for any of the top 100 coins according to their market cap
 * Request past data up to 30 days from any of the top 100 performant coins
-
+<br /><br />
+<p align="center"><a href="https://d3js-crypto-dashboard.netlify.com">Demo</a></p>
 
 ## Built With
 
 * [D3.js](https://d3js.org) is used for the data visualization, to create the graphs and the interactive functionalities.
-* Native XMLHttpRequest (XHR) object is used to request data from CoinCap API and CoinGecko API. All other functionalities are made with Vanilla JavaScript.
+* Native XMLHttpRequest (XHR) object is used to request data from [CoinCap API](https://docs.coincap.io/?version=latest) and [CoinGecko API](https://docs.coincap.io/?version=latest). All other functionalities are made with Vanilla JavaScript.
 * CSS Grid is used for the layout and responsiveness.
 
 ## Versioning
-
-### Git
 
 * [Git](https://git-scm.com) is used for version control.
 

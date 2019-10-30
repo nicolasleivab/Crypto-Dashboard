@@ -131,18 +131,18 @@ table {
   color:rgb(173, 218, 247);
 }
 
-.container{
+.globaldata-container{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    text-align: center;
     padding-bottom: 20px;
+    min-width: 800px;
 }
 
-.container p{
+.globaldata-container p{
     font-weight: 600;
 }
-.container p:not(:first-child) {
+.globaldata-container p:not(:first-child) {
     padding-left: 50px;
 }
 
