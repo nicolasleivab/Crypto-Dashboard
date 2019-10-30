@@ -10,7 +10,7 @@ Cryptocurrencies dashboard created with D3js that fetches updated data using [Co
 
 * [D3.js](https://d3js.org) is used for the data visualization, to create the graphs and the interactive functionalities.
 * Native XMLHttpRequest (XHR) object is used to request data from CoinCap API and CoinGecko API. All other functionalities are made with Vanilla JavaScript.
-* CSS Grid is used for the layout and responsiveness
+* CSS Grid is used for the layout and responsiveness.
 
 ## Versioning
 
@@ -24,5 +24,5 @@ Cryptocurrencies dashboard created with D3js that fetches updated data using [Co
 
 ## License
 
-This project is licensed under the GNU General Public License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the GNU General Public License - see the [LICENSE](LICENSE) file for details.
 
