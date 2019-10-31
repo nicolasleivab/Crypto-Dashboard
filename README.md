@@ -2,7 +2,7 @@
 
 Cryptocurrencies dashboard created with D3js that fetches updated data using [CoinCap](https://docs.coincap.io/?version=latest) and [CoinGecko](https://www.coingecko.com/api/documentations/v3) public APIs.
 * Follow the recent performance of the top 10 coins 
-* Search for any of the top 100 coins according to their market cap
+* Search for any of the top 100 coins and sort them by their market cap, price, volume, price change and supply
 * Request past data up to 30 days from any of the top 100 performant coins
 <br /><br />
 <p align="center"><a href="https://d3js-crypto-dashboard.netlify.com">Demo</a></p>
