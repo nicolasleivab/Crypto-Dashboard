@@ -7,6 +7,11 @@ let counter1 = 0, counter2 = 0, counter3 = 0, counter4 = 0, counter5= 0, firstSo
 let coinCounter = 1;
 //test
 let globalData;
+//getelementbyID objects
+const elem = (i) => document.getElementById(i);
+const content = (i, text) => elem(i).innerHTML = text;
+const addClass = (i, className) => elem(i).classList.add(className);
+const removeClass = (i, className) => elem(i).classList.remove(className);
 
 //table draw func
 function displayCryptoBoard(arr) {
@@ -15,7 +20,7 @@ function displayCryptoBoard(arr) {
     "<a href=chart.html?selectedCoin=" + crypto.id+">"+crypto.name+"</a>" + '</td><td>' + "$"+(crypto.marketCapUsd).toLocaleString('en') + '</td><td>' + "$"+(crypto.priceUsd).toLocaleString('en')+ '</td><td>' + 
     crypto.changePercent24Hr + '</td><td>' + "$"+(crypto.volumeUsd24Hr).toLocaleString('en') + '</td><td>' + 
     (crypto.supply).toLocaleString('en') + '</td></tr>'); //prints the row tables with each value
-    document.getElementById("crypto-table").innerHTML = theExport;
+    content("crypto-table", theExport);
 }
 
 /*CoinGecko API for global metrics*/
@@ -26,10 +31,10 @@ request('GET', 'https://api.coingecko.com/api/v3/global')
     console.log(globalData);
 
 //append global metrics
-document.getElementById("marketCap").innerHTML = "Market Cap (USD): $"+ Number(globalData.total_market_cap.usd).toLocaleString('en');
-document.getElementById("totalVol").innerHTML = "Total Volume (24hr): $"+ Number(globalData.total_volume.usd).toLocaleString('en');
-document.getElementById("btcDom").innerHTML = "Bitcoin Dominance: " + Number(globalData.market_cap_percentage.btc).toLocaleString('en')+"%";
-document.getElementById("allCoins").innerHTML = "Active Cryptocurrencies: " + Number(globalData.active_cryptocurrencies).toLocaleString('en');
+content("marketCap", "Market Cap (USD): $"+ Number(globalData.total_market_cap.usd).toLocaleString('en'));
+content("totalVol", "Total Volume (24hr): $"+ Number(globalData.total_volume.usd).toLocaleString('en'));
+content("btcDom", "Bitcoin Dominance: " + Number(globalData.market_cap_percentage.btc).toLocaleString('en')+"%");
+content("allCoins", "Active Cryptocurrencies: " + Number(globalData.active_cryptocurrencies).toLocaleString('en'));
 
 }).catch()
 
@@ -90,27 +95,27 @@ Add on click functions for displaying coins 21-40, 41-60, 61-80 and 81-100
 */
 function appCoins1(){
     //focus class to links
-    document.getElementById('first').classList.add('focus2');
-    document.getElementById('second').classList.remove('focus2');
-    document.getElementById('third').classList.remove('focus2');
-    document.getElementById('fourth').classList.remove('focus2');
-    document.getElementById('fifth').classList.remove('focus2');
-    
-    if(firstSort < 1){
+    addClass("first", "focus2");
+    removeClass("second", "focus2");
+    removeClass("third", "focus2");
+    removeClass("fourth", "focus2");
+    removeClass("fifth", "focus2");
+
+    if(firstSort < 1){//if not already sorted
         displayCryptoBoard(first20Coins);
         coinCounter = 1; //counter for table page
     }else{
-        displayCryptoBoard(sorted.slice(0, 20));
+        displayCryptoBoard(sorted.slice(0, 20));//draw table from sorted array
         coinCounter = 1;
     }
 };
 function appCoins2(){
     //focus class to links
-    document.getElementById('first').classList.remove('focus2');
-    document.getElementById('second').classList.add('focus2');
-    document.getElementById('third').classList.remove('focus2');
-    document.getElementById('fourth').classList.remove('focus2');
-    document.getElementById('fifth').classList.remove('focus2');
+    removeClass("first", "focus2");
+    addClass("second", "focus2");
+    removeClass("third", "focus2");
+    removeClass("fourth", "focus2");
+    removeClass("fifth", "focus2");
 
     if(firstSort < 1){
         displayCryptoBoard(secondBatch);
@@ -122,11 +127,11 @@ function appCoins2(){
 };
 function appCoins3(){
     //focus class to links
-    document.getElementById('first').classList.remove('focus2');
-    document.getElementById('second').classList.remove('focus2');
-    document.getElementById('third').classList.add('focus2');
-    document.getElementById('fourth').classList.remove('focus2');
-    document.getElementById('fifth').classList.remove('focus2');
+    removeClass("first", "focus2");
+    removeClass("second", "focus2");
+    addClass("third", "focus2");
+    removeClass("fourth", "focus2");
+    removeClass("fifth", "focus2");
 
     if(firstSort < 1){
         displayCryptoBoard(thirdBatch);
@@ -138,11 +143,11 @@ function appCoins3(){
 };
 function appCoins4(){
     //focus class to links
-    document.getElementById('first').classList.remove('focus2');
-    document.getElementById('second').classList.remove('focus2');
-    document.getElementById('third').classList.remove('focus2');
-    document.getElementById('fourth').classList.add('focus2');
-    document.getElementById('fifth').classList.remove('focus2');
+    removeClass("first", "focus2");
+    removeClass("second", "focus2");
+    removeClass("third", "focus2");
+    addClass("fourth", "focus2");
+    removeClass("fifth", "focus2");
     if(firstSort < 1){
         displayCryptoBoard(fourthBatch);
         coinCounter = 4;
@@ -153,11 +158,11 @@ function appCoins4(){
 };
 function appCoins5(){
     //focus class to links
-    document.getElementById('first').classList.remove('focus2');
-    document.getElementById('second').classList.remove('focus2');
-    document.getElementById('third').classList.remove('focus2');
-    document.getElementById('fourth').classList.remove('focus2');
-    document.getElementById('fifth').classList.add('focus2');
+    removeClass("first", "focus2");
+    removeClass("second", "focus2");
+    removeClass("third", "focus2");
+    removeClass("fourth", "focus2");
+    addClass("fifth", "focus2");
 
     if(firstSort < 1){
         displayCryptoBoard(fifthBatch);
@@ -168,8 +173,8 @@ function appCoins5(){
     }
 };
 
-document.getElementById("first").addEventListener('click', appCoins1);
-document.getElementById("second").addEventListener('click', appCoins2);
-document.getElementById("third").addEventListener('click', appCoins3); 
-document.getElementById("fourth").addEventListener('click', appCoins4); 
-document.getElementById("fifth").addEventListener('click', appCoins5); 
+elem("first").addEventListener('click', appCoins1);
+elem("second").addEventListener('click', appCoins2);
+elem("third").addEventListener('click', appCoins3); 
+elem("fourth").addEventListener('click', appCoins4); 
+elem("fifth").addEventListener('click', appCoins5); 
