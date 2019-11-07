@@ -5,18 +5,17 @@ const selectedCoin = urlParams.get('selectedCoin');
 let inputCoin, priceChange;
 const request = new XMLHttpRequest();
 //append coin data functions
-function appData(id, text){
-    document.getElementById(id).innerHTML = text;
-}
-function appAll(filtered){
-appData("rank", "Rank #" + filtered[0].rank);
-appData("title", filtered[0].name+" - "+filtered[0].symbol+"-"+"$"+filtered[0].priceUsd);
-appData("marketCap", "$"+filtered[0].marketCapUsd);
-appData("supply", filtered[0].supply);
-appData("max-supply", filtered[0].maxSupply);
-appData("24hrvolume", "$"+filtered[0].volumeUsd24Hr);
-appData("24hrwap", "$"+filtered[0].vwap24Hr);
-appData("price-change", "24hr Price Change: "+filtered[0].changePercent24Hr+"%");
+const content = (id, text) => {document.getElementById(id).innerHTML = text;}
+
+function appendData(filtered){
+content("rank", "Rank #" + filtered[0].rank);
+content("title", filtered[0].name+" - "+filtered[0].symbol+"-"+"$"+filtered[0].priceUsd);
+content("marketCap", "$"+filtered[0].marketCapUsd);
+content("supply", filtered[0].supply);
+content("max-supply", filtered[0].maxSupply);
+content("24hrvolume", "$"+filtered[0].volumeUsd24Hr);
+content("24hrwap", "$"+filtered[0].vwap24Hr);
+content("price-change", "24hr Price Change: "+filtered[0].changePercent24Hr+"%");
 if(filtered[0].changePercent24Hr<0){document.getElementById("chart-header").style.backgroundColor = "#ff9999";
 }else{document.getElementById("chart-header").style.backgroundColor = "#ccffcc";}
 }
@@ -45,24 +44,24 @@ function getData(url, sliceNum){
             //filter this coin
             function filterCoin(coin) {return coin.id == selectedCoin;}
             let filtered = topCoins.filter(filterCoin);
-            appAll(filtered);
+            appendData(filtered);
             }else if(inputCoin == undefined){
             function filterCoin(coin) {return coin.id == "bitcoin";}
             let filtered = topCoins.filter(filterCoin);
-            appAll(filtered);
+            appendData(filtered);
             }else{
             function filterCoin(coin) {return coin.id == inputCoin;}
             let filtered = topCoins.filter(filterCoin);
-            appAll(filtered);
+            appendData(filtered);
             }
 
         //append price change for 7 and 30 days
         if(sliceNum == -168){
-            appData("price-change", "7 days Price Change: "+priceChange+"%");
+            content("price-change", "7 days Price Change: "+priceChange+"%");
             if(priceChange<0){document.getElementById("chart-header").style.backgroundColor = "#ff9999";
             }else{document.getElementById("chart-header").style.backgroundColor = "#ccffcc";}
         }else if(sliceNum == -120){ 
-            appData("price-change", "30 days Price Change: "+priceChange+"%");
+            content("price-change", "30 days Price Change: "+priceChange+"%");
             if(priceChange<0){document.getElementById("chart-header").style.backgroundColor = "#ff9999";
             }else{document.getElementById("chart-header").style.backgroundColor = "#ccffcc";}
         }
