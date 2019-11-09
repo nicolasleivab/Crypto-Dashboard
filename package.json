@@ -1,0 +1,22 @@
+{
+  "name": "crypto-dashboard",
+  "version": "1.0.0",
+  "description": "d3.js cryptocurrencies dashboard",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass": "node-sass sass/main.scss css/style.css -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicolasleivab/Crypto-Dashboard.git"
+  },
+  "author": "Nicolás Leiva Büchi <nicolasleivab@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/nicolasleivab/Crypto-Dashboard/issues"
+  },
+  "homepage": "https://github.com/nicolasleivab/Crypto-Dashboard#readme",
+  "devDependencies": {
+    "node-sass": "^4.13.0"
+  }
+}
