@@ -1,0 +1,39 @@
+.nav {
+    height: 40px;
+    width: 100%;
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    background-color: $color-primary-dark;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-align: left;
+    border-bottom: solid $color-dark-gray 1px;
+
+    a{
+        margin-left: 30px;
+        margin-top: 10px;
+        height: 20px;
+        text-decoration: none;
+        font-family: 'ZCOOL QingKe HuangYou', sans-serif;
+        color: $color-white !important;
+        display: inline-block;
+        font-size: 17px;
+
+        &:hover{
+            text-decoration: none;
+            border-bottom: solid $color-white 1px;
+        }
+    }
+
+    input{
+        margin-top: 10px;
+        padding-left: 10px;
+        margin-left: 30px;
+        height: 20px;
+        min-width: 20px;
+    }
+
+};
+
