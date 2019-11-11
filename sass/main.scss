@@ -152,25 +152,12 @@ margin: auto;
 width: 100%;
 min-height: 200px;
 display: grid;
-grid-template-columns: repeat(4, 1fr);
-grid-template-rows: repeat(3, 1fr);
-gap: 15px 15px;
-}
-
-.grid-container2 {
-padding-top: 50px;
-margin: auto;
-width: 100%;
-min-height: 200px;
-display: grid;
 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-grid-template-rows: repeat(auto-fit, minmax(300px, 1fr));
+grid-template-rows: repeat(auto-fit, minmax(200px, 1fr));
 gap: 15px 15px;
 }
 
-.inner-grid {
-    width: 100%;
-    min-height: 200px;
+.item {
     border: solid #DCDCDC 1.5px;
     border-radius: 5px;
     align-self: center;

@@ -2,11 +2,11 @@
 
 //CoinCap API 
 //list of coins to be replaced
-let coin = ["template", "template", "template", "template", "template", "template", "template", "template", "template", "template", "template"];
+let coin = ["template", "template", "template", "template", "template", "template", "template", "template", "template", "template", "template", "template", "template"];
 let topOneHundred = [];
 
 const bindsArray = [], parentsArray = [], titlesArray = [], pricesArray = [], changeArray = [], headerArray = [], datesArray = [];
-for(let n = 0; n < 11; n ++){
+for(let n = 0; n < 13; n ++){
 bindsArray.push("lineChart" + n);
 parentsArray.push("#chart" + n);
 titlesArray.push("title" + n);
@@ -33,12 +33,12 @@ const request = new XMLHttpRequest();
         if(request.readyState === XMLHttpRequest.DONE && request.status === 200) { //so we can get the elements in order
             const data = JSON.parse(request.responseText);
             const cryptoData = data.data; //array of objects with 15 minutes candles
-            const topTen = data.data.slice(0,10);
-            //get first 10 ranked coins
-            const finalArray = topTen.map(function (obj) {
+            const topTwelve = data.data.slice(0,12);
+            //get first 12 ranked coins
+            const finalArray = topTwelve.map(function (obj) {
                 return obj.id;
               });
-            //replace original coins array with the updated top ten coins (when i = 0)
+            //replace original coins array with the updated top twelve coins (when i = 0)
             if(finalArray[0]!=undefined){
                 coin = [finalArray[0]].concat(finalArray)
                 topOneHundred = cryptoData;
@@ -55,7 +55,7 @@ const request = new XMLHttpRequest();
                 localStorage.setItem('arrayToPass', JSON.stringify(topOneHundred));  
             }
             
-            //after updating topTen coins
+            //after updating topTwelve coins
             if(i>0){
             const oneDayData = cryptoData.slice(-96); // 24hr/15min = 96 
             const formattedData= oneDayData.map((function(d){return {"price": (Math.round(d.priceUsd*10000))/10000, "date": new Date(d.time)} ;}));
