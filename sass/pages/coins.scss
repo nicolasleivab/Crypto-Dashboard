@@ -11,17 +11,19 @@ td, th{
     border-spacing: 0;
     border-spacing: 15px;
 }
+
 th{
     background-color: $color-light-table;
     padding: 15px;
-}
-td{
-    padding: 15px;
+
+    i:hover{
+        transform: translate(1px, -1px);
+        text-decoration: underline;
+    }
 }
 
-th i:hover{
-    transform: translate(1px, -1px);
-    text-decoration: underline;
+td{
+    padding: 15px;
 }
 
 table { 
@@ -40,12 +42,12 @@ table {
     margin: auto;
     padding: 30px 0 30px 0;
     text-align: center;
-}
 
-.pages a{
-    text-decoration: none;
-    color: $color-blue-hover;
-    padding: 0 15px 0 15px;
+    a{
+        text-decoration: none;
+        color: $color-blue-hover;
+        padding: 0 15px 0 15px;
+    }
 }
 
 .focus2{ 

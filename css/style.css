@@ -90,15 +90,13 @@ body {
   position: relative;
   padding-top: 40px; }
 
-a:link, a:visited {
-  color: #0707d8; }
-
 a {
   text-decoration: none; }
-
-a:hover {
-  text-decoration: underline;
-  color: #5b8eec; }
+  a:link, a:visited {
+    color: #0707d8; }
+  a:hover {
+    text-decoration: underline;
+    color: #5b8eec; }
 
 .grid-container {
   padding-top: 50px;
@@ -121,12 +119,10 @@ a:hover {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr; }
-
-.inner-flex div:first-child {
-  text-align: left; }
-
-.inner-flex div:nth-child(2) {
-  text-align: right; }
+  .inner-flex div:first-child {
+    text-align: left; }
+  .inner-flex div:nth-child(2) {
+    text-align: right; }
 
 .coin-header {
   margin: 5px;
@@ -158,13 +154,12 @@ td, th {
 th {
   background-color: #f0f0f5;
   padding: 15px; }
+  th i:hover {
+    transform: translate(1px, -1px);
+    text-decoration: underline; }
 
 td {
   padding: 15px; }
-
-th i:hover {
-  transform: translate(1px, -1px);
-  text-decoration: underline; }
 
 table {
   width: 100%;
@@ -180,11 +175,10 @@ table {
   margin: auto;
   padding: 30px 0 30px 0;
   text-align: center; }
-
-.pages a {
-  text-decoration: none;
-  color: #5b8eec;
-  padding: 0 15px 0 15px; }
+  .pages a {
+    text-decoration: none;
+    color: #5b8eec;
+    padding: 0 15px 0 15px; }
 
 .focus2 {
   background-color: #075686;
@@ -196,14 +190,12 @@ table {
   justify-content: center;
   padding-bottom: 20px;
   min-width: 800px; }
+  .globaldata-container p {
+    font-weight: 600; }
+    .globaldata-container p:not(:first-child) {
+      padding-left: 50px; }
 
-.globaldata-container p {
-  font-weight: 600; }
-
-.globaldata-container p:not(:first-child) {
-  padding-left: 50px; }
-
-.chart-outter-grid {
+.chart-outter-grid, .chart-outter-grid--2 {
   padding-top: 100px;
   width: 100%;
   min-height: 500px;
@@ -211,15 +203,9 @@ table {
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
   gap: 30px 30px; }
-
-.chart-outter-grid2 {
-  padding-top: 100px;
-  width: 100%;
-  min-height: 500px;
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-columns: 1fr;
-  gap: 30px 30px; }
+  .chart-outter-grid--2 {
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: 1fr; }
 
 .buttons-container {
   position: relative;
@@ -254,9 +240,8 @@ table {
 .data-container {
   text-align: left;
   width: 75%; }
-
-.data-container th {
-  width: 50%; }
+  .data-container th {
+    width: 50%; }
 
 .secondtitle {
   font-size: 13.5px;

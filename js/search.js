@@ -9,12 +9,12 @@ const content = (id, text) => {document.getElementById(id).innerHTML = text;}
 
 function appendData(filtered){
 content("rank", "Rank #" + filtered[0].rank);
-content("title", filtered[0].name+" - "+filtered[0].symbol+"-"+"$"+filtered[0].priceUsd);
-content("marketCap", "$"+filtered[0].marketCapUsd);
-content("supply", filtered[0].supply);
-content("max-supply", filtered[0].maxSupply);
-content("24hrvolume", "$"+filtered[0].volumeUsd24Hr);
-content("24hrwap", "$"+filtered[0].vwap24Hr);
+content("title", filtered[0].name+" - "+filtered[0].symbol+"-"+"$"+(filtered[0].priceUsd).toLocaleString('en'));
+content("marketCap", "$"+filtered[0].marketCapUsd.toLocaleString('en'));
+content("supply", filtered[0].supply.toLocaleString('en'));
+content("max-supply", filtered[0].maxSupply.toLocaleString('en'));
+content("24hrvolume", "$"+filtered[0].volumeUsd24Hr.toLocaleString('en'));
+content("24hrwap", "$"+filtered[0].vwap24Hr.toLocaleString('en'));
 content("price-change", "24hr Price Change: "+filtered[0].changePercent24Hr+"%");
 if(filtered[0].changePercent24Hr<0){document.getElementById("chart-header").style.backgroundColor = "#ff9999";
 }else{document.getElementById("chart-header").style.backgroundColor = "#ccffcc";}

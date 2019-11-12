@@ -4,14 +4,14 @@
     justify-content: center;
     padding-bottom: 20px;
     min-width: 800px;
-}
 
-.globaldata-container p{
-    font-weight: 600;
-}
+    p{
+        font-weight: 600;  
 
-.globaldata-container p:not(:first-child) {
-    padding-left: 50px;
+        &:not(:first-child) {
+            padding-left: 50px;
+        }
+    }  
 }
 
 .chart-outter-grid{
@@ -22,15 +22,13 @@
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
     gap: 30px 30px;
-}
-.chart-outter-grid2{
-    padding-top: 100px;
-    width: 100%;
-    min-height: 500px;
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: 1fr;
-    gap: 30px 30px;
+
+    //swapped by js
+    &--2{
+        @extend .chart-outter-grid;
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+    }
 }
 
 .buttons-container{
@@ -39,12 +37,12 @@
     left: 0;
 }
 
-
 .focus{
     background-color: $color-grid-gray;
     color: $color-dark-gray;
     font-weight: 700;
 }
+
 .chart-grid{
     width: 100%;
     min-height: 100px;
@@ -71,10 +69,10 @@
 .data-container{
  text-align: left;
  width: 75%;
-}
 
-.data-container th{
-width: 50%;
+ th{
+    width: 50%;
+    }
 }
 
 .secondtitle{

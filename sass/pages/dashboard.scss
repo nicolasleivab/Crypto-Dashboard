@@ -1,14 +1,14 @@
-a:link, a:visited {
-    color: $color-blue-link;
-}
-
 a{
     text-decoration: none;
-}
 
-a:hover {
-    text-decoration: underline;
-    color: $color-blue-hover;
+    &:link, &:visited{
+        color: $color-blue-link;
+    }
+    &:hover {
+        text-decoration: underline;
+        color: $color-blue-hover;
+    }
+
 }
 
 .grid-container {
@@ -34,15 +34,13 @@ gap: 15px 15px;
     display: grid; 
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows:  1fr;
-    
-}
 
-.inner-flex div:first-child {
- text-align: left;
-}
-
-.inner-flex div:nth-child(2) {
- text-align: right;
+    div:first-child {
+        text-align: left;
+    }
+    div:nth-child(2) {
+        text-align: right;
+    }
 }
 
 .coin-header{
