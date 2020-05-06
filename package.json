@@ -1,22 +1,32 @@
 {
   "name": "crypto-dashboard",
-  "version": "1.0.0",
-  "description": "d3.js cryptocurrencies dashboard",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "Crypto performance dashboard",
+  "main": "server.js",
   "scripts": {
-    "compile:sass": "node-sass sass/main.scss css/style.css"
+    "start": "node server.js",
+    "server": "nodemon server.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nicolasleivab/Crypto-Dashboard.git"
+    "url": "git+https://github.com/nicolasleivab/Crypto-Dashboard.git"
   },
   "author": "Nicolás Leiva Büchi <nicolasleivab@gmail.com>",
-  "license": "GPL-3.0",
+  "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/nicolasleivab/Crypto-Dashboard/issues"
   },
   "homepage": "https://github.com/nicolasleivab/Crypto-Dashboard#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.1",
+    "express": "^4.17.1",
+    "express-validator": "^6.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.12"
+  },
   "devDependencies": {
-    "node-sass": "^4.13.0"
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.3"
   }
 }
