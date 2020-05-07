@@ -1,0 +1,56 @@
+.NavBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  background-color: #2e3851;
+  position: sticky;
+}
+.titleContainer {
+  margin-left: 30px;
+  color: #ccffff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+.flexContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 50px;
+  color: #ccffff;
+}
+.flexContainer li {
+  margin: 0 30px 0 30px;
+  text-decoration: none;
+  list-style-type: none;
+}
+.flexContainer a {
+  text-decoration: none;
+  color: #ccffff;
+  font-weight: 700;
+}
+.Icon {
+  margin-left: 10px;
+}
+@media only screen and (max-width: 800px) {
+  .hide {
+    visibility: hidden;
+  }
+  .flexContainer li {
+    margin: 0;
+  }
+  .Icon {
+    margin-right: 5px;
+    margin-left: -35px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .flexContainer {
+    width: 100px;
+    margin-right: 15px;
+  }
+}
