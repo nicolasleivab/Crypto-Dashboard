@@ -41,7 +41,7 @@ router.post("/", auth, async (req, res) => {
 });
 
 // @route   PUT api/coins/:id
-// @desc    Modify coin list (add or edit coins)
+// @desc    Add coin
 // @access  Private
 router.put("/:id", auth, async (req, res) => {
   try {
@@ -65,7 +65,7 @@ router.put("/:id", auth, async (req, res) => {
       symbol: req.body.symbol,
       id: req.body.id,
     };
-
+    // add coin
     coinList.coins.unshift(newCoin);
     coinList.save();
 
@@ -78,37 +78,83 @@ router.put("/:id", auth, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-/*
-// @route   PUT api/coins/:id
-// @desc    Modify coin list (add or edit coins)
+// @route   PUT api/coins/:id/:coin_id
+// @desc    Modify existing coin
 // @access  Private
-router.get("/:id", auth, async (req, res) => {
+router.put("/:id/:coin_id", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select("-password");
     const coinList = await Coins.findById(req.params.id);
-    
+
+    //pull out coin
+    const coin = coinList.coins.find(
+      (coin) => coin.name === req.params.coin_id
+    );
+    // check if coin exists
+    if (!coin) {
+      return res.status(404).json({ msg: "Coin not found", coin: coinList });
+    }
+    //check user
+    if (coinList.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "User not authorized" });
+    }
+    // create new coin
     const newCoin = {
       name: req.body.name,
       symbol: req.body.symbol,
       id: req.body.id,
     };
 
-    coinList.coins.unshift(newCoin);
+    // check if new coin already exists
+    const findCoin = coinList.coins.find((coin) => coin.id === newCoin.id);
+
+    if (findCoin) {
+      return res.status(404).json({ msg: "Coin already exists" });
+    }
+
+    // Get and replace index
+    const replaceIndex = coinList.coins.indexOf(coin);
+
+    coinList.coins[replaceIndex] = newCoin;
+
     coinList.save();
-    
-    res.json(coinList.coins);
+    res.json(coinList);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
-*/
 
-// @route   DELETE api/coins/:id
+// @route   DELETE api/coins/:id/:coin_id
 // @desc    Delete a coin from the list
 // @access  Private
-router.delete("/:id", (req, res) => {
-  res.send("Coin list modified");
+router.delete("/:id/:coin_id", auth, async (req, res) => {
+  try {
+    const coinList = await Coins.findById(req.params.id);
+
+    //pull out coin
+    const coin = coinList.coins.find(
+      (coin) => coin.name === req.params.coin_id
+    );
+    // check if coin exists
+    if (!coin) {
+      return res.status(404).json({ msg: "Coin not found" });
+    }
+    //check user
+    if (coinList.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "User not authorized" });
+    }
+
+    // Get and remove index
+    const removeIndex = coinList.coins.indexOf(coin);
+
+    coinList.coins.splice(removeIndex, 1);
+
+    coinList.save();
+    res.json(coinList);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
 });
 
 module.exports = router;
