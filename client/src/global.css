@@ -7,6 +7,8 @@
 }
 
 @import url("https://fonts.googleapis.com/css?family=Titillium+Web&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Galada&family=Permanent+Marker&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cantora+One&display=swap");
 
 html {
   font-size: 62.5%;
@@ -16,4 +18,5 @@ body {
   font-family: "Titillium Web", sans-serif;
   font-size: 1.6rem;
   overflow-x: hidden;
+  background-color: #1c1e2e; /* 1c1e2e 212529 */
 }

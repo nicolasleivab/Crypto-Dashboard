@@ -1,0 +1,7 @@
+.Home {
+  width: 100%;
+}
+
+.blurMode {
+  filter: blur(5px);
+}

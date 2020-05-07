@@ -1,14 +1,14 @@
 import React from "react";
-import NavBar from "./components/layout/NavBar";
 import AuthState from "./context/auth/AuthState";
-import styles from "./App.module.css";
+import ModalState from "./context/modal/ModalState";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <AuthState>
-      <div className={styles.App}>
-        <NavBar />
-      </div>
+      <ModalState>
+        <Home />
+      </ModalState>
     </AuthState>
   );
 }

@@ -1,0 +1,145 @@
+.formContainer {
+  padding-top: 0;
+  margin: auto;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title {
+  font-size: 2.4rem;
+  font-family: "Pontano Sans", sans-serif;
+  font-weight: normal;
+  margin-bottom: 25px;
+  padding-top: 50px;
+  text-align: center;
+  background: -webkit-linear-gradient(
+    rgba(96, 228, 43, 1),
+    rgba(63, 224, 127, 1)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btnGray {
+  background-color: #1c1e2e;
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px rgb(58, 82, 145);
+  color: #ccffff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.btnGray:active {
+  box-shadow: 0;
+}
+
+.btnGray:active {
+  box-shadow: 0 0 #ccc;
+}
+.Login,
+.Register {
+  position: relative;
+  width: 350px;
+  height: 380px;
+  margin: 200px auto;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(58, 82, 145);
+  background: linear-gradient(
+    135deg,
+    rgba(58, 82, 145, 1) 0%,
+    rgba(134, 75, 254, 1) 89%
+  );
+}
+
+.Register {
+  height: 500px;
+}
+
+.Login input {
+  margin: 15px;
+  margin-top: 20px;
+  height: 35px;
+  width: 270px;
+  border-radius: 20px;
+  border: 0;
+  padding: 10px;
+  font-size: 1.1rem;
+  padding-left: 35px;
+}
+.Register input {
+  margin: 15px;
+  margin-top: 20px;
+  height: 35px;
+  width: 270px;
+  border-radius: 20px;
+  border: 0;
+  padding: 0;
+  font-size: 1.1rem;
+  padding-left: 15px;
+}
+
+@media only screen and (max-width: 800px) {
+  .Login,
+  .Register {
+    flex-direction: column;
+    margin-top: 30px;
+  }
+  .title {
+    padding-top: 50px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .Login,
+  .Register {
+    flex-direction: column;
+    width: 330px;
+  }
+}
+
+.signUp {
+  font-family: "Permanent Marker", cursive;
+
+  background: -webkit-linear-gradient(
+    rgba(96, 228, 43, 1),
+    rgba(63, 224, 127, 1)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: 900;
+  text-decoration: none;
+  text-align: right;
+  margin-right: 20px;
+  align-self: flex-end;
+  cursor: pointer;
+}
+
+.emailIcon {
+  position: absolute;
+  left: 25px;
+  top: 30px;
+  color: #1c1e2e;
+}
+.lockIcon {
+  position: absolute;
+  left: 25px;
+  top: 100px;
+  color: #1c1e2e;
+}
+
+.closeIcon {
+  cursor: pointer;
+  color: rgb(29, 47, 92);
+  position: absolute;
+  right: 30px;
+  top: 15px;
+}
