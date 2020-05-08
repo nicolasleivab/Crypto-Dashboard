@@ -11,3 +11,20 @@
   justify-content: center;
   align-items: center;
 }
+@media only screen and (max-width: 1000px) {
+  .coinsContainer {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 30px;
+    align-items: center;
+    justify-items: center; /* adjusted */
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .coinsContainer {
+    display: flex;
+    flex-direction: column;
+  }
+}

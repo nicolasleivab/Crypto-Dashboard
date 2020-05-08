@@ -21,7 +21,7 @@ const NavBar = ({ title, icon }) => {
 
   const authLinks = (
     <div className={styles.flexContainer}>
-      <li>Welcome {user && user.name}!</li>
+      <li className={styles.userDisplay}>Welcome {user && user.name}!</li>
       <li>
         <a
           href="#!"
