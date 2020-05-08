@@ -5,7 +5,17 @@ import AuthContext from "../../context/auth/authContext";
 import ModalContext from "../../context/modal/modalContext";
 import styles from "./CoinItem.module.css";
 
-const CoinItem = ({ name, price, change, symbol, volume, id }) => {
+const CoinItem = ({
+  name,
+  price,
+  change,
+  symbol,
+  volume,
+  id,
+  marketCap,
+  rank,
+  supply,
+}) => {
   const authtContext = useContext(AuthContext);
   const modalContext = useContext(ModalContext);
 
@@ -26,7 +36,7 @@ const CoinItem = ({ name, price, change, symbol, volume, id }) => {
 
   return (
     <div className={styles.CoinItem}>
-      <div className={styles.coinHeader}>
+      <header className={styles.coinHeader}>
         <div className={styles.coinTitle}>
           <p className={styles.title}>{name}</p>
           <p className={styles.symbol}> ({symbol})</p>
@@ -41,7 +51,19 @@ const CoinItem = ({ name, price, change, symbol, volume, id }) => {
             onClick={() => handleDelete(id)}
           />
         </div>
-      </div>
+      </header>
+      <aside className={styles.coinInfo}>
+        <div className={styles.priceContainer}>
+          <p>Price: ${price}</p>
+          <p className={change > 0 ? styles.greenChange : styles.redChange}>
+            {change > 0 ? "(" + "+" + change + "%)" : "(" + change + "%)"}
+          </p>
+        </div>
+        <p>Market Cap: ${marketCap}</p>
+        <p>Rank: #{rank}</p>
+        <p>Volume: {volume}</p>
+        <p>Supply: {supply}</p>
+      </aside>
     </div>
   );
 };

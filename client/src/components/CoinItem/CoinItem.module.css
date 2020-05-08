@@ -1,6 +1,6 @@
 .CoinItem {
   width: 230px;
-  height: 270px;
+  height: 180px;
   border-radius: 10px;
   margin: 30px;
   background: rgb(58, 82, 145);
@@ -24,17 +24,39 @@
   align-items: baseline;
 }
 .title {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Barlow Condensed Bold", sans-serif;
   font-size: 1.9rem;
   color: #ccffff;
   margin: 10px 5px 10px 10px;
 }
 .symbol {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Barlow Condensed Bold", sans-serif;
   font-size: 1.2rem;
   color: #ccffff;
 }
 
+.coinInfo {
+  font-size: 1.6rem;
+  color: #ccffff;
+  font-family: "Barlow Condensed";
+  font-weight: 400;
+  margin: 15px 10px 0 10px;
+}
+.priceContainer {
+  display: flex;
+  justify-content: baseline;
+  align-items: baseline;
+}
+.greenChange {
+  font-size: 1.2rem;
+  color: rgb(140, 255, 94);
+  margin-left: 3px;
+}
+.redChange {
+  font-size: 1.2rem;
+  color: rgb(245, 101, 76);
+  margin-left: 3px;
+}
 @media only screen and (max-width: 1000px) {
   .CoinItem {
     margin: 0;

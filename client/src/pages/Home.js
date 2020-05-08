@@ -24,23 +24,32 @@ function Home() {
       id: "bitcoin",
       price: "8245",
       price24Hr: "2.6",
-      volumeUsd: "675987345653",
+      volumeUsd: "675B",
+      supply: "1000",
+      marketCap: "500B",
+      rank: "1",
     },
     {
       name: "Ethereum",
       symbol: "ETH",
       id: "ethereum",
       price: "245",
-      price24Hr: "2.6",
-      volumeUsd: "675987345653",
+      price24Hr: "0.6",
+      volumeUsd: "675B",
+      supply: "1000",
+      marketCap: "500B",
+      rank: "2",
     },
     {
       name: "Bitcoin Cash",
       symbol: "BCH",
       id: "bitcoin-cash",
       price: "545",
-      price24Hr: "2.6",
-      volumeUsd: "675987345653",
+      price24Hr: "-17.2",
+      volumeUsd: "675B",
+      supply: "1000",
+      marketCap: "500B",
+      rank: "3",
     },
     {
       name: "Ripple",
@@ -48,7 +57,10 @@ function Home() {
       id: "ripple",
       price: "0.17",
       price24Hr: "2.6",
-      volumeUsd: "675987345653",
+      volumeUsd: "675B",
+      supply: "1000",
+      marketCap: "500B",
+      rank: "4",
     },
   ]);
 
@@ -72,7 +84,10 @@ function Home() {
             price={coin.price}
             volume={coin.volumeUsd}
             change={coin.price24Hr}
+            supply={coin.supply}
             id={coin.id}
+            marketCap={coin.marketCap}
+            rank={coin.rank}
           />
         ))}
       </div>
