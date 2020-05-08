@@ -57,6 +57,40 @@
   color: rgb(245, 101, 76);
   margin-left: 3px;
 }
+
+.CoinItem input {
+  height: 15px;
+  margin: 11.5px;
+  width: 150px;
+  border-radius: 20px;
+  border: 0;
+  padding: 10px;
+  font-size: 1.1rem;
+}
+
+.btnMain {
+  background-color: rgb(63, 224, 127);
+  width: 50px;
+  height: 20px;
+  padding-top: 3.5px;
+  font-family: "Poppins";
+  border-radius: 30px;
+  box-shadow: 2px 2px 2px rgb(33, 43, 66);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.btnMain:active {
+  box-shadow: 0;
+}
+
+.btnMain:active {
+  box-shadow: 0 0 #ccc;
+}
 @media only screen and (max-width: 1000px) {
   .CoinItem {
     margin: 0;

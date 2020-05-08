@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import styles from "./NavBar.module.css";
-import ShowChartIcon from "@material-ui/icons/ShowChart";
+import InsertChartIcon from "@material-ui/icons/InsertChart";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AuthContext from "../../context/auth/authContext";
+import ModalContext from "../../context/modal/modalContext";
 
 const NavBar = ({ title, icon }) => {
   const authContext = useContext(AuthContext);
@@ -14,6 +15,9 @@ const NavBar = ({ title, icon }) => {
     loginUser,
     loadUser,
   } = authContext;
+
+  const modalContext = useContext(ModalContext);
+  const { setModal } = modalContext;
 
   const onLogout = () => {
     logoutUser();
@@ -38,7 +42,9 @@ const NavBar = ({ title, icon }) => {
   const guessLinks = (
     <div className={styles.flexContainer}>
       <li>
-        <a href="#">Sign In</a>
+        <a href="#" onClick={() => setModal()}>
+          Sign In
+        </a>
       </li>
     </div>
   );
@@ -48,8 +54,11 @@ const NavBar = ({ title, icon }) => {
   return (
     <div className={styles.NavBar}>
       <div className={styles.titleContainer}>
+        <InsertChartIcon
+          fontSize="large"
+          style={{ marginRight: 2, marginTop: 2 }}
+        />
         <p className={styles.title}>{title}</p>
-        <ShowChartIcon fontSize="large" style={{ marginLeft: 10 }} />
       </div>
       <ul>{isAuthenticated ? authLinks : guessLinks}</ul>
     </div>

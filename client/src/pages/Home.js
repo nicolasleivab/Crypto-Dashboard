@@ -4,18 +4,27 @@ import CoinItem from "../components/CoinItem/CoinItem";
 import AuthForm from "../components/AuthForm/AuthForm";
 import AuthContext from "../context/auth/authContext";
 import ModalContext from "../context/modal/modalContext";
+import AllcoinsContext from "../context/allcoins/allcoinsContext";
 import styles from "./Home.module.css";
 
 function Home() {
   const authtContext = useContext(AuthContext);
   const modalContext = useContext(ModalContext);
+  const allcoinsContext = useContext(AllcoinsContext);
 
-  const { loadUser } = authtContext;
-  const { modal } = modalContext;
+  const { loadUser, isAuthenticated } = authtContext;
+  const { modal, hideModal } = modalContext;
+  const { getAllCoins } = allcoinsContext;
 
   useEffect(() => {
     loadUser();
+    getAllCoins();
   }, []);
+  useEffect(() => {
+    if (isAuthenticated) {
+      hideModal();
+    }
+  }, [isAuthenticated]);
 
   const [coins, setCoins] = useState([
     {

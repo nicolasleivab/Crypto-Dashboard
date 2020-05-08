@@ -28,3 +28,5 @@ export const CLEAR_CURRENT_TEAM = "CLEAR_CURRENT_TEAM";
 export const UPDATE_TEAM = "UPDATE_TEAM";
 export const SET_MODAL = "SET_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
+export const GET_ALLCOINS = "GET_ALLCOINS";
+export const ALLCOINS_ERROR = "ALLCOINS_ERROR";
