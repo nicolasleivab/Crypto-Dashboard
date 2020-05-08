@@ -129,7 +129,7 @@ const AuthForm = (props) => {
             style={{
               display: "flex",
               justifyContent: "center",
-              alignItems: "baseline",
+              alignItems: "center",
             }}
           >
             {authForm === "login" ? (

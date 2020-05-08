@@ -10,20 +10,12 @@ function Home() {
   const authtContext = useContext(AuthContext);
   const modalContext = useContext(ModalContext);
 
-  const { isAuthenticated, loadUser } = authtContext;
-  const { hideModal, setModal, modal } = modalContext;
+  const { loadUser } = authtContext;
+  const { modal } = modalContext;
 
   useEffect(() => {
     loadUser();
   }, []);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      hideModal();
-    } else {
-      setModal();
-    }
-  }, [isAuthenticated]);
 
   const [coins, setCoins] = useState([
     {
@@ -65,9 +57,23 @@ function Home() {
       <div className={modal && styles.blurMode}>
         <NavBar />
       </div>
-      <div className={styles.coinsContainer}>
+      <div
+        className={
+          modal
+            ? [styles.coinsContainer, styles.blurMode].join(" ")
+            : styles.coinsContainer
+        }
+      >
         {coins.map((coin) => (
-          <CoinItem />
+          <CoinItem
+            key={coin.id}
+            name={coin.name}
+            symbol={coin.symbol}
+            price={coin.price}
+            volume={coin.volumeUsd}
+            change={coin.price24Hr}
+            id={coin.id}
+          />
         ))}
       </div>
       {modal && <AuthForm />}

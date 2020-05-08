@@ -1,6 +1,6 @@
 .CoinItem {
-  width: 250px;
-  height: 350px;
+  width: 230px;
+  height: 270px;
   border-radius: 10px;
   margin: 30px;
   background: rgb(58, 82, 145);
@@ -10,6 +10,31 @@
     rgba(46, 56, 81, 1) 89%
   );
 }
+.coinHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.coinTitle {
+  display: flex;
+  align-items: baseline;
+}
+.actionsContainer {
+  display: flex;
+  align-items: baseline;
+}
+.title {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.9rem;
+  color: #ccffff;
+  margin: 10px 5px 10px 10px;
+}
+.symbol {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 1.2rem;
+  color: #ccffff;
+}
+
 @media only screen and (max-width: 1000px) {
   .CoinItem {
     margin: 0;
