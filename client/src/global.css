@@ -6,16 +6,35 @@
   box-sizing: border-box;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Titillium+Web&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Galada&family=Permanent+Marker&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Cantora+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+
+@font-face {
+  font-family: "Poppins";
+  src: url("./fonts/poppins/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Barlow Condensed";
+  src: url("./fonts/Barlow_Condensed/BarlowCondensed-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Neutra";
+  src: url("./fonts/Neutra/neutra-text-tf-light-5871e0fe13bff.otf");
+}
+@font-face {
+  font-family: "Neutra Bold";
+  src: url("./fonts/Neutra/neutra-text-tf-bold-5871e0e1d072a.otf");
+}
 
 html {
   font-size: 62.5%;
 }
 
 body {
-  font-family: "Titillium Web", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.6rem;
   overflow-x: hidden;
   background-color: #1c1e2e; /* 1c1e2e 212529 */

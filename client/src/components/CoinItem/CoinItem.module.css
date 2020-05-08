@@ -1,0 +1,12 @@
+.CoinItem {
+  width: 250px;
+  height: 350px;
+  border-radius: 10px;
+  margin-right: 30px;
+  background: rgb(58, 82, 145);
+  background: linear-gradient(
+    135deg,
+    rgba(58, 82, 145, 1) 0%,
+    rgba(46, 56, 81, 1) 89%
+  );
+}

@@ -14,6 +14,10 @@
   display: flex;
   align-items: center;
 }
+.title {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 2rem;
+}
 .flexContainer {
   width: 100%;
   height: 100%;
@@ -32,6 +36,7 @@
   text-decoration: none;
   color: #ccffff;
   font-weight: 700;
+  font-size: 1.3rem;
 }
 .Icon {
   margin-left: 10px;

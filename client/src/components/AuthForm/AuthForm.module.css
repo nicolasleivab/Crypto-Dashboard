@@ -8,21 +8,19 @@
 }
 .title {
   font-size: 2.4rem;
-  font-family: "Pontano Sans", sans-serif;
-  font-weight: normal;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
   margin-bottom: 25px;
   padding-top: 50px;
   text-align: center;
-  background: -webkit-linear-gradient(
-    rgba(96, 228, 43, 1),
-    rgba(63, 224, 127, 1)
-  );
+  background: -webkit-linear-gradient(rgb(96, 228, 43), rgb(63, 224, 127));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .btnGray {
   background-color: #1c1e2e;
+  font-family: "Poppins";
   border-radius: 3px;
   box-shadow: 2px 2px 2px rgb(58, 82, 145);
   color: #ccffff;
@@ -42,10 +40,11 @@
 }
 .Login,
 .Register {
-  position: relative;
+  position: absolute;
   width: 350px;
   height: 380px;
-  margin: 200px auto;
+  top: 230px;
+  left: 37.5%;
   border-radius: 20px;
   display: flex;
   justify-content: center;
@@ -57,7 +56,11 @@
     rgba(134, 75, 254, 1) 89%
   );
 }
-
+.bodyText {
+  font-family: "Neutra", sans-serif;
+  color: #ccffff;
+  margin-right: 10px;
+}
 .Register {
   height: 500px;
 }
@@ -71,7 +74,6 @@
   border: 0;
   padding: 10px;
   font-size: 1.1rem;
-  padding-left: 35px;
 }
 .Register input {
   margin: 15px;
@@ -82,7 +84,6 @@
   border: 0;
   padding: 0;
   font-size: 1.1rem;
-  padding-left: 15px;
 }
 
 @media only screen and (max-width: 800px) {
@@ -90,6 +91,8 @@
   .Register {
     flex-direction: column;
     margin-top: 30px;
+    left: 15%;
+    top: 70px;
   }
   .title {
     padding-top: 50px;
@@ -101,11 +104,13 @@
   .Register {
     flex-direction: column;
     width: 330px;
+    left: 4%;
   }
 }
 
 .signUp {
-  font-family: "Permanent Marker", cursive;
+  font-family: "Barlow Condensed", cursive;
+  font-size: 2.4rem;
 
   background: -webkit-linear-gradient(
     rgba(96, 228, 43, 1),
@@ -114,8 +119,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-transform: uppercase;
-  font-size: 1.2rem;
-  font-weight: 900;
+  font-size: 1.4rem;
   text-decoration: none;
   text-align: right;
   margin-right: 20px;

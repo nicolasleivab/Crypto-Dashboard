@@ -5,3 +5,9 @@
 .blurMode {
   filter: blur(5px);
 }
+.coinsContainer {
+  display: flex;
+  margin: 20px auto;
+  justify-content: center;
+  align-items: center;
+}

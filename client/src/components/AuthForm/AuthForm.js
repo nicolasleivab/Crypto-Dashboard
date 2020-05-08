@@ -78,6 +78,7 @@ const AuthForm = (props) => {
               required="required"
               onChange={onChange}
               maxLength={35}
+              style={{ paddingLeft: 15 }}
             />
           )}
           <input
@@ -88,6 +89,9 @@ const AuthForm = (props) => {
             required="required"
             onChange={onChange}
             maxLength={35}
+            style={
+              authForm === "login" ? { paddingLeft: 35 } : { paddingLeft: 15 }
+            }
           />
           {authForm === "login" && <EmailIcon className={styles.emailIcon} />}
 
@@ -99,6 +103,9 @@ const AuthForm = (props) => {
             required="required"
             onChange={onChange}
             maxLength={35}
+            style={
+              authForm === "login" ? { paddingLeft: 35 } : { paddingLeft: 15 }
+            }
           />
           {authForm === "register" && (
             <input
@@ -109,6 +116,7 @@ const AuthForm = (props) => {
               required="required"
               onChange={onChange}
               maxLength={35}
+              style={{ paddingLeft: 15 }}
             />
           )}
           {authForm === "login" && <LockIcon className={styles.lockIcon} />}
@@ -126,17 +134,8 @@ const AuthForm = (props) => {
           >
             {authForm === "login" ? (
               <Fragment>
-                <div>
-                  <p
-                    style={{
-                      color: "#ccffff",
-                      fontSize: 14,
-                      marginRight: 10,
-                    }}
-                  >
-                    New user?
-                  </p>
-                </div>
+                <p className={styles.bodyText}>New user?</p>
+
                 <div
                   className={styles.signUp}
                   onClick={() => setForm("register")}
@@ -147,15 +146,7 @@ const AuthForm = (props) => {
             ) : (
               <Fragment>
                 <div>
-                  <p
-                    style={{
-                      color: "#ccffff",
-                      fontSize: 14,
-                      marginRight: 10,
-                    }}
-                  >
-                    Already have an account?
-                  </p>
+                  <p className={styles.bodyText}> Already have an account?</p>
                 </div>
                 <div className={styles.signUp} onClick={() => setForm("login")}>
                   Sign in
