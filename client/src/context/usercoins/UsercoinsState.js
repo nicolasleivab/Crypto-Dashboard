@@ -38,7 +38,7 @@ const UsercoinsState = (props) => {
 
       dispatch({
         type: GET_USERCOINS,
-        payload: res.data[0].coins,
+        payload: res.data[0],
       });
     } catch (err) {
       dispatch({ type: USERCOINS_ERROR });

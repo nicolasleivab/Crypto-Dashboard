@@ -50,7 +50,7 @@ router.post("/", auth, async (req, res) => {
 // @access  Private
 router.put("/:id", auth, async (req, res) => {
   try {
-    const coinList = await Coins.findById(req.user.id);
+    const coinList = await Coins.findById(req.params.id);
 
     //check if user has a coinlist
     if (!coinList) {
@@ -64,6 +64,10 @@ router.put("/:id", auth, async (req, res) => {
     const finById = coinList.coins.find((name) => name.id === req.body.id);
     if (finById) {
       return res.status(400).json({ msg: "Coin already added" });
+    }
+    //check user
+    if (coinList.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: "User not authorized" });
     }
 
     const newCoin = {

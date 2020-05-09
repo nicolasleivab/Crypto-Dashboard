@@ -20,6 +20,7 @@ function Home() {
   const { getUserCoins, userCoins, addUserList } = usercoinsContext;
 
   const [formattedCoins, setFormattedCoins] = useState([]);
+  const [filteredCoins, setFilteredCoins] = useState([]);
 
   //load user and coins
   useEffect(() => {
@@ -72,14 +73,28 @@ function Home() {
 
   //modal
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && formattedCoins.length > 0) {
       hideModal();
       getUserCoins();
-      if (userCoins.length < 1) {
-        addUserList();
+      if (!userCoins.user) {
+        //addUserList();
       }
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, formattedCoins]);
+
+  //filter user coins
+  useEffect(() => {
+    if (isAuthenticated && userCoins.coins) {
+      const filteredCoins = [];
+      userCoins.coins.map((userCoin) =>
+        formattedCoins.map((coin) =>
+          coin.id === userCoin.id ? filteredCoins.push(coin) : null
+        )
+      );
+      console.log({ coins: filteredCoins });
+      setFilteredCoins(filteredCoins);
+    }
+  }, [userCoins, isAuthenticated]);
 
   return (
     <div className={styles.Home}>
@@ -111,6 +126,22 @@ function Home() {
                 rank={coin.rank}
               />
             ))}
+        {filteredCoins.length > 0 &&
+          isAuthenticated &&
+          filteredCoins.map((coin) => (
+            <CoinItem
+              key={coin.id}
+              name={coin.name}
+              symbol={coin.symbol}
+              price={coin.priceUsd}
+              volume={coin.volumeUsd24Hr}
+              change={coin.changePercent24Hr}
+              supply={coin.supply}
+              id={coin.id}
+              marketCap={coin.marketCapUsd}
+              rank={coin.rank}
+            />
+          ))}
         {isAuthenticated && <div className={styles.roundBtn}>+</div>}
       </div>
       {modal && <AuthForm />}
