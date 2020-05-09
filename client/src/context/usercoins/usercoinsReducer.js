@@ -1,4 +1,9 @@
-import { GET_USERCOINS, USERCOINS_ERROR } from "../types";
+import {
+  GET_USERCOINS,
+  USERCOINS_ERROR,
+  ADD_USERLIST,
+  USERLIST_ERROR,
+} from "../types";
 
 export default (state, action) => {
   switch (action.type) {
@@ -8,6 +13,15 @@ export default (state, action) => {
         userCoins: action.payload,
       };
     case USERCOINS_ERROR:
+      return {
+        ...state,
+        errors: action.payload,
+      };
+    case ADD_USERLIST:
+      return {
+        ...state,
+      };
+    case USERLIST_ERROR:
       return {
         ...state,
         errors: action.payload,

@@ -2,7 +2,12 @@ import React, { useReducer } from "react";
 import axios from "axios";
 import UsercoinsContext from "./usercoinsContext";
 import usercoinsReducer from "./usercoinsReducer";
-import { GET_USERCOINS, USERCOINS_ERROR } from "../types";
+import {
+  GET_USERCOINS,
+  USERCOINS_ERROR,
+  ADD_USERLIST,
+  USERLIST_ERROR,
+} from "../types";
 
 const UsercoinsState = (props) => {
   const initialState = {
@@ -12,7 +17,19 @@ const UsercoinsState = (props) => {
   const [state, dispatch] = useReducer(usercoinsReducer, initialState);
 
   // Add user's coinlist (first time)
-  const addUserList = async () => {};
+  const addUserList = async () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post("/api/coins", {}, config);
+      dispatch({ type: ADD_USERLIST, payload: res.data });
+    } catch (err) {
+      dispatch({ type: USERLIST_ERROR, payload: err.response.msg });
+    }
+  };
 
   // Get User coins
   const getUserCoins = async () => {
@@ -34,6 +51,7 @@ const UsercoinsState = (props) => {
         userCoins: state.userCoins,
         errors: state.errors,
         getUserCoins,
+        addUserList,
       }}
     >
       {props.children}

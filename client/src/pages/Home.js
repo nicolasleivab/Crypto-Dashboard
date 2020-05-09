@@ -17,7 +17,7 @@ function Home() {
   const { loadUser, isAuthenticated } = authtContext;
   const { modal, hideModal } = modalContext;
   const { getAllCoins, coins } = allcoinsContext;
-  const { getUserCoins, userCoins } = usercoinsContext;
+  const { getUserCoins, userCoins, addUserList } = usercoinsContext;
 
   const [formattedCoins, setFormattedCoins] = useState([]);
 
@@ -75,6 +75,9 @@ function Home() {
     if (isAuthenticated) {
       hideModal();
       getUserCoins();
+      if (userCoins.length < 1) {
+        addUserList();
+      }
     }
   }, [isAuthenticated]);
 

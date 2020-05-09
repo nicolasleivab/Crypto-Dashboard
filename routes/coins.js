@@ -28,7 +28,7 @@ router.post("/", auth, async (req, res) => {
   try {
     let coinList = await Coins.find({ user: req.user.id });
     //check if user has a coinlist
-    if (coinList) {
+    if (coinList[0]) {
       return res.status(400).json({ msg: "User already have a coinlist" });
     }
     const newCoins = new Coins({
