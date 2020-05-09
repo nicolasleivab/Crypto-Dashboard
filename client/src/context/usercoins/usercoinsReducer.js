@@ -1,13 +1,13 @@
-import { GET_ALLCOINS, ALLCOINS_ERROR } from "../types";
+import { GET_USERCOINS, USERCOINS_ERROR } from "../types";
 
 export default (state, action) => {
   switch (action.type) {
-    case GET_ALLCOINS:
+    case GET_USERCOINS:
       return {
         ...state,
-        coins: action.payload,
+        userCoins: action.payload,
       };
-    case ALLCOINS_ERROR:
+    case USERCOINS_ERROR:
       return {
         ...state,
         errors: action.payload,

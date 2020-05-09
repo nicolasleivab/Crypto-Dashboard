@@ -15,8 +15,20 @@ const AllcoinsState = (props) => {
   // Get top coins from coincapapi
   const getAllCoins = async () => {
     try {
-      const res = await axios.get("https://api.coincap.io/v2/assets");
+      //Delete token header to avoid CORS error
+      if (localStorage.token) {
+        delete axios.defaults.headers.common["x-auth-token"];
+      }
+      const config = {
+        method: "get",
+        url: "https://api.coincap.io/v2/assets",
+      };
 
+      const res = await axios(config);
+      // reattach token
+      if (localStorage.token) {
+        axios.defaults.headers.common["x-auth-token"] = localStorage.token;
+      }
       dispatch({
         type: GET_ALLCOINS,
         payload: res.data,

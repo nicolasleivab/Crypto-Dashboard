@@ -5,16 +5,19 @@ import AuthForm from "../components/AuthForm/AuthForm";
 import AuthContext from "../context/auth/authContext";
 import ModalContext from "../context/modal/modalContext";
 import AllcoinsContext from "../context/allcoins/allcoinsContext";
+import UsercoinsContext from "../context/usercoins/usercoinsContext";
 import styles from "./Home.module.css";
 
 function Home() {
   const authtContext = useContext(AuthContext);
   const modalContext = useContext(ModalContext);
   const allcoinsContext = useContext(AllcoinsContext);
+  const usercoinsContext = useContext(UsercoinsContext);
 
   const { loadUser, isAuthenticated } = authtContext;
   const { modal, hideModal } = modalContext;
   const { getAllCoins, coins } = allcoinsContext;
+  const { getUserCoins, userCoins } = usercoinsContext;
 
   const [formattedCoins, setFormattedCoins] = useState([]);
 
@@ -71,6 +74,7 @@ function Home() {
   useEffect(() => {
     if (isAuthenticated) {
       hideModal();
+      getUserCoins();
     }
   }, [isAuthenticated]);
 
@@ -87,6 +91,7 @@ function Home() {
         }
       >
         {formattedCoins.length > 0 &&
+          !isAuthenticated &&
           formattedCoins
             .slice(0, 4)
             .map((coin) => (
@@ -103,6 +108,7 @@ function Home() {
                 rank={coin.rank}
               />
             ))}
+        {isAuthenticated && <div className={styles.roundBtn}>+</div>}
       </div>
       {modal && <AuthForm />}
     </div>

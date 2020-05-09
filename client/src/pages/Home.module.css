@@ -11,6 +11,27 @@
   justify-content: center;
   align-items: center;
 }
+
+.roundBtn {
+  border-radius: 50%;
+  background: rgb(58, 82, 145);
+  background: linear-gradient(
+    135deg,
+    rgba(58, 82, 145, 1) 0%,
+    rgba(134, 75, 254, 1) 89%
+  );
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-top: 90px;
+}
 @media only screen and (max-width: 1000px) {
   .coinsContainer {
     display: grid;

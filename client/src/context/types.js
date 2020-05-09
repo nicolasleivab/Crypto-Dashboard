@@ -30,3 +30,5 @@ export const SET_MODAL = "SET_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
 export const GET_ALLCOINS = "GET_ALLCOINS";
 export const ALLCOINS_ERROR = "ALLCOINS_ERROR";
+export const GET_USERCOINS = "GET_USERCOINS";
+export const USERCOINS_ERROR = "USERCOINS_ERROR";

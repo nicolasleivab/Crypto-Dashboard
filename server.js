@@ -7,7 +7,15 @@ const app = express();
 connectDB();
 
 //Init middleware
-app.use(express.json({ extended: false }));
+//app.use(express.json({ extended: false }));
+app.use(express.json({ extended: false }), function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // keep this if your api accepts cross-origin requests
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, x-auth-token"
+  );
+  next();
+});
 
 app.get("/", (req, res) => res.json({ msg: "Crypto Performance API" }));
 
