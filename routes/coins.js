@@ -26,12 +26,17 @@ router.get("/", auth, async (req, res) => {
 router.post("/", auth, async (req, res) => {
   const { coins } = req.body;
   try {
+    let coinList = await Coins.find({ user: req.user.id });
+    //check if user has a coinlist
+    if (coinList) {
+      return res.status(400).json({ msg: "User already have a coinlist" });
+    }
     const newCoins = new Coins({
       coins,
       user: req.user.id,
     });
 
-    const coinList = await newCoins.save();
+    coinList = await newCoins.save();
 
     res.json(coinList);
   } catch (err) {
@@ -45,8 +50,9 @@ router.post("/", auth, async (req, res) => {
 // @access  Private
 router.put("/:id", auth, async (req, res) => {
   try {
-    const coinList = await Coins.findById(req.params.id);
+    const coinList = await Coins.findById(req.user.id);
 
+    //check if user has a coinlist
     if (!coinList) {
       return res.status(404).json({ msg: "Coin list not found" });
     }

@@ -31,6 +31,7 @@
   justify-content: center;
   cursor: pointer;
   margin-top: 90px;
+  padding-bottom: 2px;
 }
 @media only screen and (max-width: 1000px) {
   .coinsContainer {
