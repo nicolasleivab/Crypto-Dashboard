@@ -17,7 +17,10 @@ const AllcoinsState = (props) => {
     try {
       const res = await axios.get("https://api.coincap.io/v2/assets");
 
-      dispatch({ type: GET_ALLCOINS, payload: res.data });
+      dispatch({
+        type: GET_ALLCOINS,
+        payload: res.data,
+      });
     } catch (err) {
       dispatch({ type: ALLCOINS_ERROR });
     }

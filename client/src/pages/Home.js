@@ -14,64 +14,65 @@ function Home() {
 
   const { loadUser, isAuthenticated } = authtContext;
   const { modal, hideModal } = modalContext;
-  const { getAllCoins } = allcoinsContext;
+  const { getAllCoins, coins } = allcoinsContext;
 
+  const [formattedCoins, setFormattedCoins] = useState([]);
+
+  //load user and coins
   useEffect(() => {
     loadUser();
     getAllCoins();
   }, []);
+
+  //format coins
+  useEffect(() => {
+    if (coins.data) {
+      coins.data.forEach((d) => {
+        if (d.priceUsd >= 2) {
+          d.priceUsd = Math.floor(d.priceUsd * 100) / 100;
+        } else {
+          d.priceUsd = Math.floor(d.priceUsd * 10000) / 10000;
+        }
+        d.maxSupply = Math.floor(d.maxSupply * 10000) / 10000;
+        d.changePercent24Hr = Math.floor(d.changePercent24Hr * 100) / 100;
+        d.vwap24Hr = Math.floor(d.vwap24Hr * 10000) / 10000;
+        d.marketCapUsd = +d.marketCapUsd;
+        if (d.marketCapUsd >= 1000000000) {
+          d.marketCapUsd = (d.marketCapUsd / 1000000000).toFixed(2) + "B";
+        } else if (d.marketCapUsd >= 1000000) {
+          d.marketCapUsd = (d.marketCapUsd / 1000000).toFixed(2) + "M";
+        } else {
+          d.marketCapUsd = (d.marketCapUsd / 1000).toFixed(2) + "K";
+        }
+        d.volumeUsd24Hr = +d.volumeUsd24Hr;
+        if (d.volumeUsd24Hr >= 1000000000) {
+          d.volumeUsd24Hr = (d.volumeUsd24Hr / 1000000000).toFixed(2) + "B";
+        } else if (d.volumeUsd24Hr >= 1000000) {
+          d.volumeUsd24Hr = (d.volumeUsd24Hr / 1000000).toFixed(2) + "M";
+        } else {
+          d.volumeUsd24Hr = (d.volumeUsd24Hr / 1000).toFixed(2) + "K";
+        }
+        d.supply = +d.supply;
+        if (d.supply >= 1000000000) {
+          d.supply = (d.supply / 1000000000).toFixed(2) + "B";
+        } else if (d.supply >= 1000000) {
+          d.supply = (d.supply / 1000000).toFixed(2) + "M";
+        } else {
+          d.supply = (d.supply / 1000).toFixed(2) + "K";
+        }
+      });
+
+      setFormattedCoins(coins.data);
+      console.log(coins.data);
+    }
+  }, [coins]);
+
+  //modal
   useEffect(() => {
     if (isAuthenticated) {
       hideModal();
     }
   }, [isAuthenticated]);
-
-  const [coins, setCoins] = useState([
-    {
-      name: "Bitcoin",
-      symbol: "BTC",
-      id: "bitcoin",
-      price: "8245",
-      price24Hr: "2.6",
-      volumeUsd: "675B",
-      supply: "1000",
-      marketCap: "500B",
-      rank: "1",
-    },
-    {
-      name: "Ethereum",
-      symbol: "ETH",
-      id: "ethereum",
-      price: "245",
-      price24Hr: "0.6",
-      volumeUsd: "675B",
-      supply: "1000",
-      marketCap: "500B",
-      rank: "2",
-    },
-    {
-      name: "Bitcoin Cash",
-      symbol: "BCH",
-      id: "bitcoin-cash",
-      price: "545",
-      price24Hr: "-17.2",
-      volumeUsd: "675B",
-      supply: "1000",
-      marketCap: "500B",
-      rank: "3",
-    },
-    {
-      name: "Ripple",
-      symbol: "XRP",
-      id: "ripple",
-      price: "0.17",
-      price24Hr: "2.6",
-      volumeUsd: "675B",
-      supply: "1000",
-      marketCap: "500B",
-      rank: "4",
-    },
-  ]);
 
   return (
     <div className={styles.Home}>
@@ -85,20 +86,23 @@ function Home() {
             : styles.coinsContainer
         }
       >
-        {coins.map((coin) => (
-          <CoinItem
-            key={coin.id}
-            name={coin.name}
-            symbol={coin.symbol}
-            price={coin.price}
-            volume={coin.volumeUsd}
-            change={coin.price24Hr}
-            supply={coin.supply}
-            id={coin.id}
-            marketCap={coin.marketCap}
-            rank={coin.rank}
-          />
-        ))}
+        {formattedCoins.length > 0 &&
+          formattedCoins
+            .slice(0, 4)
+            .map((coin) => (
+              <CoinItem
+                key={coin.id}
+                name={coin.name}
+                symbol={coin.symbol}
+                price={coin.priceUsd}
+                volume={coin.volumeUsd24Hr}
+                change={coin.changePercent24Hr}
+                supply={coin.supply}
+                id={coin.id}
+                marketCap={coin.marketCapUsd}
+                rank={coin.rank}
+              />
+            ))}
       </div>
       {modal && <AuthForm />}
     </div>
