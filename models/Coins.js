@@ -3,9 +3,6 @@ const Schema = mongoose.Schema;
 
 // coin list subSchema
 const CoinSchema = Schema({
-  id: {
-    type: String,
-  },
   name: {
     type: String,
   },

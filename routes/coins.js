@@ -61,7 +61,7 @@ router.put("/:id", auth, async (req, res) => {
       return res.status(400).json({ msg: "Max length reached" });
     }
     // check if the coin was already added
-    const finById = coinList.coins.find((name) => name.id === req.body.id);
+    const finById = coinList.coins.find((coin) => coin.name === req.body.name);
     if (finById) {
       return res.status(400).json({ msg: "Coin already added" });
     }
@@ -73,7 +73,6 @@ router.put("/:id", auth, async (req, res) => {
     const newCoin = {
       name: req.body.name,
       symbol: req.body.symbol,
-      id: req.body.id,
     };
     // add coin
     coinList.coins.unshift(newCoin);
@@ -111,11 +110,10 @@ router.put("/:id/:coin_id", auth, async (req, res) => {
     const newCoin = {
       name: req.body.name,
       symbol: req.body.symbol,
-      id: req.body.id,
     };
 
     // check if new coin already exists
-    const findCoin = coinList.coins.find((coin) => coin.id === newCoin.id);
+    const findCoin = coinList.coins.find((coin) => coin.name === newCoin.name);
 
     if (findCoin) {
       return res.status(404).json({ msg: "Coin already exists" });

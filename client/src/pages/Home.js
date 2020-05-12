@@ -88,7 +88,7 @@ function Home() {
       const filteredCoins = [];
       userCoins.coins.map((userCoin) =>
         formattedCoins.map((coin) =>
-          coin.id === userCoin.id ? filteredCoins.push(coin) : null
+          coin.id === userCoin.name ? filteredCoins.push(coin) : null
         )
       );
       console.log({ coins: filteredCoins });
