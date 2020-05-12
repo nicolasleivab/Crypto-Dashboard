@@ -3,6 +3,8 @@ import {
   USERCOINS_ERROR,
   ADD_USERLIST,
   USERLIST_ERROR,
+  DELETE_COIN,
+  COIN_ERROR,
 } from "../types";
 
 export default (state, action) => {
@@ -22,6 +24,22 @@ export default (state, action) => {
         ...state,
       };
     case USERLIST_ERROR:
+      return {
+        ...state,
+        errors: action.payload,
+      };
+    case DELETE_COIN:
+      return {
+        ...state,
+        userCoins: {
+          coins: [
+            ...state.userCoins.coins.filter(
+              (coin) => coin.name !== action.payload
+            ),
+          ],
+        },
+      };
+    case COIN_ERROR:
       return {
         ...state,
         errors: action.payload,

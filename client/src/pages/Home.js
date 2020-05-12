@@ -91,10 +91,10 @@ function Home() {
           coin.id === userCoin.name ? filteredCoins.push(coin) : null
         )
       );
-      console.log({ coins: filteredCoins });
+      console.log(userCoins);
       setFilteredCoins(filteredCoins);
     }
-  }, [userCoins, isAuthenticated]);
+  }, [userCoins.coins, isAuthenticated]);
 
   return (
     <div className={styles.Home}>

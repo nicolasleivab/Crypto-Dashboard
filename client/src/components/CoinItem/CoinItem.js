@@ -3,6 +3,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import AuthContext from "../../context/auth/authContext";
 import ModalContext from "../../context/modal/modalContext";
+import UsercoinsContext from "../../context/usercoins/usercoinsContext";
 import styles from "./CoinItem.module.css";
 
 const CoinItem = ({
@@ -18,9 +19,11 @@ const CoinItem = ({
 }) => {
   const authtContext = useContext(AuthContext);
   const modalContext = useContext(ModalContext);
+  const usercoinsContext = useContext(UsercoinsContext);
 
   const { isAuthenticated } = authtContext;
   const { setModal } = modalContext;
+  const { deleteCoin, userCoins } = usercoinsContext;
 
   const [editMode, setEditMode] = useState(false);
 
@@ -28,7 +31,7 @@ const CoinItem = ({
     if (!isAuthenticated) {
       setModal();
     } else if (isAuthenticated) {
-      alert(`${id} removed`);
+      deleteCoin(userCoins._id, id);
     }
   };
 

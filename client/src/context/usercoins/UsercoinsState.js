@@ -7,6 +7,8 @@ import {
   USERCOINS_ERROR,
   ADD_USERLIST,
   USERLIST_ERROR,
+  DELETE_COIN,
+  COIN_ERROR,
 } from "../types";
 
 const UsercoinsState = (props) => {
@@ -45,6 +47,17 @@ const UsercoinsState = (props) => {
     }
   };
 
+  // Delete Coin
+  const deleteCoin = async (userId, coin) => {
+    try {
+      await axios.delete(`/api/coins/${userId}/${coin}`);
+
+      dispatch({ type: DELETE_COIN, payload: coin });
+    } catch (err) {
+      dispatch({ type: COIN_ERROR, payload: err.response.msg });
+    }
+  };
+
   return (
     <UsercoinsContext.Provider
       value={{
@@ -52,6 +65,7 @@ const UsercoinsState = (props) => {
         errors: state.errors,
         getUserCoins,
         addUserList,
+        deleteCoin,
       }}
     >
       {props.children}
