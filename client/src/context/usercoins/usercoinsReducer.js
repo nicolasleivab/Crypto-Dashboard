@@ -35,6 +35,7 @@ export default (state, action) => {
         ...state,
         userCoins: {
           coins: [action.payload, ...state.userCoins.coins],
+          _id: state.userCoins._id,
         },
       };
     case DELETE_COIN:
@@ -46,6 +47,7 @@ export default (state, action) => {
               (coin) => coin.name !== action.payload
             ),
           ],
+          _id: state.userCoins._id,
         },
       };
     case EDIT_COIN:
@@ -57,6 +59,7 @@ export default (state, action) => {
               coin.name === action.payload.current ? action.payload.new : coin
             ),
           ],
+          _id: state.userCoins._id,
         },
       };
     case COIN_ERROR:

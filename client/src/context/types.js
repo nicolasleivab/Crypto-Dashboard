@@ -24,3 +24,4 @@ export const DELETE_COIN = "DELETE_COIN";
 export const COIN_ERROR = "COIN_ERROR";
 export const ADD_COIN = "ADD_COIN";
 export const EDIT_COIN = "EDIT_COIN";
+export const ADD_MODE = "ADD_MODE";

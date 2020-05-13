@@ -1,4 +1,10 @@
-import { SET_MODAL, HIDE_MODAL, EDIT_MODE, SET_CURRENT } from "../types";
+import {
+  SET_MODAL,
+  HIDE_MODAL,
+  EDIT_MODE,
+  ADD_MODE,
+  SET_CURRENT,
+} from "../types";
 import { TransitionGroup } from "react-transition-group";
 
 export default (state, action) => {
@@ -17,6 +23,11 @@ export default (state, action) => {
       return {
         ...state,
         editmode: action.payload,
+      };
+    case ADD_MODE:
+      return {
+        ...state,
+        addmode: action.payload,
       };
     case SET_CURRENT:
       return {

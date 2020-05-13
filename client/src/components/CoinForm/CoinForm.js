@@ -5,6 +5,7 @@ import UsercoinsContext from "../../context/usercoins/usercoinsContext";
 import CloseIcon from "@material-ui/icons/Close";
 import styles from "./CoinForm.module.css";
 import UsercoinsState from "../../context/usercoins/UsercoinsState";
+import { ADD_COIN } from "../../context/types";
 
 const CoinForm = (props) => {
   const authtContext = useContext(AuthContext);
@@ -18,8 +19,16 @@ const CoinForm = (props) => {
     clearErrors,
     isAuthenticated,
   } = authtContext;
-  const { hideModal, setModal, modal, setEdit, current } = modalContext;
-  const { editCoin, userCoins } = usercoinsContext;
+  const {
+    hideModal,
+    setModal,
+    modal,
+    setEdit,
+    current,
+    addmode,
+    setAdd,
+  } = modalContext;
+  const { editCoin, userCoins, addCoin } = usercoinsContext;
 
   const [coin, setCoin] = useState({
     name: "",
@@ -31,7 +40,12 @@ const CoinForm = (props) => {
   const onChange = (e) => setCoin({ ...coin, [e.target.name]: e.target.value });
 
   const onSubmit = () => {
-    editCoin(userCoins._id, current, coin);
+    if (addmode) {
+      setAdd(false);
+      addCoin(userCoins._id, coin);
+    } else {
+      editCoin(userCoins._id, current, coin);
+    }
     hideModal();
     setEdit(false);
   };
@@ -52,7 +66,7 @@ const CoinForm = (props) => {
         }}
       >
         <CloseIcon className={styles.closeIcon} onClick={() => closeForm()} />
-        <p className={styles.title}>Edit Coin</p>
+        <p className={styles.title}>{addmode ? "Add New Coin" : "Edit Coin"}</p>
         <form
           style={{
             display: "flex",
@@ -82,7 +96,7 @@ const CoinForm = (props) => {
             <input
               className={styles.btnGray}
               type="submit"
-              value="Update Coin"
+              value={addmode ? "Add Coin" : "Update Coin"}
             />
           </div>
         </form>

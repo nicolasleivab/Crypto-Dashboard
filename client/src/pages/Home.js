@@ -8,6 +8,7 @@ import ModalContext from "../context/modal/modalContext";
 import AllcoinsContext from "../context/allcoins/allcoinsContext";
 import UsercoinsContext from "../context/usercoins/usercoinsContext";
 import styles from "./Home.module.css";
+import { ADD_COIN } from "../context/types";
 
 function Home() {
   const authtContext = useContext(AuthContext);
@@ -16,7 +17,14 @@ function Home() {
   const usercoinsContext = useContext(UsercoinsContext);
 
   const { loadUser, isAuthenticated } = authtContext;
-  const { modal, hideModal, editmode } = modalContext;
+  const {
+    modal,
+    setModal,
+    hideModal,
+    editmode,
+    setAdd,
+    setEdit,
+  } = modalContext;
   const { getAllCoins, coins } = allcoinsContext;
   const { getUserCoins, userCoins, addUserList } = usercoinsContext;
 
@@ -97,6 +105,12 @@ function Home() {
     }
   }, [userCoins.coins, isAuthenticated]);
 
+  const addNewCoin = () => {
+    setModal();
+    setEdit(true);
+    setAdd(true);
+  };
+
   return (
     <div className={styles.Home}>
       <div className={modal && styles.blurMode}>
@@ -143,7 +157,11 @@ function Home() {
               rank={coin.rank}
             />
           ))}
-        {isAuthenticated && <div className={styles.roundBtn}>+</div>}
+        {isAuthenticated && filteredCoins.length < 4 && (
+          <div className={styles.roundBtn} onClick={() => addNewCoin()}>
+            +
+          </div>
+        )}
       </div>
 
       {modal && editmode && <CoinForm />}
