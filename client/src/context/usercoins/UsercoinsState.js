@@ -5,8 +5,6 @@ import usercoinsReducer from "./usercoinsReducer";
 import {
   GET_USERCOINS,
   USERCOINS_ERROR,
-  ADD_USERLIST,
-  USERLIST_ERROR,
   DELETE_COIN,
   ADD_COIN,
   EDIT_COIN,
@@ -19,21 +17,6 @@ const UsercoinsState = (props) => {
     errors: null,
   };
   const [state, dispatch] = useReducer(usercoinsReducer, initialState);
-
-  // Add user's coinlist (first time)
-  const addUserList = async () => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    try {
-      const res = await axios.post("/api/coins", {}, config);
-      dispatch({ type: ADD_USERLIST, payload: res.data });
-    } catch (err) {
-      dispatch({ type: USERLIST_ERROR, payload: err.response.msg });
-    }
-  };
 
   // Get User coins
   const getUserCoins = async () => {
@@ -100,7 +83,6 @@ const UsercoinsState = (props) => {
         userCoins: state.userCoins,
         errors: state.errors,
         getUserCoins,
-        addUserList,
         deleteCoin,
         addCoin,
         editCoin,

@@ -23,6 +23,8 @@ const AuthForm = (props) => {
   const [user, setUser] = useState({
     email: "",
     password: "",
+    name: "",
+    password2: "",
   });
 
   const [authForm, setForm] = useState("login");

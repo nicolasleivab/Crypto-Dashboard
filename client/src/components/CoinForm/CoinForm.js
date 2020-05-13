@@ -41,8 +41,8 @@ const CoinForm = (props) => {
 
   const onSubmit = () => {
     if (addmode) {
-      setAdd(false);
       addCoin(userCoins._id, coin);
+      setAdd(false);
     } else {
       editCoin(userCoins._id, current, coin);
     }
@@ -53,6 +53,9 @@ const CoinForm = (props) => {
   const closeForm = () => {
     hideModal();
     setEdit(false);
+    if (addmode) {
+      setAdd(false);
+    }
   };
 
   return (

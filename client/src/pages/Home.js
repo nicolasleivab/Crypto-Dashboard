@@ -16,7 +16,7 @@ function Home() {
   const allcoinsContext = useContext(AllcoinsContext);
   const usercoinsContext = useContext(UsercoinsContext);
 
-  const { loadUser, isAuthenticated } = authtContext;
+  const { loadUser, isAuthenticated, addUserList } = authtContext;
   const {
     modal,
     setModal,
@@ -26,7 +26,7 @@ function Home() {
     setEdit,
   } = modalContext;
   const { getAllCoins, coins } = allcoinsContext;
-  const { getUserCoins, userCoins, addUserList } = usercoinsContext;
+  const { getUserCoins, userCoins } = usercoinsContext;
 
   const [formattedCoins, setFormattedCoins] = useState([]);
   const [filteredCoins, setFilteredCoins] = useState([]);
@@ -80,30 +80,32 @@ function Home() {
     }
   }, [coins]);
 
-  //modal
+  //get user coins
   useEffect(() => {
     if (isAuthenticated && formattedCoins.length > 0) {
       hideModal();
       getUserCoins();
-      if (!userCoins.user) {
-        //addUserList();
-      }
     }
   }, [isAuthenticated, formattedCoins]);
 
   //filter user coins
   useEffect(() => {
-    if (isAuthenticated && userCoins.coins) {
+    setFilteredCoins([]);
+    if (isAuthenticated && userCoins) {
       const filteredCoins = [];
-      userCoins.coins.map((userCoin) =>
-        formattedCoins.map((coin) =>
-          coin.id === userCoin.name ? filteredCoins.push(coin) : null
-        )
-      );
+      if (userCoins.coins) {
+        userCoins.coins.map((userCoin) =>
+          formattedCoins.map((coin) =>
+            coin.id === userCoin.name ? filteredCoins.push(coin) : null
+          )
+        );
+      }
       console.log(userCoins);
       setFilteredCoins(filteredCoins);
+    } else {
+      setFilteredCoins([]);
     }
-  }, [userCoins.coins, isAuthenticated]);
+  }, [userCoins, isAuthenticated]);
 
   const addNewCoin = () => {
     setModal();
