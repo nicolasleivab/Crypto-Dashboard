@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import NavBar from "../components/layout/NavBar";
 import CoinItem from "../components/CoinItem/CoinItem";
 import AuthForm from "../components/AuthForm/AuthForm";
+import CoinForm from "../components/CoinForm/CoinForm";
 import AuthContext from "../context/auth/authContext";
 import ModalContext from "../context/modal/modalContext";
 import AllcoinsContext from "../context/allcoins/allcoinsContext";
@@ -15,7 +16,7 @@ function Home() {
   const usercoinsContext = useContext(UsercoinsContext);
 
   const { loadUser, isAuthenticated } = authtContext;
-  const { modal, hideModal } = modalContext;
+  const { modal, hideModal, editmode } = modalContext;
   const { getAllCoins, coins } = allcoinsContext;
   const { getUserCoins, userCoins, addUserList } = usercoinsContext;
 
@@ -144,7 +145,9 @@ function Home() {
           ))}
         {isAuthenticated && <div className={styles.roundBtn}>+</div>}
       </div>
-      {modal && <AuthForm />}
+
+      {modal && editmode && <CoinForm />}
+      {modal && !editmode && <AuthForm />}
     </div>
   );
 }

@@ -5,6 +5,8 @@ import {
   USERLIST_ERROR,
   DELETE_COIN,
   COIN_ERROR,
+  ADD_COIN,
+  EDIT_COIN,
 } from "../types";
 
 export default (state, action) => {
@@ -28,6 +30,13 @@ export default (state, action) => {
         ...state,
         errors: action.payload,
       };
+    case ADD_COIN:
+      return {
+        ...state,
+        userCoins: {
+          coins: [action.payload, ...state.userCoins.coins],
+        },
+      };
     case DELETE_COIN:
       return {
         ...state,
@@ -35,6 +44,17 @@ export default (state, action) => {
           coins: [
             ...state.userCoins.coins.filter(
               (coin) => coin.name !== action.payload
+            ),
+          ],
+        },
+      };
+    case EDIT_COIN:
+      return {
+        ...state,
+        userCoins: {
+          coins: [
+            ...state.userCoins.coins.map((coin) =>
+              coin.name === action.payload.current ? action.payload.new : coin
             ),
           ],
         },

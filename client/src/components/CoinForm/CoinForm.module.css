@@ -1,0 +1,93 @@
+.title {
+  font-size: 2.4rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  margin-bottom: 25px;
+  padding-top: 50px;
+  text-align: center;
+  background: -webkit-linear-gradient(rgb(96, 228, 43), rgb(63, 224, 127));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btnGray {
+  background-color: #1c1e2e;
+  font-family: "Poppins";
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px rgb(58, 82, 145);
+  color: #ccffff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.btnGray:active {
+  box-shadow: 0;
+}
+
+.btnGray:active {
+  box-shadow: 0 0 #ccc;
+}
+.CoinForm {
+  position: absolute;
+  width: 350px;
+  height: 300px;
+  top: 230px;
+  left: 37.5%;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(58, 82, 145);
+  background: linear-gradient(
+    135deg,
+    rgba(58, 82, 145, 1) 0%,
+    rgba(134, 75, 254, 1) 89%
+  );
+}
+.bodyText {
+  font-family: "Neutra", sans-serif;
+  color: #ccffff;
+  margin-right: 10px;
+}
+
+.CoinForm input {
+  margin: 15px;
+  margin-top: 20px;
+  height: 35px;
+  width: 270px;
+  border-radius: 20px;
+  border: 0;
+  padding: 10px;
+  font-size: 1.1rem;
+}
+
+@media only screen and (max-width: 800px) {
+  .CoinForm {
+    flex-direction: column;
+    margin-top: 30px;
+    left: 15%;
+    top: 70px;
+  }
+  .title {
+    padding-top: 50px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .CoinForm {
+    flex-direction: column;
+    width: 330px;
+    left: 4%;
+  }
+}
+
+.closeIcon {
+  cursor: pointer;
+  color: rgb(29, 47, 92);
+  position: absolute;
+  right: 30px;
+  top: 15px;
+}
