@@ -34,6 +34,9 @@ const D3LineChart = ({ data }) => {
       x = d3.scaleTime().range([0, width]);
       y = d3.scaleLinear().range([height, 0]);
 
+      //remove previous chart when resizing the window
+      d3.select(d3Container.current).selectAll("svg").remove();
+
       // append the svg to the selected div
       svg = d3
         .select(d3Container.current)
@@ -320,7 +323,9 @@ const D3LineChart = ({ data }) => {
     }
   }, [data, d3Container.current]);
 
-  return <div className="d3chart" ref={d3Container}></div>;
+  return (
+    <svg className="d3chart" width={1100} height={500} ref={d3Container}></svg>
+  );
 };
 
 export default D3LineChart;
