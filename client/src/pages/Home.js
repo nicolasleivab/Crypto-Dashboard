@@ -7,8 +7,8 @@ import AuthContext from "../context/auth/authContext";
 import ModalContext from "../context/modal/modalContext";
 import AllcoinsContext from "../context/allcoins/allcoinsContext";
 import UsercoinsContext from "../context/usercoins/usercoinsContext";
+import D3LineChart from "../components/D3LineChart/D3LineChart";
 import styles from "./Home.module.css";
-import { ADD_COIN } from "../context/types";
 
 function Home() {
   const authtContext = useContext(AuthContext);
@@ -26,15 +26,22 @@ function Home() {
     setEdit,
   } = modalContext;
   const { getAllCoins, coins } = allcoinsContext;
-  const { getUserCoins, userCoins } = usercoinsContext;
+  const {
+    getUserCoins,
+    userCoins,
+    getPriceAction,
+    priceAction,
+  } = usercoinsContext;
 
   const [formattedCoins, setFormattedCoins] = useState([]);
   const [filteredCoins, setFilteredCoins] = useState([]);
+  const [formattedPA, setFormattedPA] = useState([]);
 
   //load user and coins
   useEffect(() => {
     loadUser();
     getAllCoins();
+    getPriceAction(["bitcoin", "ethereum", "ripple", "bitcoin-cash"]);
   }, []);
 
   //format coins
@@ -80,6 +87,26 @@ function Home() {
     }
   }, [coins]);
 
+  //format price action
+  useEffect(() => {
+    if (priceAction.BTC) {
+      const PA = [];
+
+      for (let i = 0; i < priceAction.BTC.length; i++) {
+        const obj = {};
+        obj.BTC = Number(priceAction.BTC[i].priceUsd);
+        obj.BCH = Number(priceAction.BCH[i].priceUsd);
+        obj.XRP = Number(priceAction.XRP[i].priceUsd);
+        obj.ETH = Number(priceAction.ETH[i].priceUsd);
+        obj.date = new Date(priceAction.BTC[i].date);
+
+        PA.push(obj);
+      }
+      console.log(PA);
+      setFormattedPA(PA);
+    }
+  }, [priceAction]);
+
   //get user coins
   useEffect(() => {
     if (isAuthenticated && formattedCoins.length > 0) {
@@ -115,7 +142,7 @@ function Home() {
 
   return (
     <div className={styles.Home}>
-      <div className={modal && styles.blurMode}>
+      <div className={modal ? styles.blurMode : null}>
         <NavBar />
       </div>
       <div
@@ -165,7 +192,11 @@ function Home() {
           </div>
         )}
       </div>
-
+      {formattedPA.length > 0 && (
+        <div className="D3container">
+          <D3LineChart data={formattedPA} />
+        </div>
+      )}
       {modal && editmode && <CoinForm />}
       {modal && !editmode && <AuthForm />}
     </div>

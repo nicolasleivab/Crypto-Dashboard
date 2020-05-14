@@ -5,6 +5,7 @@ import {
   COIN_ERROR,
   ADD_COIN,
   EDIT_COIN,
+  GET_PRICEACTION,
 } from "../types";
 
 export default (state, action) => {
@@ -49,6 +50,16 @@ export default (state, action) => {
             ),
           ],
           _id: state.userCoins._id,
+        },
+      };
+    case GET_PRICEACTION:
+      return {
+        ...state,
+        priceAction: {
+          BTC: action.payload[0],
+          BCH: action.payload[1],
+          ETH: action.payload[2],
+          XRP: action.payload[3],
         },
       };
     case COIN_ERROR:

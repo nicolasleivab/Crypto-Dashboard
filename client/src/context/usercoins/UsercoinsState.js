@@ -9,12 +9,14 @@ import {
   ADD_COIN,
   EDIT_COIN,
   COIN_ERROR,
+  GET_PRICEACTION,
 } from "../types";
 
 const UsercoinsState = (props) => {
   const initialState = {
     userCoins: [],
     errors: null,
+    priceAction: {},
   };
   const [state, dispatch] = useReducer(usercoinsReducer, initialState);
 
@@ -77,15 +79,42 @@ const UsercoinsState = (props) => {
     }
   };
 
+  // Get userscoin price action
+  const getPriceAction = (coins) => {
+    let priceAction = [];
+    let promises = [];
+    for (let i = 0; i < coins.length; i++) {
+      promises.push(
+        axios
+          .get(
+            `https://api.coincap.io/v2/assets/${coins[i]}/history?interval=d1`
+          )
+          .then((response) => {
+            // push data from the response
+            priceAction.push(response.data.data);
+          })
+      );
+    }
+    // dispatch after all promises fulfill
+    Promise.all(promises).then(() =>
+      dispatch({
+        type: GET_PRICEACTION,
+        payload: priceAction,
+      })
+    );
+  };
+
   return (
     <UsercoinsContext.Provider
       value={{
         userCoins: state.userCoins,
         errors: state.errors,
+        priceAction: state.priceAction,
         getUserCoins,
         deleteCoin,
         addCoin,
         editCoin,
+        getPriceAction,
       }}
     >
       {props.children}

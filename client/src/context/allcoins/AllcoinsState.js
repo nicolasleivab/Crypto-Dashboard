@@ -7,7 +7,6 @@ import { GET_ALLCOINS, ALLCOINS_ERROR } from "../types";
 const AllcoinsState = (props) => {
   const initialState = {
     coins: [],
-    priceAction: [],
     errors: null,
   };
   const [state, dispatch] = useReducer(allcoinsReducer, initialState);
@@ -42,7 +41,6 @@ const AllcoinsState = (props) => {
     <AllcoinsContext.Provider
       value={{
         coins: state.coins,
-        priceAction: state.priceAction,
         errors: state.errors,
         getAllCoins,
       }}

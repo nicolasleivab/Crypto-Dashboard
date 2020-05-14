@@ -40,3 +40,93 @@ body {
   overflow-x: hidden;
   background-color: #1c1e2e; /* 1c1e2e 212529 */
 }
+
+.d3chart {
+  width: 1100px;
+  margin: 40px auto;
+  background-color: #2e3851;
+  border-radius: 5px;
+}
+
+.focus-line {
+  text-decoration: line-through;
+}
+.D3container {
+  width: 1100px;
+  margin: 0 auto;
+}
+.line1 {
+  fill: none;
+  stroke: #007bff;
+  stroke-width: 2px;
+}
+.line2 {
+  fill: none;
+  stroke: #e83e8c;
+  stroke-width: 2px;
+}
+.line3 {
+  fill: none;
+  stroke: #6f42c1;
+  stroke-width: 2px;
+}
+.line4 {
+  fill: none;
+  stroke: #f8f9fa;
+  stroke-width: 2px;
+}
+
+.axisWhite text {
+  fill: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.axisWhite path {
+  stroke: gray;
+}
+
+.axisWhite line {
+  stroke: gray;
+}
+
+.axisY path {
+  opacity: 0;
+}
+.axisY line {
+  opacity: 0;
+}
+.axisY text {
+  fill: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.ygrid line {
+  stroke: #555;
+  stroke-opacity: 0.6;
+  shape-rendering: crispEdges;
+}
+.zerogrid line {
+  stroke: #999;
+  stroke-opacity: 0.6;
+  shape-rendering: crispEdges;
+  stroke-dasharray: 7, 7;
+}
+
+.ygrid path {
+  stroke-width: 0;
+}
+.zerogrid path {
+  stroke-width: 0;
+}
+
+.hover-line2 {
+  stroke: white;
+  stroke-opacity: 0.6;
+}
+
+.d3-text {
+  fill: white;
+  font-size: 14px;
+}
