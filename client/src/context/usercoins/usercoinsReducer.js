@@ -55,12 +55,7 @@ export default (state, action) => {
     case GET_PRICEACTION:
       return {
         ...state,
-        priceAction: {
-          BTC: action.payload[0],
-          BCH: action.payload[1],
-          ETH: action.payload[2],
-          XRP: action.payload[3],
-        },
+        priceAction: [...action.payload],
       };
     case COIN_ERROR:
       return {

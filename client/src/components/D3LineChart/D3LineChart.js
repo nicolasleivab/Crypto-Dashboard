@@ -258,7 +258,7 @@ const D3LineChart = ({ data }) => {
               })
               .left(data, x0, 1),
             d0 = data[i - 1],
-            d1 = data[i],
+            d1 = data[i - 1],
             d = x0 - d0.date > d1.date - x0 ? d1 : d0;
           const parseDate = d3.timeFormat("%b %d, %Y");
 
@@ -283,8 +283,6 @@ const D3LineChart = ({ data }) => {
             d.XRP.toFixed(2) +
             "%" +
             "</tspan>";
-
-          XRPapp = "";
 
           BCHapp =
             "<tspan x='0' dy='1.2em'>" +

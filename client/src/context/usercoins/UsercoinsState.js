@@ -16,7 +16,7 @@ const UsercoinsState = (props) => {
   const initialState = {
     userCoins: [],
     errors: null,
-    priceAction: {},
+    priceAction: [],
   };
   const [state, dispatch] = useReducer(usercoinsReducer, initialState);
 
@@ -83,7 +83,9 @@ const UsercoinsState = (props) => {
   const getPriceAction = (coins) => {
     let priceAction = [];
     let promises = [];
+
     for (let i = 0; i < coins.length; i++) {
+      delete axios.defaults.headers.common["x-auth-token"];
       promises.push(
         axios
           .get(
@@ -92,16 +94,18 @@ const UsercoinsState = (props) => {
           .then((response) => {
             // push data from the response
             priceAction.push(response.data.data);
+            // reattach token
+            axios.defaults.headers.common["x-auth-token"] = localStorage.token;
           })
       );
     }
     // dispatch after all promises fulfill
-    Promise.all(promises).then(() =>
+    Promise.all(promises).then(() => {
       dispatch({
         type: GET_PRICEACTION,
         payload: priceAction,
-      })
-    );
+      });
+    });
   };
 
   return (

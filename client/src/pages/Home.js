@@ -36,12 +36,12 @@ function Home() {
   const [formattedCoins, setFormattedCoins] = useState([]);
   const [filteredCoins, setFilteredCoins] = useState([]);
   const [formattedPA, setFormattedPA] = useState([]);
+  const [performanceData, setPerformanceData] = useState([]);
 
   //load user and coins
   useEffect(() => {
     loadUser();
     getAllCoins();
-    getPriceAction(["bitcoin", "ethereum", "ripple", "bitcoin-cash"]);
   }, []);
 
   //format coins
@@ -87,26 +87,6 @@ function Home() {
     }
   }, [coins]);
 
-  //format price action
-  useEffect(() => {
-    if (priceAction.BTC) {
-      const PA = [];
-
-      for (let i = 0; i < priceAction.BTC.length; i++) {
-        const obj = {};
-        obj.BTC = Number(priceAction.BTC[i].priceUsd);
-        obj.BCH = Number(priceAction.BCH[i].priceUsd);
-        obj.XRP = Number(priceAction.XRP[i].priceUsd);
-        obj.ETH = Number(priceAction.ETH[i].priceUsd);
-        obj.date = new Date(priceAction.BTC[i].date);
-
-        PA.push(obj);
-      }
-      console.log(PA);
-      setFormattedPA(PA);
-    }
-  }, [priceAction]);
-
   //get user coins
   useEffect(() => {
     if (isAuthenticated && formattedCoins.length > 0) {
@@ -126,13 +106,49 @@ function Home() {
             coin.id === userCoin.name ? filteredCoins.push(coin) : null
           )
         );
+        const coinList = [];
+        userCoins.coins.map((coin) => coinList.push(coin.name));
+        //get priceaction
+        getPriceAction([...coinList]);
       }
-      console.log(userCoins);
+
       setFilteredCoins(filteredCoins);
     } else {
       setFilteredCoins([]);
     }
   }, [userCoins, isAuthenticated]);
+
+  //format price action
+  useEffect(() => {
+    const testCoins = ["BTC", "BCH", "XRP", "ETH"];
+    if (priceAction.length > 0) {
+      const PAsliced = [];
+      priceAction.map((set) => PAsliced.push(set.slice(-60)));
+      const PA = [];
+      console.log(PAsliced);
+
+      for (let i = 0; i < PAsliced.length; i++) {
+        const coinName = testCoins[i];
+
+        for (let j = 0; j < PAsliced[i].length; j++) {
+          if (i === 0) {
+            const obj = {};
+            obj[coinName] =
+              ((PAsliced[0][j].priceUsd - PAsliced[0][0].priceUsd) * 100) /
+              PAsliced[0][0].priceUsd;
+            obj.date = new Date(priceAction[0][j].date);
+            PA.push(obj);
+          } else {
+            PA[j][coinName] =
+              ((PAsliced[i][j].priceUsd - PAsliced[i][0].priceUsd) * 100) /
+              PAsliced[i][0].priceUsd;
+          }
+        }
+      }
+
+      setFormattedPA(PA);
+    }
+  }, [priceAction]);
 
   const addNewCoin = () => {
     setModal();
