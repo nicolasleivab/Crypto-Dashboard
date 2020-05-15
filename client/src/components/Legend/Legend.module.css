@@ -1,0 +1,38 @@
+.Legend {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: #ccffff;
+  margin-top: 20px;
+  margin-bottom: -20px;
+}
+.firstLine {
+  width: 20px;
+  height: 5px;
+  background-color: #007bff;
+  border-radius: 5px;
+  margin: 0 3px 0 0;
+}
+.secondLine {
+  width: 20px;
+  height: 5px;
+  background-color: #e83e8c;
+  border-radius: 5px;
+  margin: 0 3px 0 0;
+}
+
+.thirdLine {
+  width: 20px;
+  height: 5px;
+  background-color: #6f42c1;
+  border-radius: 5px;
+  margin: 0 3px 0 0;
+}
+
+.fourhtLine {
+  width: 20px;
+  height: 5px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  margin: 0 3px 0 0;
+}

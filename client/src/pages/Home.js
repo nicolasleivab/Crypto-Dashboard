@@ -8,6 +8,7 @@ import ModalContext from "../context/modal/modalContext";
 import AllcoinsContext from "../context/allcoins/allcoinsContext";
 import UsercoinsContext from "../context/usercoins/usercoinsContext";
 import D3LineChart from "../components/D3LineChart/D3LineChart";
+import Legend from "../components/Legend/Legend";
 import styles from "./Home.module.css";
 
 function Home() {
@@ -210,7 +211,8 @@ function Home() {
         )}
       </div>
       {formattedPA.length > 0 && (
-        <div className="D3container">
+        <div className={styles.D3Container}>
+          <Legend coins={filteredCoins} />
           <D3LineChart data={formattedPA} coins={filteredCoins} />
         </div>
       )}

@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
 import { interpolatePath } from "d3-interpolate-path";
+import styles from "./D3LineChart.module.css";
 
-/* Component */
 const D3LineChart = ({ data, coins }) => {
   // ref initialized null and React will assign it later
   const d3Container = useRef(null);
@@ -403,7 +403,12 @@ const D3LineChart = ({ data, coins }) => {
   }, [data, d3Container.current]);
 
   return (
-    <svg className="d3chart" width={1100} height={500} ref={d3Container}></svg>
+    <svg
+      className={styles.d3chart}
+      width={1100}
+      height={500}
+      ref={d3Container}
+    ></svg>
   );
 };
 
