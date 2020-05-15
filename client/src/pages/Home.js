@@ -120,15 +120,15 @@ function Home() {
 
   //format price action
   useEffect(() => {
-    const testCoins = ["BTC", "BCH", "XRP", "ETH"];
+    const lineCoins = ["line1", "line2", "line3", "line4"];
     if (priceAction.length > 0) {
       const PAsliced = [];
-      priceAction.map((set) => PAsliced.push(set.slice(-60)));
+      priceAction.map((set) => PAsliced.push(set.slice(0, -60)));
       const PA = [];
       console.log(PAsliced);
 
       for (let i = 0; i < PAsliced.length; i++) {
-        const coinName = testCoins[i];
+        const coinName = lineCoins[i];
 
         for (let j = 0; j < PAsliced[i].length; j++) {
           if (i === 0) {
@@ -210,7 +210,7 @@ function Home() {
       </div>
       {formattedPA.length > 0 && (
         <div className="D3container">
-          <D3LineChart data={formattedPA} />
+          <D3LineChart data={formattedPA} coins={filteredCoins} />
         </div>
       )}
       {modal && editmode && <CoinForm />}

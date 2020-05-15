@@ -3,7 +3,7 @@ import * as d3 from "d3";
 import { interpolatePath } from "d3-interpolate-path";
 
 /* Component */
-const D3LineChart = ({ data }) => {
+const D3LineChart = ({ data, coins }) => {
   // ref initialized null and React will assign it later
   const d3Container = useRef(null);
 
@@ -11,34 +11,23 @@ const D3LineChart = ({ data }) => {
   useEffect(() => {
     if (data.length > 0) {
       /* D3 Line Chart */
-      let margin,
-        width,
-        height,
-        tooltip,
-        x,
-        y,
-        appX,
-        appY,
-        svg,
-        appYGrid,
-        appZeroGrid,
-        nTicks = 10;
+      const nTicks = 10;
 
       // set the dimensions and margins
-      margin = { top: 20, right: 80, bottom: 60, left: 80 };
-      width = 1100 - margin.left - margin.right;
-      height = 500 - margin.top - margin.bottom;
-      tooltip = { width: 100, height: 100, x: 10, y: -30 };
+      const margin = { top: 20, right: 80, bottom: 60, left: 80 };
+      const width = 1100 - margin.left - margin.right;
+      const height = 500 - margin.top - margin.bottom;
+      const tooltip = { width: 100, height: 100, x: 10, y: -30 };
       console.log(data);
       // scales
-      x = d3.scaleTime().range([0, width]);
-      y = d3.scaleLinear().range([height, 0]);
+      const x = d3.scaleTime().range([0, width]);
+      const y = d3.scaleLinear().range([height, 0]);
 
       //remove previous chart when resizing the window
       d3.select(d3Container.current).selectAll("svg").remove();
 
       // append the svg to the selected div
-      svg = d3
+      const svg = d3
         .select(d3Container.current)
         .append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -47,26 +36,27 @@ const D3LineChart = ({ data }) => {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
       //Append x and y
-      appX = svg.append("g").attr("transform", "translate(0," + height + ")");
-      appY = svg.append("g");
+      const appX = svg
+        .append("g")
+        .attr("transform", "translate(0," + height + ")");
+      const appY = svg.append("g");
 
       // Add the different lines
-      const appLineBTC = svg.append("path").attr("class", "line1");
-      const appLineETH = svg.append("path").attr("class", "line2");
-      const appLineXRP = svg.append("path").attr("class", "line3");
-      const appLineBCH = svg.append("path").attr("class", "line4");
+      const appLine1 = svg.append("path").attr("class", "line1");
+      const appLine2 = svg.append("path").attr("class", "line2");
+      const appLine3 = svg.append("path").attr("class", "line3");
+      const appLine4 = svg.append("path").attr("class", "line4");
 
-      appYGrid = svg.append("g").attr("class", "ygrid");
+      const appYGrid = svg.append("g").attr("class", "ygrid");
 
-      appZeroGrid = svg.append("g").attr("class", "zerogrid");
+      const appZeroGrid = svg.append("g").attr("class", "zerogrid");
 
       updateChart(data, nTicks);
 
       //update function
       function updateChart(data, nTicks) {
-        console.log(data);
-        let x = d3.scaleTime().range([0, width]);
-        let y = d3.scaleLinear().range([height, 0]);
+        const x = d3.scaleTime().range([0, width]);
+        const y = d3.scaleLinear().range([height, 0]);
 
         // x and y domains
         x.domain(
@@ -77,111 +67,182 @@ const D3LineChart = ({ data }) => {
         y.domain([
           d3.min(data, function (d) {
             //mirror axis
-            if (
-              Math.abs(Math.min(d.BTC, d.ETH, d.XRP, d.BCH)) >
-              Math.abs(Math.max(d.BTC, d.ETH, d.XRP, d.BCH))
-            ) {
-              return Math.min(d.BTC, d.ETH, d.XRP, d.BCH);
-            } else {
-              return -1 * Math.max(d.BTC, d.ETH, d.XRP, d.BCH);
+            if (coins.length === 1) {
+              return Math.min(d.line1);
+            }
+            if (coins.length === 2) {
+              if (
+                Math.abs(Math.min(d.line1, d.line2)) >
+                Math.abs(Math.max(d.line1, d.line2))
+              ) {
+                return Math.min(d.line1, d.line2);
+              } else {
+                return -1 * Math.max(d.line1, d.line2);
+              }
+            }
+            if (coins.length === 3) {
+              if (
+                Math.abs(Math.min(d.line1, d.line2, d.line3)) >
+                Math.abs(Math.max(d.line1, d.line2, d.line3))
+              ) {
+                return Math.min(d.line1, d.line2, d.line3);
+              } else {
+                return -1 * Math.max(d.line1, d.line2, d.line3);
+              }
+            }
+            if (coins.length === 4) {
+              if (
+                Math.abs(Math.min(d.line1, d.line2, d.line3, d.line4)) >
+                Math.abs(Math.max(d.line1, d.line2, d.line3, d.line4))
+              ) {
+                return Math.min(d.line1, d.line2, d.line3, d.line4);
+              } else {
+                return -1 * Math.max(d.line1, d.line2, d.line3, d.line4);
+              }
             }
           }),
           d3.max(data, function (d) {
-            if (
-              Math.abs(Math.min(d.BTC, d.ETH, d.XRP, d.BCH)) <
-              Math.abs(Math.max(d.BTC, d.ETH, d.XRP, d.BCH))
-            ) {
-              return Math.max(d.BTC, d.ETH, d.XRP, d.BCH);
-            } else {
-              return -1 * Math.min(d.BTC, d.ETH, d.XRP, d.BCH);
+            if (coins.length === 1) {
+              if (Math.abs(Math.min(d.line1)) < Math.abs(Math.max(d.line1))) {
+                return Math.max(d.line1);
+              } else {
+                return -1 * Math.min(d.line1);
+              }
+            }
+            if (coins.length === 2) {
+              if (
+                Math.abs(Math.min(d.line1, d.line2)) <
+                Math.abs(Math.max(d.line1, d.line2))
+              ) {
+                return Math.max(d.line1, d.line2);
+              } else {
+                return -1 * Math.min(d.line1, d.line2);
+              }
+            }
+            if (coins.length === 3) {
+              if (
+                Math.abs(Math.min(d.line1, d.line2, d.line3)) <
+                Math.abs(Math.max(d.line1, d.line2, d.line3))
+              ) {
+                return Math.max(d.line1, d.line2, d.line3);
+              } else {
+                return -1 * Math.min(d.line1, d.line2, d.line3);
+              }
+            }
+            if (coins.length === 4) {
+              if (
+                Math.abs(Math.min(d.line1, d.line2, d.line3, d.line4)) <
+                Math.abs(Math.max(d.line1, d.line2, d.line3, d.line4))
+              ) {
+                return Math.max(d.line1, d.line2, d.line3, d.line4);
+              } else {
+                return -1 * Math.min(d.line1, d.line2, d.line3, d.line4);
+              }
             }
           }),
         ]).nice();
 
-        // BTC line
-        const lineBTC = d3
-          .line()
-          .x(function (d) {
-            return x(d.date);
-          })
-          .y(function (d) {
-            return y(d.BTC);
-          });
+        let line1, line2, line3, line4;
+        // 1st line
+        if (coins[0]) {
+          line1 = d3
+            .line()
+            .x(function (d) {
+              return x(d.date);
+            })
+            .y(function (d) {
+              return y(d.line1);
+            });
+        }
 
-        // ETH line
-        const lineETH = d3
-          .line()
-          .x(function (d) {
-            return x(d.date);
-          })
-          .y(function (d) {
-            return y(d.ETH);
-          });
+        // 2nd line
+        if (coins[1]) {
+          line2 = d3
+            .line()
+            .x(function (d) {
+              return x(d.date);
+            })
+            .y(function (d) {
+              return y(d.line2);
+            });
+        }
 
-        // XRP line
-        const lineXRP = d3
-          .line()
-          .x(function (d) {
-            return x(d.date);
-          })
-          .y(function (d) {
-            return y(d.XRP);
-          });
+        // 3rd line
+        if (coins[2]) {
+          line3 = d3
+            .line()
+            .x(function (d) {
+              return x(d.date);
+            })
+            .y(function (d) {
+              return y(d.line3);
+            });
+        }
 
-        // BCH line
-        const lineBCH = d3
-          .line()
-          .x(function (d) {
-            return x(d.date);
-          })
-          .y(function (d) {
-            return y(d.BCH);
-          });
+        // 4th line
+        if (coins[3]) {
+          line4 = d3
+            .line()
+            .x(function (d) {
+              return x(d.date);
+            })
+            .y(function (d) {
+              return y(d.line4);
+            });
+        }
 
-        svg
-          .select(".line1")
-          .transition(2000)
-          .attr("d", lineBTC(data))
-          .attrTween("d", function (d) {
-            //interpolation func for a smooth path transition
-            var previous = d3.select(this).attr("d");
-            var current = lineBTC(data);
-            return interpolatePath(previous, current);
-          });
+        if (coins[0]) {
+          svg
+            .select(".line1")
+            .transition(2000)
+            .attr("d", line1(data))
+            .attrTween("d", function (d) {
+              //interpolation func for a smooth path transition
+              var previous = d3.select(this).attr("d");
+              var current = line1(data);
+              return interpolatePath(previous, current);
+            });
+        }
 
-        svg
-          .select(".line2")
-          .transition(2000)
-          .attr("d", lineETH(data))
-          .attrTween("d", function (d) {
-            //interpolation func for a smooth path transition
+        if (coins[1]) {
+          svg
+            .select(".line2")
+            .transition(2000)
+            .attr("d", line2(data))
+            .attrTween("d", function (d) {
+              //interpolation func for a smooth path transition
 
-            var previous = d3.select(this).attr("d");
-            var current = lineETH(data);
-            return interpolatePath(previous, current);
-          });
+              var previous = d3.select(this).attr("d");
+              var current = line2(data);
+              return interpolatePath(previous, current);
+            });
+        }
 
-        svg
-          .select(".line3")
-          .transition(2000)
-          .attr("d", lineXRP(data))
-          .attrTween("d", function (d) {
-            //interpolation func for a smooth path transition
-            var previous = d3.select(this).attr("d");
-            var current = lineXRP(data);
-            return interpolatePath(previous, current);
-          });
+        if (coins[2]) {
+          svg
+            .select(".line3")
+            .transition(2000)
+            .attr("d", line3(data))
+            .attrTween("d", function (d) {
+              //interpolation func for a smooth path transition
+              var previous = d3.select(this).attr("d");
+              var current = line3(data);
+              return interpolatePath(previous, current);
+            });
+        }
 
-        svg
-          .select(".line4")
-          .transition(2000)
-          .attr("d", lineBCH(data))
-          .attrTween("d", function (d) {
-            //interpolation func for a smooth path transition
-            var previous = d3.select(this).attr("d");
-            var current = lineBCH(data);
-            return interpolatePath(previous, current);
-          });
+        if (coins[3]) {
+          svg
+            .select(".line4")
+            .transition(2000)
+            .attr("d", line4(data))
+            .attrTween("d", function (d) {
+              //interpolation func for a smooth path transition
+              var previous = d3.select(this).attr("d");
+              var current = line4(data);
+              return interpolatePath(previous, current);
+            });
+        }
 
         const percentFormat = function (d) {
           return d + "%";
@@ -267,39 +328,57 @@ const D3LineChart = ({ data }) => {
 
           focus.attr(
             "transform",
-            "translate(" + x(d.date) + "," + y(d.BTC) + ")"
+            "translate(" + x(d.date) + "," + y(d.line1) + ")"
           );
           //conditional logic for appending mousemove text
 
-          let BTCapp, XRPapp, BCHapp, ETHapp;
+          let line1App, line2App, line3App, line4App;
+          if (coins[0]) {
+            line1App =
+              "<tspan x='0' dy='1.2em' class='btcLegend'>" +
+              coins[0].symbol +
+              ": " +
+              d.line1.toFixed(2) +
+              "%" +
+              "</tspan>";
+          } else {
+            line1App = "";
+          }
+          if (coins[1]) {
+            line2App =
+              "<tspan x='0' dy='1.2em'>" +
+              coins[1].symbol +
+              ": " +
+              d.line2.toFixed(2) +
+              "%" +
+              "</tspan>";
+          } else {
+            line2App = "";
+          }
 
-          BTCapp =
-            "<tspan x='0' dy='1.2em' class='btcLegend'>" +
-            "BTC: " +
-            d.BTC.toFixed(2) +
-            "%" +
-            "</tspan>";
+          if (coins[2]) {
+            line3App =
+              "<tspan x='0' dy='1.2em'>" +
+              coins[2].symbol +
+              ": " +
+              d.line3.toFixed(2) +
+              "%" +
+              "</tspan>";
+          } else {
+            line3App = "";
+          }
 
-          XRPapp =
-            "<tspan x='0' dy='1.2em'>" +
-            "XRP: " +
-            d.XRP.toFixed(2) +
-            "%" +
-            "</tspan>";
-
-          BCHapp =
-            "<tspan x='0' dy='1.2em'>" +
-            "BCH: " +
-            d.BCH.toFixed(2) +
-            "%" +
-            "</tspan>";
-
-          ETHapp =
-            "<tspan x='0' dy='1.2em'>" +
-            "ETH: " +
-            d.ETH.toFixed(2) +
-            "%" +
-            "</tspan>";
+          if (coins[3]) {
+            line4App =
+              "<tspan x='0' dy='1.2em'>" +
+              coins[3].symbol +
+              ": " +
+              d.line4.toFixed(2) +
+              "%" +
+              "</tspan>";
+          } else {
+            line4App = "";
+          }
 
           focus
             .select("text")
@@ -308,16 +387,16 @@ const D3LineChart = ({ data }) => {
                 "date: " +
                 parseDate(d.date) +
                 "</tspan>" +
-                BTCapp +
-                XRPapp +
-                BCHapp +
-                ETHapp
+                line1App +
+                line2App +
+                line3App +
+                line4App
             );
 
-          focus.select(".x-hover-line").attr("y2", height - y(d.BTC));
+          focus.select(".x-hover-line").attr("y2", height - y(d.line1));
           focus
             .select(".x2-hover-line")
-            .attr("y2", height - y(d.BTC) + -height);
+            .attr("y2", height - y(d.line1) + -height);
         }
       }
     }
