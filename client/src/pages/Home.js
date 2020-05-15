@@ -9,6 +9,7 @@ import AllcoinsContext from "../context/allcoins/allcoinsContext";
 import UsercoinsContext from "../context/usercoins/usercoinsContext";
 import D3LineChart from "../components/D3LineChart/D3LineChart";
 import Legend from "../components/Legend/Legend";
+import useWindowSize from "../components/assets/hooks/useWindowSize";
 import styles from "./Home.module.css";
 
 function Home() {
@@ -39,6 +40,27 @@ function Home() {
   const [formattedPA, setFormattedPA] = useState([]);
   const [performanceData, setPerformanceData] = useState([]);
 
+  const [chartWidth, setChartWidth] = useState(1100);
+  const [chartHeight, setChartHeight] = useState(500);
+  const [windowWidth, windowHeight] = useWindowSize();
+  const [responsiveTicks, setTicks] = useState(10);
+
+  useEffect(() => {
+    console.log(chartWidth);
+    if (windowWidth > 1000) {
+      setTicks(10);
+      setChartWidth(1100);
+    } else if (windowWidth > 800) {
+      setChartWidth(700);
+      setTicks(7);
+    } else if (windowWidth > 600) {
+      setChartWidth(550);
+      setTicks(6);
+    } else {
+      setChartWidth(400);
+      setTicks(5);
+    }
+  }, [windowWidth]);
   //load user and coins
   useEffect(() => {
     loadUser();
@@ -212,8 +234,14 @@ function Home() {
       </div>
       {formattedPA.length > 0 && (
         <div className={styles.D3Container}>
-          <Legend coins={filteredCoins} />
-          <D3LineChart data={formattedPA} coins={filteredCoins} />
+          <Legend coins={filteredCoins} chartWidth={chartWidth} />
+          <D3LineChart
+            data={formattedPA}
+            coins={filteredCoins}
+            chartWidth={chartWidth}
+            chartHeight={chartHeight}
+            responsiveTicks={responsiveTicks}
+          />
         </div>
       )}
       {modal && editmode && <CoinForm />}

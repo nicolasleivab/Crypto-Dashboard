@@ -37,11 +37,16 @@ const CoinForm = (props) => {
   const onSubmit = () => {
     const coin = {};
     coin.name = value;
-    if (addmode) {
-      addCoin(userCoins._id, coin);
-      setAdd(false);
+    const checkCoin = coins.data.find((coin) => coin.id === value);
+    if (checkCoin) {
+      if (addmode) {
+        addCoin(userCoins._id, coin);
+        setAdd(false);
+      } else {
+        editCoin(userCoins._id, current, coin);
+      }
     } else {
-      editCoin(userCoins._id, current, coin);
+      alert("Please enter a valid coin");
     }
     hideModal();
     setEdit(false);

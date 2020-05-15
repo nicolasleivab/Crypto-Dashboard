@@ -3,7 +3,13 @@ import * as d3 from "d3";
 import { interpolatePath } from "d3-interpolate-path";
 import styles from "./D3LineChart.module.css";
 
-const D3LineChart = ({ data, coins }) => {
+const D3LineChart = ({
+  data,
+  coins,
+  chartWidth,
+  chartHeight,
+  responsiveTicks,
+}) => {
   // ref initialized null and React will assign it later
   const d3Container = useRef(null);
 
@@ -11,12 +17,12 @@ const D3LineChart = ({ data, coins }) => {
   useEffect(() => {
     if (data.length > 0) {
       /* D3 Line Chart */
-      const nTicks = 10;
+      const nTicks = responsiveTicks;
 
       // set the dimensions and margins
       const margin = { top: 20, right: 80, bottom: 60, left: 80 };
-      const width = 1100 - margin.left - margin.right;
-      const height = 500 - margin.top - margin.bottom;
+      const width = chartWidth - margin.left - margin.right;
+      const height = chartHeight - margin.top - margin.bottom;
       const tooltip = { width: 100, height: 100, x: 10, y: -30 };
       console.log(data);
       // scales
@@ -400,7 +406,7 @@ const D3LineChart = ({ data, coins }) => {
         }
       }
     }
-  }, [data, d3Container.current]);
+  }, [data, d3Container.current, chartWidth]);
 
   return (
     <svg
