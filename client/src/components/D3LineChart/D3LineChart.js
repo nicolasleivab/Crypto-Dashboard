@@ -109,11 +109,7 @@ const D3LineChart = ({
           }),
           d3.max(data, function (d) {
             if (coins.length === 1) {
-              if (Math.abs(Math.min(d.line1)) < Math.abs(Math.max(d.line1))) {
-                return Math.max(d.line1);
-              } else {
-                return -1 * Math.min(d.line1);
-              }
+              return Math.max(d.line1);
             }
             if (coins.length === 2) {
               if (
@@ -150,7 +146,7 @@ const D3LineChart = ({
 
         let line1, line2, line3, line4;
         // 1st line
-        if (coins[0]) {
+        if (data[0].line1 !== undefined) {
           line1 = d3
             .line()
             .x(function (d) {
@@ -162,7 +158,7 @@ const D3LineChart = ({
         }
 
         // 2nd line
-        if (coins[1]) {
+        if (data[0].line2 !== undefined) {
           line2 = d3
             .line()
             .x(function (d) {
@@ -174,7 +170,7 @@ const D3LineChart = ({
         }
 
         // 3rd line
-        if (coins[2]) {
+        if (data[0].line3 !== undefined) {
           line3 = d3
             .line()
             .x(function (d) {
@@ -186,7 +182,7 @@ const D3LineChart = ({
         }
 
         // 4th line
-        if (coins[3]) {
+        if (data[0].line4 !== undefined) {
           line4 = d3
             .line()
             .x(function (d) {
@@ -197,7 +193,7 @@ const D3LineChart = ({
             });
         }
 
-        if (coins[0]) {
+        if (data[0].line1 !== undefined) {
           svg
             .select(".line1")
             .transition(2000)
@@ -210,7 +206,7 @@ const D3LineChart = ({
             });
         }
 
-        if (coins[1]) {
+        if (data[0].line2 !== undefined) {
           svg
             .select(".line2")
             .transition(2000)
@@ -224,7 +220,7 @@ const D3LineChart = ({
             });
         }
 
-        if (coins[2]) {
+        if (data[0].line3 !== undefined) {
           svg
             .select(".line3")
             .transition(2000)
@@ -237,7 +233,7 @@ const D3LineChart = ({
             });
         }
 
-        if (coins[3]) {
+        if (data[0].line4 !== undefined) {
           svg
             .select(".line4")
             .transition(2000)
@@ -339,7 +335,7 @@ const D3LineChart = ({
           //conditional logic for appending mousemove text
 
           let line1App, line2App, line3App, line4App;
-          if (coins[0]) {
+          if (data[0].line1 !== undefined) {
             line1App =
               "<tspan x='0' dy='1.2em' class='btcLegend'>" +
               coins[0].symbol +
@@ -350,7 +346,7 @@ const D3LineChart = ({
           } else {
             line1App = "";
           }
-          if (coins[1]) {
+          if (data[0].line2 !== undefined) {
             line2App =
               "<tspan x='0' dy='1.2em'>" +
               coins[1].symbol +
@@ -362,7 +358,7 @@ const D3LineChart = ({
             line2App = "";
           }
 
-          if (coins[2]) {
+          if (data[0].line3 !== undefined) {
             line3App =
               "<tspan x='0' dy='1.2em'>" +
               coins[2].symbol +
@@ -374,7 +370,7 @@ const D3LineChart = ({
             line3App = "";
           }
 
-          if (coins[3]) {
+          if (data[0].line4 !== undefined) {
             line4App =
               "<tspan x='0' dy='1.2em'>" +
               coins[3].symbol +
