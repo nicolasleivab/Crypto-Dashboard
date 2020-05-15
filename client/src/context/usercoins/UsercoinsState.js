@@ -42,7 +42,7 @@ const UsercoinsState = (props) => {
       },
     };
     try {
-      const res = await axios.put(`/api/coins/${userId}`, coin, config);
+      await axios.put(`/api/coins/${userId}`, coin, config);
       dispatch({ type: ADD_COIN, payload: coin });
     } catch (err) {
       dispatch({ type: COIN_ERROR, payload: err.response.msg });

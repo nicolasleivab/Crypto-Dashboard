@@ -38,7 +38,6 @@ function Home() {
   const [formattedCoins, setFormattedCoins] = useState([]);
   const [filteredCoins, setFilteredCoins] = useState([]);
   const [formattedPA, setFormattedPA] = useState([]);
-  const [performanceData, setPerformanceData] = useState([]);
 
   const [chartWidth, setChartWidth] = useState(1100);
   const [chartHeight, setChartHeight] = useState(500);
@@ -46,7 +45,6 @@ function Home() {
   const [responsiveTicks, setTicks] = useState(10);
 
   useEffect(() => {
-    console.log(chartWidth);
     if (windowWidth > 1000) {
       setTicks(10);
       setChartWidth(1100);
@@ -65,6 +63,7 @@ function Home() {
   useEffect(() => {
     loadUser();
     getAllCoins();
+    // eslint-disable-next-line
   }, []);
 
   //format coins
@@ -106,7 +105,6 @@ function Home() {
       });
 
       setFormattedCoins(coins.data);
-      console.log(coins.data);
     }
   }, [coins]);
 
@@ -116,7 +114,19 @@ function Home() {
       hideModal();
       getUserCoins();
     }
+    setFormattedPA([]);
+    // eslint-disable-next-line
   }, [isAuthenticated, formattedCoins]);
+
+  //check for user's list
+  useEffect(() => {
+    if (!userCoins) {
+      setFormattedPA([]);
+      addUserList();
+      window.location.reload();
+    }
+    // eslint-disable-next-line
+  }, [userCoins]);
 
   //filter user coins
   useEffect(() => {
@@ -139,17 +149,16 @@ function Home() {
     } else {
       setFilteredCoins([]);
     }
+    // eslint-disable-next-line
   }, [userCoins, isAuthenticated]);
 
   //format price action
   useEffect(() => {
     const lineCoins = ["line1", "line2", "line3", "line4"];
     if (priceAction.length > 0) {
-      console.log(priceAction);
       const PAsliced = [];
       priceAction.forEach((set) => PAsliced.push(set.slice(-365)));
       const PA = [];
-      console.log(PAsliced);
 
       for (let i = 0; i < PAsliced.length; i++) {
         const coinName = lineCoins[i];
@@ -233,7 +242,7 @@ function Home() {
         )}
       </div>
       {formattedPA.length > 0 && (
-        <div className={styles.D3Container}>
+        <div className={modal ? styles.D3ContainerBlur : styles.D3Container}>
           <Legend coins={filteredCoins} chartWidth={chartWidth} />
           <D3LineChart
             data={formattedPA}

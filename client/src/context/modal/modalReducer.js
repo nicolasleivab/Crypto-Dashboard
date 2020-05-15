@@ -5,7 +5,6 @@ import {
   ADD_MODE,
   SET_CURRENT,
 } from "../types";
-import { TransitionGroup } from "react-transition-group";
 
 export default (state, action) => {
   switch (action.type) {

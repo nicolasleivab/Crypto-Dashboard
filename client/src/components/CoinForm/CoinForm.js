@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import AuthContext from "../../context/auth/authContext";
 import ModalContext from "../../context/modal/modalContext";
 import UsercoinsContext from "../../context/usercoins/usercoinsContext";
 import AllcoinsContext from "../../context/allcoins/allcoinsContext";
@@ -8,27 +7,11 @@ import Autocomplete from "react-autocomplete";
 import styles from "./CoinForm.module.css";
 
 const CoinForm = (props) => {
-  const authtContext = useContext(AuthContext);
   const modalContext = useContext(ModalContext);
   const usercoinsContext = useContext(UsercoinsContext);
   const allcoinsContext = useContext(AllcoinsContext);
 
-  const {
-    loginUser,
-    registerUser,
-    error,
-    clearErrors,
-    isAuthenticated,
-  } = authtContext;
-  const {
-    hideModal,
-    setModal,
-    modal,
-    setEdit,
-    current,
-    addmode,
-    setAdd,
-  } = modalContext;
+  const { hideModal, setEdit, current, addmode, setAdd } = modalContext;
   const { editCoin, userCoins, addCoin } = usercoinsContext;
   const { coins } = allcoinsContext;
 

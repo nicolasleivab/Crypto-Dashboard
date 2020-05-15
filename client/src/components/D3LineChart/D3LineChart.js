@@ -23,11 +23,6 @@ const D3LineChart = ({
       const margin = { top: 20, right: 80, bottom: 60, left: 80 };
       const width = chartWidth - margin.left - margin.right;
       const height = chartHeight - margin.top - margin.bottom;
-      const tooltip = { width: 100, height: 100, x: 10, y: -30 };
-      console.log(data);
-      // scales
-      const x = d3.scaleTime().range([0, width]);
-      const y = d3.scaleLinear().range([height, 0]);
 
       //remove previous chart when resizing the window
       d3.select(d3Container.current).selectAll("svg").remove();
@@ -48,10 +43,10 @@ const D3LineChart = ({
       const appY = svg.append("g");
 
       // Add the different lines
-      const appLine1 = svg.append("path").attr("class", "line1");
-      const appLine2 = svg.append("path").attr("class", "line2");
-      const appLine3 = svg.append("path").attr("class", "line3");
-      const appLine4 = svg.append("path").attr("class", "line4");
+      svg.append("path").attr("class", "line1");
+      svg.append("path").attr("class", "line2");
+      svg.append("path").attr("class", "line3");
+      svg.append("path").attr("class", "line4");
 
       const appYGrid = svg.append("g").attr("class", "ygrid");
 
@@ -402,6 +397,7 @@ const D3LineChart = ({
         }
       }
     }
+    // eslint-disable-next-line
   }, [data, d3Container.current, chartWidth]);
 
   return (

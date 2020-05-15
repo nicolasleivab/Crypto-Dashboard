@@ -8,13 +8,7 @@ import ModalContext from "../../context/modal/modalContext";
 
 const NavBar = ({ title, icon }) => {
   const authContext = useContext(AuthContext);
-  const {
-    isAuthenticated,
-    logoutUser,
-    user,
-    loginUser,
-    loadUser,
-  } = authContext;
+  const { isAuthenticated, logoutUser, user } = authContext;
 
   const modalContext = useContext(ModalContext);
   const { setModal } = modalContext;
@@ -27,14 +21,13 @@ const NavBar = ({ title, icon }) => {
     <div className={styles.flexContainer}>
       <li className={styles.userDisplay}>Welcome {user && user.name}!</li>
       <li>
-        <a
-          href="#!"
+        <div
           onClick={onLogout}
           style={{ display: "flex", alignItems: "center" }}
         >
           <p className={styles.hide}>Logout</p>
           <ExitToAppIcon fontSize="large" className={styles.Icon} />
-        </a>
+        </div>
       </li>
     </div>
   );
@@ -42,9 +35,7 @@ const NavBar = ({ title, icon }) => {
   const guessLinks = (
     <div className={styles.flexContainer}>
       <li>
-        <a href="#" onClick={() => setModal()}>
-          Sign In
-        </a>
+        <p onClick={() => setModal()}>Sign In</p>
       </li>
     </div>
   );

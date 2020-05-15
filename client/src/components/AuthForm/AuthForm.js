@@ -1,7 +1,6 @@
 import React, { useState, useContext, Fragment } from "react";
 import AuthContext from "../../context/auth/authContext";
 import ModalContext from "../../context/modal/modalContext";
-import useWindowSize from "../assets/hooks/useWindowSize";
 import EmailIcon from "@material-ui/icons/Email";
 import LockIcon from "@material-ui/icons/Lock";
 import CloseIcon from "@material-ui/icons/Close";
@@ -11,14 +10,8 @@ const AuthForm = (props) => {
   const authtContext = useContext(AuthContext);
   const modalContext = useContext(ModalContext);
 
-  const {
-    loginUser,
-    registerUser,
-    error,
-    clearErrors,
-    isAuthenticated,
-  } = authtContext;
-  const { hideModal, setModal, modal } = modalContext;
+  const { loginUser, registerUser } = authtContext;
+  const { hideModal } = modalContext;
 
   const [user, setUser] = useState({
     email: "",
@@ -46,8 +39,6 @@ const AuthForm = (props) => {
       registerUser(user);
     }
   };
-
-  const [width, height] = useWindowSize();
 
   return (
     <div className={authForm === "login" ? styles.Login : styles.Register}>
