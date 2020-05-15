@@ -122,8 +122,9 @@ function Home() {
   useEffect(() => {
     const lineCoins = ["line1", "line2", "line3", "line4"];
     if (priceAction.length > 0) {
+      console.log(priceAction);
       const PAsliced = [];
-      priceAction.map((set) => PAsliced.push(set.slice(0, -60)));
+      priceAction.forEach((set) => PAsliced.push(set.slice(-365)));
       const PA = [];
       console.log(PAsliced);
 
@@ -136,7 +137,7 @@ function Home() {
             obj[coinName] =
               ((PAsliced[0][j].priceUsd - PAsliced[0][0].priceUsd) * 100) /
               PAsliced[0][0].priceUsd;
-            obj.date = new Date(priceAction[0][j].date);
+            obj.date = new Date(PAsliced[0][j].date);
             PA.push(obj);
           } else {
             PA[j][coinName] =

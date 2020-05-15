@@ -2,15 +2,16 @@ import React, { useContext, useState } from "react";
 import AuthContext from "../../context/auth/authContext";
 import ModalContext from "../../context/modal/modalContext";
 import UsercoinsContext from "../../context/usercoins/usercoinsContext";
+import AllcoinsContext from "../../context/allcoins/allcoinsContext";
 import CloseIcon from "@material-ui/icons/Close";
+import Autocomplete from "react-autocomplete";
 import styles from "./CoinForm.module.css";
-import UsercoinsState from "../../context/usercoins/UsercoinsState";
-import { ADD_COIN } from "../../context/types";
 
 const CoinForm = (props) => {
   const authtContext = useContext(AuthContext);
   const modalContext = useContext(ModalContext);
   const usercoinsContext = useContext(UsercoinsContext);
+  const allcoinsContext = useContext(AllcoinsContext);
 
   const {
     loginUser,
@@ -29,17 +30,13 @@ const CoinForm = (props) => {
     setAdd,
   } = modalContext;
   const { editCoin, userCoins, addCoin } = usercoinsContext;
+  const { coins } = allcoinsContext;
 
-  const [coin, setCoin] = useState({
-    name: "",
-    symbol: "",
-  });
-
-  const { name, symbol } = coin;
-
-  const onChange = (e) => setCoin({ ...coin, [e.target.name]: e.target.value });
+  const [value, setValue] = useState("");
 
   const onSubmit = () => {
+    const coin = {};
+    coin.name = value;
     if (addmode) {
       addCoin(userCoins._id, coin);
       setAdd(false);
@@ -78,17 +75,41 @@ const CoinForm = (props) => {
           }}
           onSubmit={onSubmit}
         >
-          <input
-            type="name"
-            placeholder="Search by name"
-            name="name"
-            value={name}
-            required="required"
-            onChange={onChange}
-            maxLength={35}
-            style={{ paddingLeft: 15 }}
-          />
-
+          {coins.data.length > 0 && (
+            <Autocomplete
+              inputProps={{
+                placeholder: "Search by name",
+              }}
+              items={coins.data}
+              shouldItemRender={(item, id) =>
+                item.id.toLowerCase().indexOf(value.toLowerCase()) > -1
+              }
+              getItemValue={(item) => item.id}
+              menuStyle={{
+                borderRadius: "3px",
+                boxShadow: "0 2px 12px rgba(0, 0, 0, 0.1)",
+                background: "rgba(255, 255, 255, 0.9)",
+                padding: "2px 0",
+                fontSize: "90%",
+                position: "fixed",
+                overflow: "auto",
+                maxHeight: "20%",
+              }}
+              renderItem={(item, highlighted) => (
+                <div
+                  key={item.id}
+                  style={{
+                    backgroundColor: highlighted ? "#eee" : "transparent",
+                  }}
+                >
+                  {item.id}
+                </div>
+              )}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              onSelect={(value) => setValue(value)}
+            />
+          )}
           <div
             style={{
               display: "flex",

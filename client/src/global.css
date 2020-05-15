@@ -44,7 +44,6 @@ body {
 .d3chart {
   width: 1100px;
   margin: 40px auto;
-  background-color: #2e3851;
   border-radius: 5px;
 }
 
@@ -53,7 +52,12 @@ body {
 }
 .D3container {
   width: 1100px;
-  margin: 0 auto;
+  height: 550px;
+  border-radius: 10px;
+  margin: auto;
+  margin-bottom: 100px;
+
+  background-color: #2e3851;
 }
 .line1 {
   fill: none;
