@@ -100,7 +100,12 @@ const UsercoinsState = (props) => {
           //so we can get the elements in order
           const data = JSON.parse(request.responseText);
           const prices = data.data;
-          priceAction.push(prices);
+          if (data.data.length >= 365) {
+            priceAction.push(prices);
+          } else {
+            alert(`No data available for ${coins[i]}`);
+            deleteCoin(state.userCoins._id, coins[i]);
+          }
 
           if (i === coins.length - 1) {
             dispatch({

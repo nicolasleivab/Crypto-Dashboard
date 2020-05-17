@@ -68,10 +68,19 @@ const D3LineChart = ({
         y.domain([
           d3.min(data, function (d) {
             //mirror axis
-            if (coins.length === 1) {
+            if (
+              data[0].line1 !== undefined &&
+              data[0].line2 === undefined &&
+              data[0].line3 === undefined &&
+              data[0].line4 === undefined
+            ) {
               return Math.min(d.line1);
-            }
-            if (coins.length === 2) {
+            } else if (
+              data[0].line1 !== undefined &&
+              data[0].line2 !== undefined &&
+              data[0].line3 === undefined &&
+              data[0].line4 === undefined
+            ) {
               if (
                 Math.abs(Math.min(d.line1, d.line2)) >
                 Math.abs(Math.max(d.line1, d.line2))
@@ -80,8 +89,12 @@ const D3LineChart = ({
               } else {
                 return -1 * Math.max(d.line1, d.line2);
               }
-            }
-            if (coins.length === 3) {
+            } else if (
+              data[0].line1 !== undefined &&
+              data[0].line2 !== undefined &&
+              data[0].line3 !== undefined &&
+              data[0].line4 === undefined
+            ) {
               if (
                 Math.abs(Math.min(d.line1, d.line2, d.line3)) >
                 Math.abs(Math.max(d.line1, d.line2, d.line3))
@@ -90,8 +103,12 @@ const D3LineChart = ({
               } else {
                 return -1 * Math.max(d.line1, d.line2, d.line3);
               }
-            }
-            if (coins.length === 4) {
+            } else if (
+              data[0].line1 !== undefined &&
+              data[0].line2 !== undefined &&
+              data[0].line3 !== undefined &&
+              data[0].line4 !== undefined
+            ) {
               if (
                 Math.abs(Math.min(d.line1, d.line2, d.line3, d.line4)) >
                 Math.abs(Math.max(d.line1, d.line2, d.line3, d.line4))
@@ -103,10 +120,19 @@ const D3LineChart = ({
             }
           }),
           d3.max(data, function (d) {
-            if (coins.length === 1) {
+            if (
+              data[0].line1 !== undefined &&
+              data[0].line2 === undefined &&
+              data[0].line3 === undefined &&
+              data[0].line4 === undefined
+            ) {
               return Math.max(d.line1);
-            }
-            if (coins.length === 2) {
+            } else if (
+              data[0].line1 !== undefined &&
+              data[0].line2 !== undefined &&
+              data[0].line3 === undefined &&
+              data[0].line4 === undefined
+            ) {
               if (
                 Math.abs(Math.min(d.line1, d.line2)) <
                 Math.abs(Math.max(d.line1, d.line2))
@@ -115,8 +141,12 @@ const D3LineChart = ({
               } else {
                 return -1 * Math.min(d.line1, d.line2);
               }
-            }
-            if (coins.length === 3) {
+            } else if (
+              data[0].line1 !== undefined &&
+              data[0].line2 !== undefined &&
+              data[0].line3 !== undefined &&
+              data[0].line4 === undefined
+            ) {
               if (
                 Math.abs(Math.min(d.line1, d.line2, d.line3)) <
                 Math.abs(Math.max(d.line1, d.line2, d.line3))
@@ -125,8 +155,12 @@ const D3LineChart = ({
               } else {
                 return -1 * Math.min(d.line1, d.line2, d.line3);
               }
-            }
-            if (coins.length === 4) {
+            } else if (
+              data[0].line1 !== undefined &&
+              data[0].line2 !== undefined &&
+              data[0].line3 !== undefined &&
+              data[0].line4 !== undefined
+            ) {
               if (
                 Math.abs(Math.min(d.line1, d.line2, d.line3, d.line4)) <
                 Math.abs(Math.max(d.line1, d.line2, d.line3, d.line4))
@@ -140,6 +174,7 @@ const D3LineChart = ({
         ]).nice();
 
         let line1, line2, line3, line4;
+
         // 1st line
         if (data[0].line1 !== undefined) {
           line1 = d3

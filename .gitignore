@@ -1,5 +1,6 @@
 # dependencies
 <<<<<<< HEAD
+<<<<<<< HEAD
 /node_modules
 /config/default.json
 ||||||| parent of fa6b8f7... FIX: price action xhr order
@@ -9,3 +10,10 @@
 /config/default.json
 /config/production.json
 >>>>>>> fa6b8f7... FIX: price action xhr order
+||||||| parent of b0ba4cc... FIX: handling no data coin
+/node_modules
+=======
+/node_modules
+/config/default.json
+/config/production.json
+>>>>>>> b0ba4cc... FIX: handling no data coin
