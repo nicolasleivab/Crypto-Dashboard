@@ -11,7 +11,7 @@ Cryptocurrencies dashboard developed with the MERN stack that fetches updated da
 ## Built With
 
 - [React](https://reactjs.org/)
-- [ApexCharts](https://apexcharts.com/)
+- [d3js](https://d3js.org/)
 - [Node](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
 - [MongoDB](https://www.mongodb.com/cloud/atlas)

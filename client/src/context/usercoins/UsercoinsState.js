@@ -81,31 +81,38 @@ const UsercoinsState = (props) => {
 
   // Get userscoin price action
   const getPriceAction = (coins) => {
-    let priceAction = [];
-    let promises = [];
+    const request = new XMLHttpRequest();
+    const priceAction = [];
+    //request loop
+    (function loop(i, length) {
+      if (i >= length) {
+        return;
+      }
+      let url =
+        "https://api.coincap.io/v2/assets/" + coins[i] + "/history?interval=d1";
 
-    for (let i = 0; i < coins.length; i++) {
-      delete axios.defaults.headers.common["x-auth-token"];
-      promises.push(
-        axios
-          .get(
-            `https://api.coincap.io/v2/assets/${coins[i]}/history?interval=d1`
-          )
-          .then((response) => {
-            // push data from the response
-            priceAction.push(response.data.data);
-            // reattach token
-            axios.defaults.headers.common["x-auth-token"] = localStorage.token;
-          })
-      );
-    }
-    // dispatch after all promises fulfill
-    Promise.all(promises).then(() => {
-      dispatch({
-        type: GET_PRICEACTION,
-        payload: priceAction,
-      });
-    });
+      request.open("GET", url);
+      request.onreadystatechange = function () {
+        if (
+          request.readyState === XMLHttpRequest.DONE &&
+          request.status === 200
+        ) {
+          //so we can get the elements in order
+          const data = JSON.parse(request.responseText);
+          const prices = data.data;
+          priceAction.push(prices);
+
+          if (i === coins.length - 1) {
+            dispatch({
+              type: GET_PRICEACTION,
+              payload: priceAction,
+            });
+          }
+          loop(i + 1, length);
+        }
+      };
+      request.send();
+    })(0, coins.length);
   };
 
   return (

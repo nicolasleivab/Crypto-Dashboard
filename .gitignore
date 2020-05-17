@@ -1,3 +1,11 @@
 # dependencies
+<<<<<<< HEAD
 /node_modules
 /config/default.json
+||||||| parent of fa6b8f7... FIX: price action xhr order
+/node_modules
+=======
+/node_modules
+/config/default.json
+/config/production.json
+>>>>>>> fa6b8f7... FIX: price action xhr order
