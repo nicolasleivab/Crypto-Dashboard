@@ -6,7 +6,7 @@ Cryptocurrencies dashboard developed with the MERN stack that fetches updated da
 - Compare the performance of different coins in several visualizations
 - Sign up and keep your favorite coins in a watchlist
 <br /><br />
-<p align="center"><a href="https://merncryptoperformance.herokuapp.com">Live</a></p>
+<p align="center"><a href="https://crypto-performance.herokuapp.com/">Live</a></p>
 
 ## Built With
 
@@ -27,3 +27,17 @@ Cryptocurrencies dashboard developed with the MERN stack that fetches updated da
 ## License
 
 This project is licensed under the GNU General Public License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+#### How to run this code
+
+1. Make sure MongoDB is running on your system or connect to MongoDB Atlas
+2. Clone this repository
+3. Add config/config.js or default.json with your test values for Stripe API keys and Stripe Connect Client ID
+4. Open command line in the cloned folder,
+   - To install dependencies, run `npm install`
+   - To run the application for development, run `npm run dev`
+5. Open [localhost:3000](http://localhost:3000/) in the browser
+
+---
