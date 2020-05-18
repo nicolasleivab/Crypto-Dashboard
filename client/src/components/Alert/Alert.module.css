@@ -1,0 +1,23 @@
+.alertContainerRed {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  bottom: 25px;
+  left: 40%;
+  margin: auto;
+  background-color: rgb(255, 102, 102, 0.75);
+  width: fit-content;
+  height: 25px;
+  border-radius: 5px;
+  padding: 5px;
+}
+.alertTextGray {
+  font-style: italic;
+  font-size: 1.4rem;
+  color: #555;
+}
+.alertTextWhite {
+  font-style: italic;
+  font-size: 1.4rem;
+  color: #fff;
+}

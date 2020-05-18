@@ -1,17 +1,27 @@
-import React, { useState, useContext, Fragment } from "react";
+import React, { useState, useContext, Fragment, useEffect } from "react";
 import AuthContext from "../../context/auth/authContext";
 import ModalContext from "../../context/modal/modalContext";
+import AlertContext from "../../context/alert/alertContext";
 import EmailIcon from "@material-ui/icons/Email";
 import LockIcon from "@material-ui/icons/Lock";
 import CloseIcon from "@material-ui/icons/Close";
+import Alert from "../Alert/Alert";
 import styles from "./AuthForm.module.css";
 
 const AuthForm = (props) => {
   const authtContext = useContext(AuthContext);
   const modalContext = useContext(ModalContext);
+  const alertContext = useContext(AlertContext);
 
-  const { loginUser, registerUser } = authtContext;
+  const {
+    loginUser,
+    registerUser,
+    isAuthenticated,
+    error,
+    clearErrors,
+  } = authtContext;
   const { hideModal } = modalContext;
+  const { setAlert } = alertContext;
 
   const [user, setUser] = useState({
     email: "",
@@ -36,9 +46,29 @@ const AuthForm = (props) => {
     if (authForm === "login") {
       loginUser(user);
     } else {
-      registerUser(user);
+      if (name === "" || email === "" || password === "" || password2 === "") {
+        setAlert("Missing Fields", "Red");
+      } else if (password !== password2) {
+        setAlert("Passwords do not match", "Red");
+      } else if (password.length < 6) {
+        setAlert("Password must contain at least 6 characters", "Red");
+      } else {
+        registerUser(user);
+      }
     }
   };
+
+  useEffect(() => {
+    if (error === "Invalid credentials") {
+      setAlert(error, "Red");
+      clearErrors();
+    }
+    if (error === "User already exists") {
+      setAlert(error, "Red");
+      clearErrors();
+    }
+    // eslint-disable-next-line
+  }, [error, isAuthenticated]);
 
   return (
     <div className={authForm === "login" ? styles.Login : styles.Register}>
@@ -148,6 +178,9 @@ const AuthForm = (props) => {
             )}
           </div>
         </form>
+      </div>
+      <div className={styles.alertBox}>
+        <Alert />
       </div>
     </div>
   );

@@ -147,3 +147,10 @@
   right: 30px;
   top: 15px;
 }
+
+.alertBox {
+  position: absolute;
+  width: 500px;
+  top: 143px;
+  left: -189px;
+}
