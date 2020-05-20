@@ -1,0 +1,31 @@
+.TimeFilter {
+  display: flex;
+  margin: 15px 0 -15px 35px;
+}
+.btnSecondary,
+.btnFocus {
+  font-family: "Barlow Condensed";
+  font-size: 1.6rem;
+  margin: 20px 0 0 10px;
+  border: solid #2e3851 1px; /*#3a5291*/
+  border-radius: 5px;
+  box-shadow: 3px 5px 5px #333;
+  padding: 5px;
+  color: #ccffff;
+  background-color: #2e3851;
+  cursor: pointer;
+}
+.btnSecondary:hover,
+.btnFocus:hover {
+  text-decoration: underline;
+}
+
+.btnSecondary:active,
+.btnFocus:active {
+  box-shadow: 0 0 0;
+}
+
+.btnFocus {
+  background-color: #3a5291;
+  box-shadow: 0 0 0;
+}

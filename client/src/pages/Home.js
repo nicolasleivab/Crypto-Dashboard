@@ -3,12 +3,14 @@ import NavBar from "../components/layout/NavBar";
 import CoinItem from "../components/CoinItem/CoinItem";
 import AuthForm from "../components/AuthForm/AuthForm";
 import CoinForm from "../components/CoinForm/CoinForm";
+import Copyright from "../components/Copyright/Copyright";
 import AuthContext from "../context/auth/authContext";
 import ModalContext from "../context/modal/modalContext";
 import AllcoinsContext from "../context/allcoins/allcoinsContext";
 import UsercoinsContext from "../context/usercoins/usercoinsContext";
 import D3LineChart from "../components/D3LineChart/D3LineChart";
 import Legend from "../components/Legend/Legend";
+import TimeFilter from "../components/TimeFilter/TimeFilter";
 import useWindowSize from "../components/assets/hooks/useWindowSize";
 import styles from "./Home.module.css";
 
@@ -244,6 +246,7 @@ function Home() {
       {formattedPA.length > 0 && (
         <div className={modal ? styles.D3ContainerBlur : styles.D3Container}>
           <Legend coins={filteredCoins} chartWidth={chartWidth} />
+          <TimeFilter />
           <D3LineChart
             data={formattedPA}
             coins={filteredCoins}
@@ -255,6 +258,9 @@ function Home() {
       )}
       {modal && editmode && <CoinForm />}
       {modal && !editmode && <AuthForm />}
+      <div className={modal ? styles.blurMode : null}>
+        <Copyright copyright={"Nicolás Leiva Büchi"} />
+      </div>
     </div>
   );
 }
