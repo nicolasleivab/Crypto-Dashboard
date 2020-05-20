@@ -40,6 +40,7 @@ function Home() {
   const [formattedCoins, setFormattedCoins] = useState([]);
   const [filteredCoins, setFilteredCoins] = useState([]);
   const [formattedPA, setFormattedPA] = useState([]);
+  const [storedPA, setStored] = useState([]);
 
   const [chartWidth, setChartWidth] = useState(1100);
   const [chartHeight, setChartHeight] = useState(500);
@@ -182,6 +183,7 @@ function Home() {
       }
 
       setFormattedPA(PA);
+      setStored(PA);
     }
   }, [priceAction]);
 
@@ -189,6 +191,102 @@ function Home() {
     setModal();
     setEdit(true);
     setAdd(true);
+  };
+
+  const timeFilerHandle = (e) => {
+    const lineCoins = ["line1", "line2", "line3", "line4"];
+    //1 year
+    if (e.target.id === "0") {
+      const stored = [...storedPA];
+      setFormattedPA(stored);
+    }
+    //6 months
+    if (e.target.id === "1") {
+      if (priceAction.length > 0) {
+        const PAsliced = [];
+        priceAction.forEach((set) => PAsliced.push(set.slice(-180)));
+        const PA = [];
+
+        for (let i = 0; i < PAsliced.length; i++) {
+          const coinName = lineCoins[i];
+
+          for (let j = 0; j < PAsliced[i].length; j++) {
+            if (i === 0) {
+              const obj = {};
+              obj[coinName] =
+                ((PAsliced[0][j].priceUsd - PAsliced[0][0].priceUsd) * 100) /
+                PAsliced[0][0].priceUsd;
+              obj.date = new Date(PAsliced[0][j].date);
+              PA.push(obj);
+            } else {
+              PA[j][coinName] =
+                ((PAsliced[i][j].priceUsd - PAsliced[i][0].priceUsd) * 100) /
+                PAsliced[i][0].priceUsd;
+            }
+          }
+        }
+
+        setFormattedPA(PA);
+      }
+    }
+    //3 months
+    if (e.target.id === "2") {
+      if (priceAction.length > 0) {
+        const PAsliced = [];
+        priceAction.forEach((set) => PAsliced.push(set.slice(-90)));
+        const PA = [];
+
+        for (let i = 0; i < PAsliced.length; i++) {
+          const coinName = lineCoins[i];
+
+          for (let j = 0; j < PAsliced[i].length; j++) {
+            if (i === 0) {
+              const obj = {};
+              obj[coinName] =
+                ((PAsliced[0][j].priceUsd - PAsliced[0][0].priceUsd) * 100) /
+                PAsliced[0][0].priceUsd;
+              obj.date = new Date(PAsliced[0][j].date);
+              PA.push(obj);
+            } else {
+              PA[j][coinName] =
+                ((PAsliced[i][j].priceUsd - PAsliced[i][0].priceUsd) * 100) /
+                PAsliced[i][0].priceUsd;
+            }
+          }
+        }
+
+        setFormattedPA(PA);
+      }
+    }
+    //1 month
+    if (e.target.id === "3") {
+      if (priceAction.length > 0) {
+        const PAsliced = [];
+        priceAction.forEach((set) => PAsliced.push(set.slice(-30)));
+        const PA = [];
+
+        for (let i = 0; i < PAsliced.length; i++) {
+          const coinName = lineCoins[i];
+
+          for (let j = 0; j < PAsliced[i].length; j++) {
+            if (i === 0) {
+              const obj = {};
+              obj[coinName] =
+                ((PAsliced[0][j].priceUsd - PAsliced[0][0].priceUsd) * 100) /
+                PAsliced[0][0].priceUsd;
+              obj.date = new Date(PAsliced[0][j].date);
+              PA.push(obj);
+            } else {
+              PA[j][coinName] =
+                ((PAsliced[i][j].priceUsd - PAsliced[i][0].priceUsd) * 100) /
+                PAsliced[i][0].priceUsd;
+            }
+          }
+        }
+
+        setFormattedPA(PA);
+      }
+    }
   };
 
   return (
@@ -246,7 +344,7 @@ function Home() {
       {formattedPA.length > 0 && (
         <div className={modal ? styles.D3ContainerBlur : styles.D3Container}>
           <Legend coins={filteredCoins} chartWidth={chartWidth} />
-          <TimeFilter />
+          <TimeFilter timeFilter={timeFilerHandle} />
           <D3LineChart
             data={formattedPA}
             coins={filteredCoins}

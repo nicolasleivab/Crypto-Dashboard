@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import styles from "./TimeFilter.module.css";
 
-const TimeFilter = () => {
-  const [btnMatrix, setMatrix] = useState([false, false, false, true]);
+const TimeFilter = (props) => {
+  const [btnMatrix, setMatrix] = useState([true, false, false, false]);
 
   const setFocus = (e) => {
     const base = [false, false, false, false];
     base[e.target.id] = true;
     setMatrix(base);
+    props.timeFilter(e);
   };
 
   return (
