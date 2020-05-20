@@ -344,7 +344,7 @@ function Home() {
       {formattedPA.length > 0 && (
         <div className={modal ? styles.D3ContainerBlur : styles.D3Container}>
           <Legend coins={filteredCoins} chartWidth={chartWidth} />
-          <TimeFilter timeFilter={timeFilerHandle} />
+          <TimeFilter timeFilter={timeFilerHandle} priceAction={priceAction} />
           <D3LineChart
             data={formattedPA}
             coins={filteredCoins}

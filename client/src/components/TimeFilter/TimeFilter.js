@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./TimeFilter.module.css";
 
 const TimeFilter = (props) => {
@@ -10,6 +10,10 @@ const TimeFilter = (props) => {
     setMatrix(base);
     props.timeFilter(e);
   };
+
+  useEffect(() => {
+    setMatrix([true, false, false, false]);
+  }, [props.priceAction]);
 
   return (
     <div className={styles.TimeFilter}>
