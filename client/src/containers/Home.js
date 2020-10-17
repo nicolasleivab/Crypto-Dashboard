@@ -1,18 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
-import NavBar from "../components/layout/NavBar";
-import CoinItem from "../components/CoinItem/CoinItem";
-import AuthForm from "../components/AuthForm/AuthForm";
-import CoinForm from "../components/CoinForm/CoinForm";
-import Copyright from "../components/Copyright/Copyright";
-import AuthContext from "../context/auth/authContext";
-import ModalContext from "../context/modal/modalContext";
-import AllcoinsContext from "../context/allcoins/allcoinsContext";
-import UsercoinsContext from "../context/usercoins/usercoinsContext";
-import D3LineChart from "../components/D3LineChart/D3LineChart";
-import Legend from "../components/Legend/Legend";
-import TimeFilter from "../components/TimeFilter/TimeFilter";
-import useWindowSize from "../components/assets/hooks/useWindowSize";
-import styles from "./Home.module.css";
+import React, { useContext, useEffect, useState } from 'react';
+import NavBar from '../components/layout/NavBar';
+import CoinItem from '../components/CoinItem/CoinItem';
+import AuthForm from '../components/AuthForm/AuthForm';
+import CoinForm from '../components/CoinForm/CoinForm';
+import Copyright from '../components/Copyright/Copyright';
+import AuthContext from '../context/auth/authContext';
+import ModalContext from '../context/modal/modalContext';
+import AllcoinsContext from '../context/allcoins/allcoinsContext';
+import UsercoinsContext from '../context/usercoins/usercoinsContext';
+import D3LineChart from '../components/D3LineChart/D3LineChart';
+import Legend from '../components/Legend/Legend';
+import TimeFilter from '../components/TimeFilter/TimeFilter';
+import useWindowSize from '../components/assets/hooks/useWindowSize';
+import { formatCoins, sliceDataByTimeUnit } from './helpers';
+import styles from './Home.module.css';
 
 function Home() {
   const authtContext = useContext(AuthContext);
@@ -72,42 +73,8 @@ function Home() {
   //format coins
   useEffect(() => {
     if (coins.data) {
-      coins.data.forEach((d) => {
-        if (d.priceUsd >= 2) {
-          d.priceUsd = Math.floor(d.priceUsd * 100) / 100;
-        } else {
-          d.priceUsd = Math.floor(d.priceUsd * 10000) / 10000;
-        }
-        d.maxSupply = Math.floor(d.maxSupply * 10000) / 10000;
-        d.changePercent24Hr = Math.floor(d.changePercent24Hr * 100) / 100;
-        d.vwap24Hr = Math.floor(d.vwap24Hr * 10000) / 10000;
-        d.marketCapUsd = +d.marketCapUsd;
-        if (d.marketCapUsd >= 1000000000) {
-          d.marketCapUsd = (d.marketCapUsd / 1000000000).toFixed(2) + "B";
-        } else if (d.marketCapUsd >= 1000000) {
-          d.marketCapUsd = (d.marketCapUsd / 1000000).toFixed(2) + "M";
-        } else {
-          d.marketCapUsd = (d.marketCapUsd / 1000).toFixed(2) + "K";
-        }
-        d.volumeUsd24Hr = +d.volumeUsd24Hr;
-        if (d.volumeUsd24Hr >= 1000000000) {
-          d.volumeUsd24Hr = (d.volumeUsd24Hr / 1000000000).toFixed(2) + "B";
-        } else if (d.volumeUsd24Hr >= 1000000) {
-          d.volumeUsd24Hr = (d.volumeUsd24Hr / 1000000).toFixed(2) + "M";
-        } else {
-          d.volumeUsd24Hr = (d.volumeUsd24Hr / 1000).toFixed(2) + "K";
-        }
-        d.supply = +d.supply;
-        if (d.supply >= 1000000000) {
-          d.supply = (d.supply / 1000000000).toFixed(2) + "B";
-        } else if (d.supply >= 1000000) {
-          d.supply = (d.supply / 1000000).toFixed(2) + "M";
-        } else {
-          d.supply = (d.supply / 1000).toFixed(2) + "K";
-        }
-      });
-
-      setFormattedCoins(coins.data);
+      const formattedCoins = formatCoins(coins.data);
+      setFormattedCoins(formattedCoins);
     }
   }, [coins]);
 
@@ -157,7 +124,7 @@ function Home() {
 
   //format price action
   useEffect(() => {
-    const lineCoins = ["line1", "line2", "line3", "line4"];
+    const lineCoins = ['line1', 'line2', 'line3', 'line4'];
     if (priceAction.length > 0) {
       const PAsliced = [];
       priceAction.forEach((set) => PAsliced.push(set.slice(-365)));
@@ -194,98 +161,25 @@ function Home() {
   };
 
   const timeFilerHandle = (e) => {
-    const lineCoins = ["line1", "line2", "line3", "line4"];
     //1 year
-    if (e.target.id === "0") {
+    if (e.target.id === '0') {
       const stored = [...storedPA];
       setFormattedPA(stored);
     }
     //6 months
-    if (e.target.id === "1") {
-      if (priceAction.length > 0) {
-        const PAsliced = [];
-        priceAction.forEach((set) => PAsliced.push(set.slice(-180)));
-        const PA = [];
-
-        for (let i = 0; i < PAsliced.length; i++) {
-          const coinName = lineCoins[i];
-
-          for (let j = 0; j < PAsliced[i].length; j++) {
-            if (i === 0) {
-              const obj = {};
-              obj[coinName] =
-                ((PAsliced[0][j].priceUsd - PAsliced[0][0].priceUsd) * 100) /
-                PAsliced[0][0].priceUsd;
-              obj.date = new Date(PAsliced[0][j].date);
-              PA.push(obj);
-            } else {
-              PA[j][coinName] =
-                ((PAsliced[i][j].priceUsd - PAsliced[i][0].priceUsd) * 100) /
-                PAsliced[i][0].priceUsd;
-            }
-          }
-        }
-
-        setFormattedPA(PA);
-      }
+    if (e.target.id === '1' && priceAction.length > 0) {
+      const PA = sliceDataByTimeUnit(priceAction, -180);
+      setFormattedPA(PA);
     }
     //3 months
-    if (e.target.id === "2") {
-      if (priceAction.length > 0) {
-        const PAsliced = [];
-        priceAction.forEach((set) => PAsliced.push(set.slice(-90)));
-        const PA = [];
-
-        for (let i = 0; i < PAsliced.length; i++) {
-          const coinName = lineCoins[i];
-
-          for (let j = 0; j < PAsliced[i].length; j++) {
-            if (i === 0) {
-              const obj = {};
-              obj[coinName] =
-                ((PAsliced[0][j].priceUsd - PAsliced[0][0].priceUsd) * 100) /
-                PAsliced[0][0].priceUsd;
-              obj.date = new Date(PAsliced[0][j].date);
-              PA.push(obj);
-            } else {
-              PA[j][coinName] =
-                ((PAsliced[i][j].priceUsd - PAsliced[i][0].priceUsd) * 100) /
-                PAsliced[i][0].priceUsd;
-            }
-          }
-        }
-
-        setFormattedPA(PA);
-      }
+    if (e.target.id === '2' && priceAction.length > 0) {
+      const PA = sliceDataByTimeUnit(priceAction, -90);
+      setFormattedPA(PA);
     }
     //1 month
-    if (e.target.id === "3") {
-      if (priceAction.length > 0) {
-        const PAsliced = [];
-        priceAction.forEach((set) => PAsliced.push(set.slice(-30)));
-        const PA = [];
-
-        for (let i = 0; i < PAsliced.length; i++) {
-          const coinName = lineCoins[i];
-
-          for (let j = 0; j < PAsliced[i].length; j++) {
-            if (i === 0) {
-              const obj = {};
-              obj[coinName] =
-                ((PAsliced[0][j].priceUsd - PAsliced[0][0].priceUsd) * 100) /
-                PAsliced[0][0].priceUsd;
-              obj.date = new Date(PAsliced[0][j].date);
-              PA.push(obj);
-            } else {
-              PA[j][coinName] =
-                ((PAsliced[i][j].priceUsd - PAsliced[i][0].priceUsd) * 100) /
-                PAsliced[i][0].priceUsd;
-            }
-          }
-        }
-
-        setFormattedPA(PA);
-      }
+    if (e.target.id === '3' && priceAction.length > 0) {
+      const PA = sliceDataByTimeUnit(priceAction, -30);
+      setFormattedPA(PA);
     }
   };
 
@@ -297,7 +191,7 @@ function Home() {
       <div
         className={
           modal
-            ? [styles.coinsContainer, styles.blurMode].join(" ")
+            ? [styles.coinsContainer, styles.blurMode].join(' ')
             : styles.coinsContainer
         }
       >
@@ -357,7 +251,7 @@ function Home() {
       {modal && editmode && <CoinForm />}
       {modal && !editmode && <AuthForm />}
       <div className={modal ? styles.blurMode : null}>
-        <Copyright copyright={"Nicolás Leiva Büchi"} />
+        <Copyright copyright={'Nicolás Leiva Büchi'} />
       </div>
     </div>
   );
