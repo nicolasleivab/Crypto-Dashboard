@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import NavBar from '../components/layout/NavBar';
-import CoinItem from '../components/CoinItem/CoinItem';
+import CoinsContainer from './CoinsContainer';
 import AuthForm from '../components/AuthForm/AuthForm';
 import CoinForm from '../components/CoinForm/CoinForm';
 import Copyright from '../components/Copyright/Copyright';
@@ -195,40 +195,11 @@ function Home() {
             : styles.coinsContainer
         }
       >
-        {formattedCoins.length > 0 &&
-          !isAuthenticated &&
-          formattedCoins
-            .slice(0, 4)
-            .map((coin) => (
-              <CoinItem
-                key={coin.id}
-                name={coin.name}
-                symbol={coin.symbol}
-                price={coin.priceUsd}
-                volume={coin.volumeUsd24Hr}
-                change={coin.changePercent24Hr}
-                supply={coin.supply}
-                id={coin.id}
-                marketCap={coin.marketCapUsd}
-                rank={coin.rank}
-              />
-            ))}
-        {filteredCoins.length > 0 &&
-          isAuthenticated &&
-          filteredCoins.map((coin) => (
-            <CoinItem
-              key={coin.id}
-              name={coin.name}
-              symbol={coin.symbol}
-              price={coin.priceUsd}
-              volume={coin.volumeUsd24Hr}
-              change={coin.changePercent24Hr}
-              supply={coin.supply}
-              id={coin.id}
-              marketCap={coin.marketCapUsd}
-              rank={coin.rank}
-            />
-          ))}
+        <CoinsContainer
+          filteredCoins={filteredCoins}
+          formattedCoins={formattedCoins}
+          isAuthenticated={isAuthenticated}
+        />
         {isAuthenticated && filteredCoins.length < 4 && (
           <div className={styles.roundBtn} onClick={() => addNewCoin()}>
             +
