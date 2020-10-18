@@ -71,6 +71,7 @@ const CoinForm = (props) => {
           {coins.data.length > 0 && (
             <Autocomplete
               options={coins.data}
+              onChange={(value) => setValue(value)}
               onSelect={(value) => setValue(value)}
             />
           )}
