@@ -1,5 +1,5 @@
-const express = require("express");
-const connectDB = require("./config/db");
+const express = require('express');
+const connectDB = require('./config/db');
 
 const app = express();
 
@@ -9,20 +9,26 @@ connectDB();
 //Init middleware
 //app.use(express.json({ extended: false }));
 app.use(express.json({ extended: false }), function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"); // keep this if your api accepts cross-origin requests
+  res.header('Access-Control-Allow-Origin', '*'); // keep this if your api accepts cross-origin requests
   res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, x-auth-token"
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, x-auth-token'
   );
   next();
 });
 
-app.get("/", (req, res) => res.json({ msg: "Crypto Performance API" }));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  );
+}
 
 // Define Routes
-app.use("/api/users", require("./routes/users"));
-app.use("/api/auth", require("./routes/auth"));
-app.use("/api/coins", require("./routes/coins"));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/coins', require('./routes/coins'));
 
 const PORT = process.env.PORT || 5000;
 
