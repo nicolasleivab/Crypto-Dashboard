@@ -7,6 +7,18 @@
   background-color: #2e3851;
   position: sticky;
 }
+.blurMode {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  background-color: #2e3851;
+  position: sticky;
+
+  filter: blur(5px);
+}
+
 .titleContainer {
   margin-left: 30px;
   color: #ccffff;
@@ -16,11 +28,11 @@
   justify-content: center;
 }
 .title {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
   font-size: 2rem;
 }
 .userDisplay {
-  font-family: "Neutra Bold", sans-serif;
+  font-family: 'Neutra Bold', sans-serif;
 }
 .flexContainer {
   width: 100%;

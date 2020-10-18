@@ -1,17 +1,17 @@
-import React, { useContext, useEffect } from "react";
-import PropTypes from "prop-types";
-import styles from "./NavBar.module.css";
-import InsertChartIcon from "@material-ui/icons/InsertChart";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import AuthContext from "../../context/auth/authContext";
-import ModalContext from "../../context/modal/modalContext";
+import React, { useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import styles from './NavBar.module.css';
+import InsertChartIcon from '@material-ui/icons/InsertChart';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AuthContext from '../../context/auth/authContext';
+import ModalContext from '../../context/modal/modalContext';
 
-const NavBar = ({ title, icon }) => {
+const NavBar = ({ title }) => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, logoutUser, user } = authContext;
 
   const modalContext = useContext(ModalContext);
-  const { setModal } = modalContext;
+  const { setModal, modal } = modalContext;
 
   const onLogout = () => {
     logoutUser();
@@ -23,10 +23,10 @@ const NavBar = ({ title, icon }) => {
       <li>
         <div
           onClick={onLogout}
-          style={{ display: "flex", alignItems: "center" }}
+          style={{ display: 'flex', alignItems: 'center' }}
         >
           <p className={styles.hide}>Logout</p>
-          <ExitToAppIcon fontSize="large" className={styles.Icon} />
+          <ExitToAppIcon fontSize='large' className={styles.Icon} />
         </div>
       </li>
     </div>
@@ -43,16 +43,16 @@ const NavBar = ({ title, icon }) => {
     //loginUser(user);
   }, []);
   return (
-    <div className={styles.NavBar}>
+    <nav className={modal ? styles.blurMode : styles.NavBar}>
       <div className={styles.titleContainer}>
         <InsertChartIcon
-          fontSize="large"
+          fontSize='large'
           style={{ marginRight: 2, marginTop: 2 }}
         />
         <p className={styles.title}>{title}</p>
       </div>
       <ul>{isAuthenticated ? authLinks : guessLinks}</ul>
-    </div>
+    </nav>
   );
 };
 
@@ -61,7 +61,7 @@ NavBar.propTypes = {
 };
 
 NavBar.defaultProps = {
-  title: "Crypto Performance",
+  title: 'Crypto Performance',
 };
 
 export default NavBar;

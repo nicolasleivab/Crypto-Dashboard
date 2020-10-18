@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import NavBar from '../components/layout/NavBar';
 import CoinsContainer from './CoinsContainer';
+import ChartContainer from './ChartContainer';
 import AuthForm from '../components/AuthForm/AuthForm';
 import CoinForm from '../components/CoinForm/CoinForm';
 import Copyright from '../components/Copyright/Copyright';
@@ -8,10 +9,6 @@ import AuthContext from '../context/auth/authContext';
 import ModalContext from '../context/modal/modalContext';
 import AllcoinsContext from '../context/allcoins/allcoinsContext';
 import UsercoinsContext from '../context/usercoins/usercoinsContext';
-import D3LineChart from '../components/D3LineChart/D3LineChart';
-import Legend from '../components/Legend/Legend';
-import TimeFilter from '../components/TimeFilter/TimeFilter';
-import useWindowSize from '../components/assets/hooks/useWindowSize';
 import { formatCoins, sliceDataByTimeUnit } from './helpers';
 import styles from './Home.module.css';
 
@@ -43,26 +40,6 @@ function Home() {
   const [formattedPA, setFormattedPA] = useState([]);
   const [storedPA, setStored] = useState([]);
 
-  const [chartWidth, setChartWidth] = useState(1100);
-  const [chartHeight, setChartHeight] = useState(500);
-  const [windowWidth, windowHeight] = useWindowSize();
-  const [responsiveTicks, setTicks] = useState(10);
-
-  useEffect(() => {
-    if (windowWidth > 1000) {
-      setTicks(10);
-      setChartWidth(1100);
-    } else if (windowWidth > 800) {
-      setChartWidth(700);
-      setTicks(7);
-    } else if (windowWidth > 600) {
-      setChartWidth(550);
-      setTicks(6);
-    } else {
-      setChartWidth(400);
-      setTicks(5);
-    }
-  }, [windowWidth]);
   //load user and coins
   useEffect(() => {
     loadUser();
@@ -137,7 +114,7 @@ function Home() {
     setAdd(true);
   };
 
-  const timeFilerHandle = (e) => {
+  const timeFilterHandle = (e) => {
     //1 year
     if (e.target.id === '0') {
       const stored = [...storedPA];
@@ -162,9 +139,7 @@ function Home() {
 
   return (
     <div className={styles.Home}>
-      <div className={modal ? styles.blurMode : null}>
-        <NavBar />
-      </div>
+      <NavBar />
       <CoinsContainer
         filteredCoins={filteredCoins}
         formattedCoins={formattedCoins}
@@ -173,23 +148,17 @@ function Home() {
         addNewCoin={addNewCoin}
       />
       {formattedPA.length > 0 && (
-        <div className={modal ? styles.D3ContainerBlur : styles.D3Container}>
-          <Legend coins={filteredCoins} chartWidth={chartWidth} />
-          <TimeFilter timeFilter={timeFilerHandle} priceAction={priceAction} />
-          <D3LineChart
-            data={formattedPA}
-            coins={filteredCoins}
-            chartWidth={chartWidth}
-            chartHeight={chartHeight}
-            responsiveTicks={responsiveTicks}
-          />
-        </div>
+        <ChartContainer
+          modal={modal}
+          filteredCoins={filteredCoins}
+          timeFilterHandle={timeFilterHandle}
+          priceAction={priceAction}
+          formattedPA={formattedPA}
+        />
       )}
       {modal && editmode && <CoinForm />}
       {modal && !editmode && <AuthForm />}
-      <div className={modal ? styles.blurMode : null}>
-        <Copyright copyright={'Nicolás Leiva Büchi'} />
-      </div>
+      <Copyright copyright={'Nicolás Leiva Büchi'} blurMode={styles.blurMode} />
     </div>
   );
 }
