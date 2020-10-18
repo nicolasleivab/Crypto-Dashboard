@@ -1,10 +1,24 @@
 import React, { Fragment } from 'react';
 import CoinItem from '../components/CoinItem/CoinItem';
+import styles from './Home.module.css';
 
 const CoinsContainer = (props) => {
-  const { formattedCoins, filteredCoins, isAuthenticated } = props;
+  const {
+    formattedCoins,
+    filteredCoins,
+    isAuthenticated,
+    modal,
+    addNewCoin,
+  } = props;
+
   return (
-    <Fragment>
+    <div
+      className={
+        modal
+          ? [styles.coinsContainer, styles.blurMode].join(' ')
+          : styles.coinsContainer
+      }
+    >
       {formattedCoins.length > 0 &&
         !isAuthenticated &&
         formattedCoins
@@ -39,7 +53,12 @@ const CoinsContainer = (props) => {
             rank={coin.rank}
           />
         ))}
-    </Fragment>
+      {isAuthenticated && filteredCoins.length < 4 && (
+        <div className={styles.roundBtn} onClick={() => addNewCoin()}>
+          +
+        </div>
+      )}
+    </div>
   );
 };
 

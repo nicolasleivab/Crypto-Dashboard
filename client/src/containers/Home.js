@@ -124,31 +124,8 @@ function Home() {
 
   //format price action
   useEffect(() => {
-    const lineCoins = ['line1', 'line2', 'line3', 'line4'];
     if (priceAction.length > 0) {
-      const PAsliced = [];
-      priceAction.forEach((set) => PAsliced.push(set.slice(-365)));
-      const PA = [];
-
-      for (let i = 0; i < PAsliced.length; i++) {
-        const coinName = lineCoins[i];
-
-        for (let j = 0; j < PAsliced[i].length; j++) {
-          if (i === 0) {
-            const obj = {};
-            obj[coinName] =
-              ((PAsliced[0][j].priceUsd - PAsliced[0][0].priceUsd) * 100) /
-              PAsliced[0][0].priceUsd;
-            obj.date = new Date(PAsliced[0][j].date);
-            PA.push(obj);
-          } else {
-            PA[j][coinName] =
-              ((PAsliced[i][j].priceUsd - PAsliced[i][0].priceUsd) * 100) /
-              PAsliced[i][0].priceUsd;
-          }
-        }
-      }
-
+      const PA = sliceDataByTimeUnit(priceAction, -365);
       setFormattedPA(PA);
       setStored(PA);
     }
@@ -188,24 +165,13 @@ function Home() {
       <div className={modal ? styles.blurMode : null}>
         <NavBar />
       </div>
-      <div
-        className={
-          modal
-            ? [styles.coinsContainer, styles.blurMode].join(' ')
-            : styles.coinsContainer
-        }
-      >
-        <CoinsContainer
-          filteredCoins={filteredCoins}
-          formattedCoins={formattedCoins}
-          isAuthenticated={isAuthenticated}
-        />
-        {isAuthenticated && filteredCoins.length < 4 && (
-          <div className={styles.roundBtn} onClick={() => addNewCoin()}>
-            +
-          </div>
-        )}
-      </div>
+      <CoinsContainer
+        filteredCoins={filteredCoins}
+        formattedCoins={formattedCoins}
+        isAuthenticated={isAuthenticated}
+        modal={modal}
+        addNewCoin={addNewCoin}
+      />
       {formattedPA.length > 0 && (
         <div className={modal ? styles.D3ContainerBlur : styles.D3Container}>
           <Legend coins={filteredCoins} chartWidth={chartWidth} />
