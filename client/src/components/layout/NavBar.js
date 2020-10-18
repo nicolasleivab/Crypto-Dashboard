@@ -13,17 +13,17 @@ const NavBar = ({ title }) => {
   const modalContext = useContext(ModalContext);
   const { setModal, modal } = modalContext;
 
-  const onLogout = () => {
-    logoutUser();
-  };
+  const tabIndexProp = modal ? {} : { tabIndex: 1 };
 
   const authLinks = (
     <div className={styles.flexContainer}>
       <li className={styles.userDisplay}>Welcome {user && user.name}!</li>
       <li>
         <div
-          onClick={onLogout}
+          onClick={() => logoutUser()}
+          onKeyPress={(e) => (e.key === 'Enter' ? logoutUser() : null)}
           style={{ display: 'flex', alignItems: 'center' }}
+          {...tabIndexProp}
         >
           <p className={styles.hide}>Logout</p>
           <ExitToAppIcon fontSize='large' className={styles.Icon} />
@@ -35,13 +35,20 @@ const NavBar = ({ title }) => {
   const guessLinks = (
     <div className={styles.flexContainer}>
       <li>
-        <p onClick={() => setModal()}>Sign In</p>
+        <p
+          onClick={() => setModal()}
+          onKeyPress={(e) => (e.key === 'Enter' ? setModal() : null)}
+          {...tabIndexProp}
+        >
+          Sign In
+        </p>
       </li>
     </div>
   );
   useEffect(() => {
     //loginUser(user);
   }, []);
+
   return (
     <nav className={modal ? styles.blurMode : styles.NavBar}>
       <div className={styles.titleContainer}>

@@ -22,7 +22,7 @@ const CoinItem = ({
   const usercoinsContext = useContext(UsercoinsContext);
 
   const { isAuthenticated } = authtContext;
-  const { setModal, setEdit, setCurrent } = modalContext;
+  const { setModal, setEdit, setCurrent, modal } = modalContext;
   const { deleteCoin, userCoins } = usercoinsContext;
 
   const handleDelete = (id) => {
@@ -43,6 +43,8 @@ const CoinItem = ({
     }
   };
 
+  const tabIndexProp = modal ? {} : { tabIndex: 1 };
+
   return (
     <div className={styles.CoinItem}>
       <header className={styles.coinHeader}>
@@ -58,6 +60,8 @@ const CoinItem = ({
               cursor: 'pointer',
             }}
             onClick={() => handleEdit(id)}
+            onKeyPress={(e) => (e.key === 'Enter' ? handleEdit(e) : null)}
+            {...tabIndexProp}
           />
           <DeleteOutlineIcon
             style={{
@@ -66,6 +70,8 @@ const CoinItem = ({
               cursor: 'pointer',
             }}
             onClick={() => handleDelete(id)}
+            onKeyPress={(e) => (e.key === 'Enter' ? handleDelete(id) : null)}
+            {...tabIndexProp}
           />
         </div>
       </header>

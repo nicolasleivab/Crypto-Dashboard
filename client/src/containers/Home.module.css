@@ -13,6 +13,7 @@
 }
 
 .roundBtn {
+  border: none;
   border-radius: 50%;
   background: rgb(58, 82, 145);
   background: linear-gradient(
@@ -20,7 +21,7 @@
     rgba(58, 82, 145, 1) 0%,
     rgba(134, 75, 254, 1) 89%
   );
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
   font-size: 2rem;
   font-weight: 600;
   color: white;

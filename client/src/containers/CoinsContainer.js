@@ -54,9 +54,13 @@ const CoinsContainer = (props) => {
           />
         ))}
       {isAuthenticated && filteredCoins.length < 4 && (
-        <div className={styles.roundBtn} onClick={() => addNewCoin()}>
+        <button
+          className={styles.roundBtn}
+          onClick={() => addNewCoin()}
+          disabled={modal}
+        >
           +
-        </div>
+        </button>
       )}
     </div>
   );
