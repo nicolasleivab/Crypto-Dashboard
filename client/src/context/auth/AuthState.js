@@ -1,8 +1,8 @@
-import React, { useReducer } from "react";
-import axios from "axios";
-import AuthContext from "./authContext";
-import authReducer from "./authReducer";
-import setAuthToken from "../../utils/setAuthToken";
+import React, { useReducer } from 'react';
+import axios from 'axios';
+import AuthContext from './authContext';
+import authReducer from './authReducer';
+import setAuthToken from '../../utils/setAuthToken';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -14,11 +14,11 @@ import {
   CLEAR_ERRORS,
   ADD_USERLIST,
   USERLIST_ERROR,
-} from "../types";
+} from '../types';
 
 const AuthState = (props) => {
   const initialState = {
-    token: localStorage.getItem("token"),
+    token: localStorage.getItem('token'),
     isAuthenticated: null,
     loading: true,
     error: null,
@@ -30,11 +30,11 @@ const AuthState = (props) => {
   const addUserList = async () => {
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
     try {
-      const res = await axios.post("/api/coins", {}, config);
+      const res = await axios.post('/api/coins', {}, config);
       dispatch({ type: ADD_USERLIST, payload: res.data });
     } catch (err) {
       dispatch({ type: USERLIST_ERROR, payload: err.response.msg });
@@ -47,8 +47,8 @@ const AuthState = (props) => {
       setAuthToken(localStorage.token);
     }
     try {
-      const res = await axios.get("/api/auth");
-      addUserList();
+      const res = await axios.get('/api/auth');
+
       dispatch({ type: USER_LODADED, payload: res.data });
     } catch (err) {
       dispatch({ type: AUTH_ERROR });
@@ -59,11 +59,11 @@ const AuthState = (props) => {
   const registerUser = async (formData) => {
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
     try {
-      const res = await axios.post("/api/users", formData, config);
+      const res = await axios.post('/api/users', formData, config);
 
       dispatch({
         type: REGISTER_SUCCESS,
@@ -83,11 +83,11 @@ const AuthState = (props) => {
   const loginUser = async (formData) => {
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     };
     try {
-      const res = await axios.post("/api/auth", formData, config);
+      const res = await axios.post('/api/auth', formData, config);
 
       dispatch({
         type: LOGIN_SUCCESS,

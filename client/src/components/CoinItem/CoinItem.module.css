@@ -24,36 +24,36 @@
   align-items: baseline;
 }
 .title {
-  font-family: "Barlow Condensed Bold", sans-serif;
+  font-family: 'Barlow Condensed Bold', sans-serif;
   font-size: 1.9rem;
   color: #ccffff;
   margin: 10px 5px 10px 10px;
 }
 .symbol {
-  font-family: "Barlow Condensed Bold", sans-serif;
+  font-family: 'Barlow Condensed Bold', sans-serif;
   font-size: 1.2rem;
   color: #ccffff;
 }
 
 .coinInfo {
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   color: #ccffff;
-  font-family: "Barlow Condensed";
+  font-family: 'Barlow Condensed';
   font-weight: 400;
   margin: 15px 10px 0 10px;
 }
-.priceContainer {
+.flexContainer {
   display: flex;
-  justify-content: baseline;
+  justify-content: space-between;
   align-items: baseline;
 }
 .greenChange {
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   color: rgb(140, 255, 94);
   margin-left: 3px;
 }
 .redChange {
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   color: rgb(245, 101, 76);
   margin-left: 3px;
 }
@@ -73,7 +73,7 @@
   width: 50px;
   height: 20px;
   padding-top: 3.5px;
-  font-family: "Poppins";
+  font-family: 'Poppins';
   border-radius: 30px;
   box-shadow: 2px 2px 2px rgb(33, 43, 66);
   color: #ffffff;

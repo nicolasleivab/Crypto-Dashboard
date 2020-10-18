@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
-import AuthContext from "../../context/auth/authContext";
-import ModalContext from "../../context/modal/modalContext";
-import UsercoinsContext from "../../context/usercoins/usercoinsContext";
-import styles from "./CoinItem.module.css";
+import React, { useContext } from 'react';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import AuthContext from '../../context/auth/authContext';
+import ModalContext from '../../context/modal/modalContext';
+import UsercoinsContext from '../../context/usercoins/usercoinsContext';
+import styles from './CoinItem.module.css';
 
 const CoinItem = ({
   name,
@@ -54,32 +54,47 @@ const CoinItem = ({
           <EditIcon
             style={{
               marginRight: 7,
-              color: "#ccffff",
-              cursor: "pointer",
+              color: '#ccffff',
+              cursor: 'pointer',
             }}
             onClick={() => handleEdit(id)}
           />
           <DeleteOutlineIcon
             style={{
               marginRight: 10,
-              color: "#ccffff",
-              cursor: "pointer",
+              color: '#ccffff',
+              cursor: 'pointer',
             }}
             onClick={() => handleDelete(id)}
           />
         </div>
       </header>
       <aside className={styles.coinInfo}>
-        <div className={styles.priceContainer}>
-          <p>Price: ${price}</p>
-          <p className={change > 0 ? styles.greenChange : styles.redChange}>
-            {change > 0 ? "(" + "+" + change + "%)" : "(" + change + "%)"}
-          </p>
+        <div className={styles.flexContainer}>
+          <p>Price:</p>
+          <div style={{ display: 'flex', alignItems: 'baseline' }}>
+            <p>{`$${price}`}</p>
+            <p className={change > 0 ? styles.greenChange : styles.redChange}>
+              {change > 0 ? `(+${change}%)` : `(${change}%)`}
+            </p>
+          </div>
         </div>
-        <p>Market Cap: ${marketCap}</p>
-        <p>Rank: #{rank}</p>
-        <p>Volume: {volume}</p>
-        <p>Supply: {supply}</p>
+        <div className={styles.flexContainer}>
+          <p>Market Cap:</p>
+          <p>{`$${marketCap}`}</p>
+        </div>
+        <div className={styles.flexContainer}>
+          <p>Rank:</p>
+          <p>{`#${rank}`}</p>
+        </div>
+        <div className={styles.flexContainer}>
+          <p>Volume:</p>
+          <p>{`$${volume}`}</p>
+        </div>
+        <div className={styles.flexContainer}>
+          <p>Supply:</p>
+          <p>{supply}</p>
+        </div>
       </aside>
     </div>
   );

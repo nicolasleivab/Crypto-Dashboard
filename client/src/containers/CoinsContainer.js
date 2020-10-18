@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import CoinItem from '../components/CoinItem/CoinItem';
 import styles from './Home.module.css';
 
