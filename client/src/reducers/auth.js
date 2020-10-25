@@ -11,7 +11,15 @@ import {
   USERLIST_ERROR,
 } from 'actions/types';
 
-export default (state, action) => {
+const initialState = {
+  token: localStorage.getItem('token'),
+  isAuthenticated: null,
+  loading: true,
+  user: null,
+};
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default function (state = initialState, action) {
   switch (action.type) {
     case USER_LODADED:
       return {
@@ -59,4 +67,4 @@ export default (state, action) => {
     default:
       return state;
   }
-};
+}

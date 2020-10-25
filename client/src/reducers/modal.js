@@ -4,8 +4,16 @@ import {
   EDIT_MODE,
   ADD_MODE,
   SET_CURRENT,
-} from "../types";
+} from '../types';
 
+const initialState = {
+  modal: false,
+  editmode: false,
+  addmode: false,
+  current: null,
+};
+
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (state, action) => {
   switch (action.type) {
     case SET_MODAL:
