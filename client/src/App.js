@@ -1,25 +1,14 @@
 import React from 'react';
-import AuthState from './context/auth/AuthState';
-import ModalState from './context/modal/ModalState';
-import AllcoinsState from './context/allcoins/AllcoinsState';
-import UsercoinsState from './context/usercoins/UsercoinsState';
-import AlertState from './context/alert/AlertState';
+import { Provider } from 'react-redux';
+import store from './store';
 import Home from './containers/Home';
 
-function App() {
+const App = () => {
   return (
-    <AuthState>
-      <ModalState>
-        <AllcoinsState>
-          <UsercoinsState>
-            <AlertState>
-              <Home />
-            </AlertState>
-          </UsercoinsState>
-        </AllcoinsState>
-      </ModalState>
-    </AuthState>
+    <Provider store={store}>
+      <Home />
+    </Provider>
   );
-}
+};
 
 export default App;
