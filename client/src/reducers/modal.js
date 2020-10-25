@@ -14,7 +14,7 @@ const initialState = {
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default (state, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case SET_MODAL:
       return {

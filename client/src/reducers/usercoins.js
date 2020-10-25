@@ -6,9 +6,16 @@ import {
   ADD_COIN,
   EDIT_COIN,
   GET_PRICEACTION,
-} from "../types";
+} from '../types';
 
-export default (state, action) => {
+const initialState = {
+  userCoins: [],
+  errors: null,
+  priceAction: [],
+};
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default (state = initialState, action) => {
   switch (action.type) {
     case GET_USERCOINS:
       return {
