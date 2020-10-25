@@ -1,19 +1,23 @@
-import React, { useContext, useState } from 'react';
-import ModalContext from '../../context/modal/modalContext';
-import UsercoinsContext from '../../context/usercoins/usercoinsContext';
-import AllcoinsContext from '../../context/allcoins/allcoinsContext';
+import React, { useState } from 'react';
 import CloseIcon from '@material-ui/icons/Close';
 import Autocomplete from '../AutoComplete/AutoComplete';
+import { connect } from 'react-redux';
+import { hideModal, setEdit, setAdd } from 'actions/modal';
+import { editCoin, addCoin } from 'actions/usercoins';
 import styles from './CoinForm.module.css';
 
 const CoinForm = (props) => {
-  const modalContext = useContext(ModalContext);
-  const usercoinsContext = useContext(UsercoinsContext);
-  const allcoinsContext = useContext(AllcoinsContext);
-
-  const { hideModal, setEdit, current, addmode, setAdd } = modalContext;
-  const { editCoin, userCoins, addCoin } = usercoinsContext;
-  const { coins } = allcoinsContext;
+  const {
+    hideModal,
+    setEdit,
+    current,
+    addmode,
+    setAdd,
+    editCoin,
+    userCoins,
+    addCoin,
+    coins,
+  } = props;
 
   const [value, setValue] = useState('');
 
@@ -94,4 +98,17 @@ const CoinForm = (props) => {
   );
 };
 
-export default CoinForm;
+const mapStateToProps = (state) => ({
+  current: state.modal.current,
+  addmode: state.modal.addmode,
+  userCoins: state.usercoins.userCoins,
+  coins: state.allcoins.coins,
+});
+
+export default connect(mapStateToProps, {
+  hideModal,
+  setEdit,
+  setAdd,
+  editCoin,
+  addCoin,
+})(CoinForm);

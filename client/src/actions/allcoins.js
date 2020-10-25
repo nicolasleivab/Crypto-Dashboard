@@ -2,7 +2,7 @@ import axios from 'axios';
 import { GET_ALLCOINS, ALLCOINS_ERROR } from './types';
 
 // Get top coins from coincapapi
-export const getAllCoins = (dispatch) => async () => {
+export const getAllCoins = () => async (dispatch) => {
   try {
     //Delete token header to avoid CORS error
     if (localStorage.token) {

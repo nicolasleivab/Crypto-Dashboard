@@ -4,7 +4,7 @@ import {
   EDIT_MODE,
   SET_CURRENT,
   ADD_MODE,
-} from '../types';
+} from './types';
 
 // Set Modal
 export const setModal = () => (dispatch) => {

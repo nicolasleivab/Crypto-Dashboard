@@ -4,7 +4,7 @@ import {
   EDIT_MODE,
   ADD_MODE,
   SET_CURRENT,
-} from '../types';
+} from 'actions/types';
 
 const initialState = {
   modal: false,

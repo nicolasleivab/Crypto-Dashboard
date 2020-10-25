@@ -16,6 +16,7 @@ const initialState = {
   isAuthenticated: null,
   loading: true,
   user: null,
+  error: null,
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -24,7 +25,7 @@ export default function (state = initialState, action) {
     case USER_LODADED:
       return {
         ...state,
-        isAuthenticated: true,
+        isAuthenticated: state.token ? true : false,
         loading: false,
         user: action.payload,
       };
@@ -57,7 +58,7 @@ export default function (state = initialState, action) {
     case USERLIST_ERROR:
       return {
         ...state,
-        errors: action.payload,
+        error: action.payload,
       };
     case CLEAR_ERRORS:
       return {

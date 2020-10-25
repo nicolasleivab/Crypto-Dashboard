@@ -1,5 +1,5 @@
 import axios from 'axios';
-import setAuthToken from '../../utils/setAuthToken';
+import { setAuthToken } from 'utils/setAuthToken';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -44,47 +44,54 @@ export const loadUser = () => async (dispatch) => {
 
 // Register User
 export const registerUser = (formData) => async (dispatch) => {
+  const { name, email, password } = formData;
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
+  const body = JSON.stringify({ name, email, password });
+
   try {
-    const res = await axios.post('/api/users', formData, config);
+    const res = await axios.post('/api/users', body, config);
 
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data,
     });
-
-    loadUser();
   } catch (err) {
+    const errors = err.response.data.errors;
+
     dispatch({
       type: REGISTER_FAIL,
-      payload: err.response.data.msg,
+      payload: errors,
     });
   }
 };
 
 // Login User
-export const loginUser = (formDate) => async (dispatch) => {
+export const loginUser = (formData) => async (dispatch) => {
+  const { email, password } = formData;
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
+  const body = JSON.stringify({ email, password });
+
   try {
-    const res = await axios.post('/api/auth', formData, config);
+    const res = await axios.post('/api/auth', body, config);
 
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
-    loadUser();
   } catch (err) {
+    const errors = err.response.data.errors;
+
     dispatch({
       type: LOGIN_FAIL,
-      payload: err.response.data.msg,
+      payload: errors,
     });
   }
 };

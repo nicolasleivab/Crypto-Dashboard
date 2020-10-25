@@ -1,39 +1,36 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../components/layout/NavBar';
 import CoinsContainer from './CoinsContainer';
 import ChartContainer from './ChartContainer';
 import AuthForm from '../components/AuthForm/AuthForm';
 import CoinForm from '../components/CoinForm/CoinForm';
 import Copyright from '../components/Copyright/Copyright';
-import AuthContext from '../context/auth/authContext';
-import ModalContext from '../context/modal/modalContext';
-import AllcoinsContext from '../context/allcoins/allcoinsContext';
-import UsercoinsContext from '../context/usercoins/usercoinsContext';
 import { formatCoins, sliceDataByTimeUnit } from './helpers';
+import { connect } from 'react-redux';
+import { loadUser, addUserList } from 'actions/auth';
+import { setModal, hideModal, setEdit, setAdd } from 'actions/modal';
+import { getAllCoins } from 'actions/allcoins';
+import { getUserCoins, getPriceAction } from 'actions/usercoins';
 import styles from './Home.module.css';
 
-function Home() {
-  const authtContext = useContext(AuthContext);
-  const modalContext = useContext(ModalContext);
-  const allcoinsContext = useContext(AllcoinsContext);
-  const usercoinsContext = useContext(UsercoinsContext);
-
-  const { loadUser, isAuthenticated, addUserList } = authtContext;
+function Home(props) {
   const {
+    loadUser,
+    isAuthenticated,
+    addUserList,
     modal,
     setModal,
     hideModal,
     editmode,
     setAdd,
     setEdit,
-  } = modalContext;
-  const { getAllCoins, coins } = allcoinsContext;
-  const {
+    getAllCoins,
+    coins,
     getUserCoins,
     userCoins,
     getPriceAction,
     priceAction,
-  } = usercoinsContext;
+  } = props;
 
   const [formattedCoins, setFormattedCoins] = useState([]);
   const [filteredCoins, setFilteredCoins] = useState([]);
@@ -42,10 +39,12 @@ function Home() {
 
   //load user and coins
   useEffect(() => {
-    loadUser();
-    getAllCoins();
+    if (isAuthenticated) {
+      loadUser();
+      getAllCoins();
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [isAuthenticated]);
 
   //format coins
   useEffect(() => {
@@ -88,8 +87,8 @@ function Home() {
         );
         const coinList = [];
         userCoins.coins.map((coin) => coinList.push(coin.name));
-        //get priceaction
-        getPriceAction([...coinList]);
+
+        getPriceAction(userCoins._id, [...coinList]);
       }
 
       setFilteredCoins(filteredCoins);
@@ -158,9 +157,32 @@ function Home() {
       )}
       {modal && editmode && <CoinForm />}
       {modal && !editmode && <AuthForm />}
-      <Copyright copyright={'Nicolás Leiva Büchi'} blurMode={styles.blurMode} />
+      <Copyright
+        copyright={'Nicolás Leiva Büchi'}
+        blurMode={styles.blurMode}
+        modal={modal}
+      />
     </div>
   );
 }
 
-export default Home;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  modal: state.modal.modal,
+  editmode: state.modal.editmode,
+  coins: state.allcoins.coins,
+  userCoins: state.usercoins.userCoins,
+  priceAction: state.usercoins.priceAction,
+});
+
+export default connect(mapStateToProps, {
+  loadUser,
+  addUserList,
+  setModal,
+  hideModal,
+  setAdd,
+  setEdit,
+  getAllCoins,
+  getUserCoins,
+  getPriceAction,
+})(Home);

@@ -6,7 +6,7 @@ import {
   ADD_COIN,
   EDIT_COIN,
   GET_PRICEACTION,
-} from '../types';
+} from 'actions/types';
 
 const initialState = {
   userCoins: [],

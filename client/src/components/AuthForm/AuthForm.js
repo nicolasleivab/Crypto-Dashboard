@@ -1,27 +1,24 @@
 import React, { useState, useContext, Fragment, useEffect } from 'react';
-import AuthContext from '../../context/auth/authContext';
-import ModalContext from '../../context/modal/modalContext';
-import AlertContext from '../../context/alert/alertContext';
 import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
 import CloseIcon from '@material-ui/icons/Close';
 import Alert from '../Alert/Alert';
+import { connect } from 'react-redux';
+import { loginUser, registerUser, clearErrors } from 'actions/auth';
+import { hideModal } from 'actions/modal';
+import { setAlert } from 'actions/alert';
 import styles from './AuthForm.module.css';
 
 const AuthForm = (props) => {
-  const authtContext = useContext(AuthContext);
-  const modalContext = useContext(ModalContext);
-  const alertContext = useContext(AlertContext);
-
   const {
     loginUser,
     registerUser,
     isAuthenticated,
     error,
     clearErrors,
-  } = authtContext;
-  const { hideModal } = modalContext;
-  const { setAlert } = alertContext;
+    hideModal,
+    setAlert,
+  } = props;
 
   const [user, setUser] = useState({
     email: '',
@@ -206,4 +203,15 @@ const AuthForm = (props) => {
   );
 };
 
-export default AuthForm;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  error: state.auth.error,
+});
+
+export default connect(mapStateToProps, {
+  loginUser,
+  registerUser,
+  clearErrors,
+  hideModal,
+  setAlert,
+})(AuthForm);

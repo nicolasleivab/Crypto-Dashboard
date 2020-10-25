@@ -1,10 +1,7 @@
 import React, { useContext } from 'react';
-import ModalContext from '../../context/modal/modalContext';
 
 export default function Copyright(props) {
-  const { copyright, blurMode } = props;
-  const modalContext = useContext(ModalContext);
-  const { modal } = modalContext;
+  const { copyright, blurMode, modal } = props;
 
   return (
     <div className={modal ? blurMode : null}>

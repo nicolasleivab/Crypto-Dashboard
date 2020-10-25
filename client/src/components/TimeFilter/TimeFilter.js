@@ -1,23 +1,20 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './TimeFilter.module.css';
-import ModalContext from '../../context/modal/modalContext';
 
 const TimeFilter = (props) => {
+  const { timeFilter, priceAction, modal } = props;
   const [btnMatrix, setMatrix] = useState([true, false, false, false]);
 
   const setFocus = (e) => {
     const base = [false, false, false, false];
     base[e.target.id] = true;
     setMatrix(base);
-    props.timeFilter(e);
+    timeFilter(e);
   };
 
   useEffect(() => {
     setMatrix([true, false, false, false]);
-  }, [props.priceAction]);
-
-  const modalContext = useContext(ModalContext);
-  const { modal } = modalContext;
+  }, [priceAction]);
 
   return (
     <div className={styles.TimeFilter}>

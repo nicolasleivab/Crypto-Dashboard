@@ -1,29 +1,30 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import AuthContext from '../../context/auth/authContext';
-import ModalContext from '../../context/modal/modalContext';
-import UsercoinsContext from '../../context/usercoins/usercoinsContext';
+import { connect } from 'react-redux';
+import { setModal, setEdit, setCurrent } from 'actions/modal';
+import { deleteCoin } from 'actions/usercoins';
 import styles from './CoinItem.module.css';
 
-const CoinItem = ({
-  name,
-  price,
-  change,
-  symbol,
-  volume,
-  id,
-  marketCap,
-  rank,
-  supply,
-}) => {
-  const authtContext = useContext(AuthContext);
-  const modalContext = useContext(ModalContext);
-  const usercoinsContext = useContext(UsercoinsContext);
-
-  const { isAuthenticated } = authtContext;
-  const { setModal, setEdit, setCurrent, modal } = modalContext;
-  const { deleteCoin, userCoins } = usercoinsContext;
+const CoinItem = (props) => {
+  const {
+    name,
+    price,
+    change,
+    symbol,
+    volume,
+    id,
+    marketCap,
+    rank,
+    supply,
+    isAuthenticated,
+    setModal,
+    setEdit,
+    setCurrent,
+    modal,
+    deleteCoin,
+    userCoins,
+  } = props;
 
   const handleDelete = (id) => {
     if (!isAuthenticated) {
@@ -106,4 +107,15 @@ const CoinItem = ({
   );
 };
 
-export default CoinItem;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  modal: state.modal.modal,
+  userCoins: state.usercoins.userCoins,
+});
+
+export default connect(mapStateToProps, {
+  setModal,
+  setEdit,
+  setCurrent,
+  deleteCoin,
+})(CoinItem);

@@ -7,7 +7,7 @@ import {
   EDIT_COIN,
   COIN_ERROR,
   GET_PRICEACTION,
-} from '../types';
+} from './types';
 
 // Get User coins
 export const getUserCoins = () => async (dispatch) => {
@@ -69,9 +69,10 @@ export const editCoin = (userId, currentCoin, coin) => async (dispatch) => {
 };
 
 // Get userscoin price action
-export const getPriceAction = (coins) => (dispatch) => {
+export const getPriceAction = (userCoinsId, coins) => (dispatch) => {
   const request = new XMLHttpRequest();
   const priceAction = [];
+
   //request loop
   (function loop(i, length) {
     if (i >= length) {
@@ -93,7 +94,7 @@ export const getPriceAction = (coins) => (dispatch) => {
           priceAction.push(prices);
         } else {
           alert(`No data available for ${coins[i]}`);
-          deleteCoin(state.userCoins._id, coins[i]);
+          deleteCoin(userCoinsId, coins[i]);
         }
 
         if (i === coins.length - 1) {

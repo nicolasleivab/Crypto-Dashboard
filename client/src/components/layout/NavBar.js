@@ -1,17 +1,14 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './NavBar.module.css';
 import InsertChartIcon from '@material-ui/icons/InsertChart';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import AuthContext from '../../context/auth/authContext';
-import ModalContext from '../../context/modal/modalContext';
+import { connect } from 'react-redux';
+import { logoutUser } from 'actions/auth';
+import { setModal } from 'actions/modal';
 
-const NavBar = ({ title }) => {
-  const authContext = useContext(AuthContext);
-  const { isAuthenticated, logoutUser, user } = authContext;
-
-  const modalContext = useContext(ModalContext);
-  const { setModal, modal } = modalContext;
+const NavBar = (props) => {
+  const { isAuthenticated, logoutUser, user, setModal, modal, title } = props;
 
   const tabIndexProp = modal ? {} : { tabIndex: 1 };
 
@@ -71,4 +68,10 @@ NavBar.defaultProps = {
   title: 'Crypto Performance',
 };
 
-export default NavBar;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  user: state.auth.user,
+  modal: state.modal.modal,
+});
+
+export default connect(mapStateToProps, { logoutUser, setModal })(NavBar);

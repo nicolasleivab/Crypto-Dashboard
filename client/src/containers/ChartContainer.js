@@ -37,7 +37,11 @@ const ChartContainer = (props) => {
   return (
     <div className={modal ? styles.D3ContainerBlur : styles.D3Container}>
       <Legend coins={filteredCoins} chartWidth={chartWidth} />
-      <TimeFilter timeFilter={timeFilterHandle} priceAction={priceAction} />
+      <TimeFilter
+        timeFilter={timeFilterHandle}
+        priceAction={priceAction}
+        modal={modal}
+      />
       <D3LineChart
         data={formattedPA}
         coins={filteredCoins}

@@ -1,4 +1,4 @@
-import { GET_ALLCOINS, ALLCOINS_ERROR } from '../types';
+import { GET_ALLCOINS, ALLCOINS_ERROR } from 'actions/types';
 
 const initialState = {
   coins: [],
