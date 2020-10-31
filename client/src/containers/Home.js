@@ -39,12 +39,10 @@ function Home(props) {
 
   //load user and coins
   useEffect(() => {
-    if (isAuthenticated) {
-      loadUser();
-      getAllCoins();
-    }
+    loadUser();
+    getAllCoins();
     // eslint-disable-next-line
-  }, [isAuthenticated]);
+  }, []);
 
   //format coins
   useEffect(() => {
@@ -58,11 +56,14 @@ function Home(props) {
   useEffect(() => {
     if (isAuthenticated && formattedCoins.length > 0) {
       hideModal();
+    }
+    if (isAuthenticated && userCoins && !userCoins.coins) {
       getUserCoins();
     }
     setFormattedPA([]);
+    setStored([]);
     // eslint-disable-next-line
-  }, [isAuthenticated, formattedCoins]);
+  }, [formattedCoins, userCoins]);
 
   //check for user's list
   useEffect(() => {
@@ -77,26 +78,24 @@ function Home(props) {
   //filter user coins
   useEffect(() => {
     setFilteredCoins([]);
-    if (isAuthenticated && userCoins) {
+    if (isAuthenticated && userCoins && userCoins.coins) {
       const filteredCoins = [];
-      if (userCoins.coins) {
-        userCoins.coins.map((userCoin) =>
-          formattedCoins.map((coin) =>
-            coin.id === userCoin.name ? filteredCoins.push(coin) : null
-          )
-        );
-        const coinList = [];
-        userCoins.coins.map((coin) => coinList.push(coin.name));
+      userCoins.coins.map((userCoin) =>
+        formattedCoins.map((coin) =>
+          coin.id === userCoin.name ? filteredCoins.push(coin) : null
+        )
+      );
+      const coinList = [];
+      userCoins.coins.map((coin) => coinList.push(coin.name));
 
-        getPriceAction(userCoins._id, [...coinList]);
-      }
+      getPriceAction(userCoins._id, [...coinList]);
 
       setFilteredCoins(filteredCoins);
     } else {
       setFilteredCoins([]);
     }
     // eslint-disable-next-line
-  }, [userCoins, isAuthenticated]);
+  }, [userCoins]);
 
   //format price action
   useEffect(() => {

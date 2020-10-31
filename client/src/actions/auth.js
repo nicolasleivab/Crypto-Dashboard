@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { setAuthToken } from 'utils/setAuthToken';
+import { getUserCoins, removeUserCoins } from './usercoins';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  USER_LODADED,
+  USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -36,7 +37,7 @@ export const loadUser = () => async (dispatch) => {
   try {
     const res = await axios.get('/api/auth');
 
-    dispatch({ type: USER_LODADED, payload: res.data });
+    dispatch({ type: USER_LOADED, payload: res.data });
   } catch (err) {
     dispatch({ type: AUTH_ERROR });
   }
@@ -59,6 +60,8 @@ export const registerUser = (formData) => async (dispatch) => {
       type: REGISTER_SUCCESS,
       payload: res.data,
     });
+    dispatch(loadUser());
+    dispatch(getUserCoins());
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -86,6 +89,8 @@ export const loginUser = (formData) => async (dispatch) => {
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
+    dispatch(loadUser());
+    dispatch(getUserCoins());
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -99,6 +104,7 @@ export const loginUser = (formData) => async (dispatch) => {
 // Logout
 export const logoutUser = () => (dispatch) => {
   dispatch({ type: LOGOUT });
+  dispatch(removeUserCoins());
 };
 
 // Clear Errors

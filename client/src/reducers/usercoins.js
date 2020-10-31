@@ -1,5 +1,6 @@
 import {
   GET_USERCOINS,
+  REMOVE_USERCOINS,
   USERCOINS_ERROR,
   DELETE_COIN,
   COIN_ERROR,
@@ -9,7 +10,7 @@ import {
 } from 'actions/types';
 
 const initialState = {
-  userCoins: [],
+  userCoins: {},
   errors: null,
   priceAction: [],
 };
@@ -21,6 +22,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userCoins: action.payload,
+      };
+    case REMOVE_USERCOINS:
+      return {
+        ...state,
+        userCoins: {},
+        priceAction: [],
       };
     case USERCOINS_ERROR:
       return {

@@ -2,7 +2,8 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import styles from './Alert.module.css';
 
-const Alert = ({ alerts }) => {
+const Alert = (props) => {
+  const { alerts } = props;
   return alerts && alerts.length > 0 ? (
     alerts.map((alert) =>
       alert.type === 'Red' ? (

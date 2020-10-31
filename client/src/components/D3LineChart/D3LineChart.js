@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from "react";
-import * as d3 from "d3";
-import { interpolatePath } from "d3-interpolate-path";
-import styles from "./D3LineChart.module.css";
+import React, { useRef, useEffect } from 'react';
+import * as d3 from 'd3';
+import { interpolatePath } from 'd3-interpolate-path';
+import styles from './D3LineChart.module.css';
 
 const D3LineChart = ({
   data,
@@ -25,32 +25,32 @@ const D3LineChart = ({
       const height = chartHeight - margin.top - margin.bottom;
 
       //remove previous chart when resizing the window
-      d3.select(d3Container.current).selectAll("svg").remove();
+      d3.select(d3Container.current).selectAll('svg').remove();
 
       // append the svg to the selected div
       const svg = d3
         .select(d3Container.current)
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .append('svg')
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom)
+        .append('g')
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
       //Append x and y
       const appX = svg
-        .append("g")
-        .attr("transform", "translate(0," + height + ")");
-      const appY = svg.append("g");
+        .append('g')
+        .attr('transform', 'translate(0,' + height + ')');
+      const appY = svg.append('g');
 
       // Add the different lines
-      svg.append("path").attr("class", "line1");
-      svg.append("path").attr("class", "line2");
-      svg.append("path").attr("class", "line3");
-      svg.append("path").attr("class", "line4");
+      svg.append('path').attr('class', 'line1');
+      svg.append('path').attr('class', 'line2');
+      svg.append('path').attr('class', 'line3');
+      svg.append('path').attr('class', 'line4');
 
-      const appYGrid = svg.append("g").attr("class", "ygrid");
+      const appYGrid = svg.append('g').attr('class', 'ygrid');
 
-      const appZeroGrid = svg.append("g").attr("class", "zerogrid");
+      const appZeroGrid = svg.append('g').attr('class', 'zerogrid');
 
       updateChart(data, nTicks);
 
@@ -225,12 +225,12 @@ const D3LineChart = ({
 
         if (data[0].line1 !== undefined) {
           svg
-            .select(".line1")
+            .select('.line1')
             .transition(2000)
-            .attr("d", line1(data))
-            .attrTween("d", function (d) {
+            .attr('d', line1(data))
+            .attrTween('d', function (d) {
               //interpolation func for a smooth path transition
-              var previous = d3.select(this).attr("d");
+              var previous = d3.select(this).attr('d');
               var current = line1(data);
               return interpolatePath(previous, current);
             });
@@ -238,13 +238,13 @@ const D3LineChart = ({
 
         if (data[0].line2 !== undefined) {
           svg
-            .select(".line2")
+            .select('.line2')
             .transition(2000)
-            .attr("d", line2(data))
-            .attrTween("d", function (d) {
+            .attr('d', line2(data))
+            .attrTween('d', function (d) {
               //interpolation func for a smooth path transition
 
-              var previous = d3.select(this).attr("d");
+              var previous = d3.select(this).attr('d');
               var current = line2(data);
               return interpolatePath(previous, current);
             });
@@ -252,12 +252,12 @@ const D3LineChart = ({
 
         if (data[0].line3 !== undefined) {
           svg
-            .select(".line3")
+            .select('.line3')
             .transition(2000)
-            .attr("d", line3(data))
-            .attrTween("d", function (d) {
+            .attr('d', line3(data))
+            .attrTween('d', function (d) {
               //interpolation func for a smooth path transition
-              var previous = d3.select(this).attr("d");
+              var previous = d3.select(this).attr('d');
               var current = line3(data);
               return interpolatePath(previous, current);
             });
@@ -265,33 +265,33 @@ const D3LineChart = ({
 
         if (data[0].line4 !== undefined) {
           svg
-            .select(".line4")
+            .select('.line4')
             .transition(2000)
-            .attr("d", line4(data))
-            .attrTween("d", function (d) {
+            .attr('d', line4(data))
+            .attrTween('d', function (d) {
               //interpolation func for a smooth path transition
-              var previous = d3.select(this).attr("d");
+              var previous = d3.select(this).attr('d');
               var current = line4(data);
               return interpolatePath(previous, current);
             });
         }
 
         const percentFormat = function (d) {
-          return d + "%";
+          return d + '%';
         };
 
         // Call x axis
         appX
           .transition()
-          .attr("class", "axisWhite")
+          .attr('class', 'axisWhite')
           .call(d3.axisBottom(x).ticks(nTicks))
-          .selectAll("text")
-          .style("text-anchor", "end")
-          .attr("transform", "rotate(-40)");
+          .selectAll('text')
+          .style('text-anchor', 'end')
+          .attr('transform', 'rotate(-40)');
         // Call y axis
         appY
           .transition()
-          .attr("class", "axisY")
+          .attr('class', 'axisY')
           .call(d3.axisLeft(y).ticks(nTicks).tickFormat(percentFormat));
 
         function yGridlines() {
@@ -301,49 +301,49 @@ const D3LineChart = ({
           return d3.axisLeft(y).ticks(1);
         }
 
-        appYGrid.call(yGridlines().tickSize(-width).tickFormat(""));
+        appYGrid.call(yGridlines().tickSize(-width).tickFormat(''));
 
-        appZeroGrid.call(zeroGridline().tickSize(-width).tickFormat(""));
+        appZeroGrid.call(zeroGridline().tickSize(-width).tickFormat(''));
 
         const focus = svg
-          .append("g")
-          .attr("class", "focus ")
-          .style("display", "none");
+          .append('g')
+          .attr('class', 'focus ')
+          .style('display', 'none');
 
         //bottom line
         focus
-          .append("line")
-          .attr("class", "x-hover-line hover-line2")
-          .attr("y1", 0)
-          .attr("y2", height);
+          .append('line')
+          .attr('class', 'x-hover-line hover-line2')
+          .attr('y1', 0)
+          .attr('y2', height);
 
         //upper line
         focus
-          .append("line")
-          .attr("class", "x2-hover-line hover-line2")
-          .attr("y1", 0)
-          .attr("y2", height);
+          .append('line')
+          .attr('class', 'x2-hover-line hover-line2')
+          .attr('y1', 0)
+          .attr('y2', height);
 
         focus
-          .append("text")
-          .attr("class", "d3-text")
-          .attr("x", 15)
-          .attr("dy", ".31em");
+          .append('text')
+          .attr('class', 'd3-text')
+          .attr('x', 15)
+          .attr('dy', '.31em');
 
         svg
-          .append("rect")
-          .attr("class", "overlay")
-          .attr("fill", "transparent")
-          .attr("width", width)
-          .attr("height", height)
-          .on("mouseover", function () {
-            focus.style("display", null);
+          .append('rect')
+          .attr('class', 'overlay')
+          .attr('fill', 'transparent')
+          .attr('width', width)
+          .attr('height', height)
+          .on('mouseover', function () {
+            focus.style('display', null);
           })
 
-          .on("mouseout", function () {
-            focus.style("display", "none");
+          .on('mouseout', function () {
+            focus.style('display', 'none');
           })
-          .on("mousemove", mousemove);
+          .on('mousemove', mousemove);
 
         //mousemove function adapted from Adam Janes https://github.com/adamjanes/udemy-d3/blob/master/06/6.10.0/js/main.js
         function mousemove() {
@@ -356,11 +356,11 @@ const D3LineChart = ({
             d0 = data[i - 1],
             d1 = data[i - 1],
             d = x0 - d0.date > d1.date - x0 ? d1 : d0;
-          const parseDate = d3.timeFormat("%b %d, %Y");
+          const parseDate = d3.timeFormat('%b %d, %Y');
 
           focus.attr(
-            "transform",
-            "translate(" + x(d.date) + "," + y(d.line1) + ")"
+            'transform',
+            'translate(' + x(d.date) + ',' + y(d.line1) + ')'
           );
           //conditional logic for appending mousemove text
 
@@ -369,69 +369,70 @@ const D3LineChart = ({
             line1App =
               "<tspan x='0' dy='1.2em' class='btcLegend'>" +
               coins[0].symbol +
-              ": " +
+              ': ' +
               d.line1.toFixed(2) +
-              "%" +
-              "</tspan>";
+              '%' +
+              '</tspan>';
           } else {
-            line1App = "";
+            line1App = '';
           }
           if (data[0].line2 !== undefined) {
             line2App =
               "<tspan x='0' dy='1.2em'>" +
               coins[1].symbol +
-              ": " +
+              ': ' +
               d.line2.toFixed(2) +
-              "%" +
-              "</tspan>";
+              '%' +
+              '</tspan>';
           } else {
-            line2App = "";
+            line2App = '';
           }
 
           if (data[0].line3 !== undefined) {
             line3App =
               "<tspan x='0' dy='1.2em'>" +
               coins[2].symbol +
-              ": " +
+              ': ' +
               d.line3.toFixed(2) +
-              "%" +
-              "</tspan>";
+              '%' +
+              '</tspan>';
           } else {
-            line3App = "";
+            line3App = '';
           }
 
           if (data[0].line4 !== undefined) {
             line4App =
               "<tspan x='0' dy='1.2em'>" +
               coins[3].symbol +
-              ": " +
+              ': ' +
               d.line4.toFixed(2) +
-              "%" +
-              "</tspan>";
+              '%' +
+              '</tspan>';
           } else {
-            line4App = "";
+            line4App = '';
           }
 
           focus
-            .select("text")
+            .select('text')
             .html(
               "<tspan x='0' dy='1.2em'>" +
-                "date: " +
+                'date: ' +
                 parseDate(d.date) +
-                "</tspan>" +
+                '</tspan>' +
                 line1App +
                 line2App +
                 line3App +
                 line4App
             );
 
-          focus.select(".x-hover-line").attr("y2", height - y(d.line1));
+          focus.select('.x-hover-line').attr('y2', height - y(d.line1));
           focus
-            .select(".x2-hover-line")
-            .attr("y2", height - y(d.line1) + -height);
+            .select('.x2-hover-line')
+            .attr('y2', height - y(d.line1) + -height);
         }
       }
     }
+
     // eslint-disable-next-line
   }, [data, d3Container.current, chartWidth]);
 

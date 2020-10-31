@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
   GET_USERCOINS,
+  REMOVE_USERCOINS,
   USERCOINS_ERROR,
   DELETE_COIN,
   ADD_COIN,
@@ -21,6 +22,13 @@ export const getUserCoins = () => async (dispatch) => {
   } catch (err) {
     dispatch({ type: USERCOINS_ERROR });
   }
+};
+
+// Rempve User coins
+export const removeUserCoins = () => (dispatch) => {
+  dispatch({
+    type: REMOVE_USERCOINS,
+  });
 };
 
 // Add Coin
