@@ -63,7 +63,7 @@ export const registerUser = (formData) => async (dispatch) => {
     dispatch(loadUser());
     dispatch(getUserCoins());
   } catch (err) {
-    const errors = err.response.data.errors;
+    const errors = err.response.data.msg;
 
     dispatch({
       type: REGISTER_FAIL,
@@ -92,8 +92,8 @@ export const loginUser = (formData) => async (dispatch) => {
     dispatch(loadUser());
     dispatch(getUserCoins());
   } catch (err) {
-    const errors = err.response.data.errors;
-
+    const errors = err.response.data.msg;
+    console.log('login', errors);
     dispatch({
       type: LOGIN_FAIL,
       payload: errors,

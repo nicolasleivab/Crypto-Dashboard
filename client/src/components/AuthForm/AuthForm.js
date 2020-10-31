@@ -35,11 +35,6 @@ const AuthForm = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    /*if (email === "" || password === "") {
-      setAlert("Please fill out all fields", "Red");
-    } else {
-      loginUser(user);
-    }*/
     if (authForm === 'login') {
       loginUser(user);
     } else {
@@ -69,6 +64,9 @@ const AuthForm = (props) => {
 
   return (
     <div className={authForm === 'login' ? styles.Login : styles.Register}>
+      <div className={styles.alertBox}>
+        <Alert />
+      </div>
       <div
         style={{
           display: 'flex',
@@ -195,9 +193,6 @@ const AuthForm = (props) => {
             )}
           </div>
         </form>
-      </div>
-      <div className={styles.alertBox}>
-        <Alert />
       </div>
     </div>
   );
