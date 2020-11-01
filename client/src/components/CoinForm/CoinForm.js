@@ -48,51 +48,55 @@ const CoinForm = (props) => {
   };
 
   return (
-    <div className={styles.CoinForm}>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          margin: 'auto',
-          marginTop: 0,
-        }}
-      >
-        <CloseIcon
-          className={styles.closeIcon}
-          onClick={() => closeForm()}
-          onKeyPress={(e) => (e.key === 'Enter' ? closeForm() : null)}
-          tabIndex={0}
-        />
-        <p className={styles.title}>{addmode ? 'Add New Coin' : 'Edit Coin'}</p>
-        <form
+    <div className={styles.modalContainer}>
+      <div className={styles.CoinForm}>
+        <div
           style={{
             display: 'flex',
             flexDirection: 'column',
-            position: 'relative',
+            margin: 'auto',
+            marginTop: 0,
           }}
-          onSubmit={onSubmit}
         >
-          {coins.data.length > 0 && (
-            <Autocomplete
-              options={coins.data}
-              onChange={(value) => setValue(value)}
-              onSelect={(value) => setValue(value)}
-            />
-          )}
-          <div
+          <CloseIcon
+            className={styles.closeIcon}
+            onClick={() => closeForm()}
+            onKeyPress={(e) => (e.key === 'Enter' ? closeForm() : null)}
+            tabIndex={0}
+          />
+          <p className={styles.title}>
+            {addmode ? 'Add New Coin' : 'Edit Coin'}
+          </p>
+          <form
             style={{
               display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+              flexDirection: 'column',
+              position: 'relative',
             }}
+            onSubmit={onSubmit}
           >
-            <input
-              className={styles.btnGray}
-              type='submit'
-              value={addmode ? 'Add Coin' : 'Update Coin'}
-            />
-          </div>
-        </form>
+            {coins.data.length > 0 && (
+              <Autocomplete
+                options={coins.data}
+                onChange={(value) => setValue(value)}
+                onSelect={(value) => setValue(value)}
+              />
+            )}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <input
+                className={styles.btnGray}
+                type='submit'
+                value={addmode ? 'Add Coin' : 'Update Coin'}
+              />
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -63,136 +63,138 @@ const AuthForm = (props) => {
   }, [error, isAuthenticated]);
 
   return (
-    <div className={authForm === 'login' ? styles.Login : styles.Register}>
-      <div className={styles.alertBox}>
-        <Alert />
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          margin: 'auto',
-          marginTop: 0,
-        }}
-      >
-        <CloseIcon
-          className={styles.closeIcon}
-          onClick={() => hideModal()}
-          onKeyPress={(e) => (e.key === 'Enter' ? hideModal() : null)}
-          tabIndex={0}
-        />
-        <p className={styles.title}>
-          {authForm === 'login' ? 'Member Login' : 'Register Account'}
-        </p>
-        <form
+    <div className={styles.modalContainer}>
+      <div className={authForm === 'login' ? styles.Login : styles.Register}>
+        <div className={styles.alertBox}>
+          <Alert />
+        </div>
+        <div
           style={{
             display: 'flex',
             flexDirection: 'column',
-            position: 'relative',
+            margin: 'auto',
+            marginTop: 0,
           }}
-          onSubmit={onSubmit}
         >
-          {authForm === 'register' && (
-            <input
-              type='name'
-              placeholder='Name'
-              name='name'
-              value={name}
-              required='required'
-              onChange={onChange}
-              maxLength={35}
-              style={{ paddingLeft: 15 }}
-              tabIndex={0}
-            />
-          )}
-          <input
-            type='email'
-            placeholder='Email'
-            name='email'
-            value={email}
-            required='required'
-            onChange={onChange}
-            maxLength={35}
-            style={
-              authForm === 'login' ? { paddingLeft: 35 } : { paddingLeft: 15 }
-            }
+          <CloseIcon
+            className={styles.closeIcon}
+            onClick={() => hideModal()}
+            onKeyPress={(e) => (e.key === 'Enter' ? hideModal() : null)}
             tabIndex={0}
           />
-          {authForm === 'login' && <EmailIcon className={styles.emailIcon} />}
-
-          <input
-            type='password'
-            placeholder='Password'
-            name='password'
-            value={password}
-            required='required'
-            onChange={onChange}
-            maxLength={35}
-            style={
-              authForm === 'login' ? { paddingLeft: 35 } : { paddingLeft: 15 }
-            }
-            tabIndex={0}
-          />
-          {authForm === 'register' && (
-            <input
-              type='password'
-              placeholder='Confirm Password'
-              name='password2'
-              value={password2}
-              required='required'
-              onChange={onChange}
-              maxLength={35}
-              style={{ paddingLeft: 15 }}
-              tabIndex={0}
-            />
-          )}
-          {authForm === 'login' && <LockIcon className={styles.lockIcon} />}
-          <input
-            type='submit'
-            value={authForm === 'login' ? 'LOGIN' : 'REGISTER'}
-            className={styles.btnGray}
-          />
-          <div
+          <p className={styles.title}>
+            {authForm === 'login' ? 'Member Login' : 'Register Account'}
+          </p>
+          <form
             style={{
               display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+              flexDirection: 'column',
+              position: 'relative',
             }}
+            onSubmit={onSubmit}
           >
-            {authForm === 'login' ? (
-              <Fragment>
-                <p className={styles.bodyText}>New user?</p>
-
-                <div
-                  className={styles.signUp}
-                  onClick={() => setForm('register')}
-                  onKeyPress={(e) =>
-                    e.key === 'Enter' ? setForm('register') : null
-                  }
-                  tabIndex={0}
-                >
-                  Sign up
-                </div>
-              </Fragment>
-            ) : (
-              <Fragment>
-                <div>
-                  <p className={styles.bodyText}> Already have an account?</p>
-                </div>
-                <div
-                  className={styles.signUp}
-                  onClick={() => setForm('login')}
-                  onKeyPress={(e) =>
-                    e.key === 'Enter' ? setForm('login') : null
-                  }
-                  tabIndex={0}
-                >
-                  Sign in
-                </div>
-              </Fragment>
+            {authForm === 'register' && (
+              <input
+                type='name'
+                placeholder='Name'
+                name='name'
+                value={name}
+                required='required'
+                onChange={onChange}
+                maxLength={35}
+                style={{ paddingLeft: 15 }}
+                tabIndex={0}
+              />
             )}
-          </div>
-        </form>
+            <input
+              type='email'
+              placeholder='Email'
+              name='email'
+              value={email}
+              required='required'
+              onChange={onChange}
+              maxLength={35}
+              style={
+                authForm === 'login' ? { paddingLeft: 35 } : { paddingLeft: 15 }
+              }
+              tabIndex={0}
+            />
+            {authForm === 'login' && <EmailIcon className={styles.emailIcon} />}
+
+            <input
+              type='password'
+              placeholder='Password'
+              name='password'
+              value={password}
+              required='required'
+              onChange={onChange}
+              maxLength={35}
+              style={
+                authForm === 'login' ? { paddingLeft: 35 } : { paddingLeft: 15 }
+              }
+              tabIndex={0}
+            />
+            {authForm === 'register' && (
+              <input
+                type='password'
+                placeholder='Confirm Password'
+                name='password2'
+                value={password2}
+                required='required'
+                onChange={onChange}
+                maxLength={35}
+                style={{ paddingLeft: 15 }}
+                tabIndex={0}
+              />
+            )}
+            {authForm === 'login' && <LockIcon className={styles.lockIcon} />}
+            <input
+              type='submit'
+              value={authForm === 'login' ? 'LOGIN' : 'REGISTER'}
+              className={styles.btnGray}
+            />
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              {authForm === 'login' ? (
+                <Fragment>
+                  <p className={styles.bodyText}>New user?</p>
+
+                  <div
+                    className={styles.signUp}
+                    onClick={() => setForm('register')}
+                    onKeyPress={(e) =>
+                      e.key === 'Enter' ? setForm('register') : null
+                    }
+                    tabIndex={0}
+                  >
+                    Sign up
+                  </div>
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <div>
+                    <p className={styles.bodyText}> Already have an account?</p>
+                  </div>
+                  <div
+                    className={styles.signUp}
+                    onClick={() => setForm('login')}
+                    onKeyPress={(e) =>
+                      e.key === 'Enter' ? setForm('login') : null
+                    }
+                    tabIndex={0}
+                  >
+                    Sign in
+                  </div>
+                </Fragment>
+              )}
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -38,13 +38,19 @@
 .btnGray:active {
   box-shadow: 0 0 #ccc;
 }
+.modalContainer {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  top: 300px;
+  justify-content: center;
+  align-items: center;
+}
 .Login,
 .Register {
   position: absolute;
   width: 350px;
   height: 380px;
-  top: 230px;
-  left: 37.5%;
   border-radius: 20px;
   display: flex;
   justify-content: center;
@@ -91,8 +97,6 @@
   .Register {
     flex-direction: column;
     margin-top: 30px;
-    left: 15%;
-    top: 70px;
   }
   .title {
     padding-top: 50px;
@@ -104,7 +108,6 @@
   .Register {
     flex-direction: column;
     width: 330px;
-    left: 4%;
   }
 }
 
