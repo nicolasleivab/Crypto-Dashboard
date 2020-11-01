@@ -9,6 +9,7 @@ import {
 // Set Modal
 export const setModal = () => (dispatch) => {
   dispatch({ type: SET_MODAL });
+  window.scrollTo(0, 0);
 };
 // Hide Modal
 export const hideModal = () => (dispatch) => {
