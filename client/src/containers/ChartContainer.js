@@ -23,14 +23,14 @@ const ChartContainer = (props) => {
     if (windowWidth > 1000) {
       setTicks(10);
       setChartWidth(1100);
-    } else if (windowWidth > 800) {
+    } else if (windowWidth > 700) {
       setChartWidth(700);
       setTicks(7);
-    } else if (windowWidth > 600) {
-      setChartWidth(550);
+    } else if (windowWidth > 400) {
+      setChartWidth(650);
       setTicks(6);
     } else {
-      setChartWidth(400);
+      setChartWidth(350);
       setTicks(5);
     }
   }, [windowWidth]);
